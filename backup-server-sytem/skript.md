@@ -1,20 +1,24 @@
-# Video
+# BackUp System 
+
+In dieser Anleitung wird gezeigt, wie man auf einem Debian oder Ubuntu Server mit Borg ein vollautomatisches, sicheres und inkrementelles BackUp-System einrichtet. Als darunterliegende Technologie wird Borg verwendet.
+
+## Video
 
 <https://youtu.be/7ZgjElyUqZ4>
 
-# Vorbereitungen: 
+## Vorbereitungen: 
 
 * Debian oder Ubuntu Server als BackUp Server einrichten
 * Am besten diesen Server bei einem anderen Serveranbieter mieten, oder bei sich Zuhause haben. Auf jeden Fall an einem anderen pyhsischen Ort.
 
-# Source Server:
+## Source Server:
 
 ```
 ssh-keygen
 less ~/.ssh/id_rsa.pub
 ```
 
-# BackUp Server:
+## BackUp Server:
 
 ```
 sudo adduser serverbackup # Keine Root Rechte!
@@ -32,7 +36,7 @@ borg init --encryption=repokey ~/backups/Server1
 borg key export ~/backups/Server1 ~/key-export # Diesen Schlüssel sicher aufbewahren und die Datei danach vom Server löschen.
 ```
 
-# Source Serer:
+## Source Serer:
 
 ```
 sudo apt install borgbackup -y
@@ -50,7 +54,7 @@ crontab -e
 0 2 * * * /home/jean/backup.sh # Jeden Tag um 2:00 Uhr
 ```
 
-# Backup Server
+## Backup Server
 
 ```
 nano ~/prune-backup.sh
