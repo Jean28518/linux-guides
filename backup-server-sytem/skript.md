@@ -1,6 +1,8 @@
 # Video
 
-# Vorbereitungen:
+<https://youtu.be/7ZgjElyUqZ4>
+
+# Vorbereitungen: 
 
 * Debian oder Ubuntu Server als BackUp Server einrichten
 * Am besten diesen Server bei einem anderen Serveranbieter mieten, oder bei sich Zuhause haben. Auf jeden Fall an einem anderen pyhsischen Ort.
