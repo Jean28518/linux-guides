@@ -22,7 +22,7 @@ sudo adduser serverbackup # Keine Root Rechte!
 su serverbackup
 mkdir .ssh && nano ~/.ssh/authorized_keys
 
-sudo vim ~/.ssh/authorized_keys # Den Public key vom Source Server hinzufügen
+sudo nano ~/.ssh/authorized_keys # Den Public key vom Source Server hinzufügen
 command="borg serve --restrict-to-path /home/serverbackup/backups/Server --append-only" # Das vor dem eben eingefügten Public Key einfügen
 
 sudo apt install borgbackup
@@ -53,7 +53,7 @@ crontab -e
 # Backup Server
 
 ```
-vim ~/prune-backup.sh
+nano ~/prune-backup.sh
 
     #!/bin/bash
     export BORG_PASSPHRASE="MeineSuperSicherePassphrase"
