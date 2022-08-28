@@ -45,7 +45,7 @@ nano ~/backup.sh
     DATE=`date +"%Y-%m-%d"`
     REPOSITORY="ssh://serverbackup@1.2.3.4:22/~/backups/Server1"
     export BORG_PASSPHRASE="MeineSuperSicherePassphrase"
-    borg create $REPOSITORY::$DATE /home/jean /var/www --exclude-caches
+    borg create $REPOSITORY::$DATE /etc /home /opt /usr /var/www /var/lib /var/log --exclude-caches
    
 chmod +x /backup.sh
 ~/backup.sh # Austesten
