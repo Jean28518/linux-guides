@@ -56,7 +56,7 @@ nano ~/backup.sh
     
 
    
-chmod +x /backup.sh
+chmod +x ~/backup.sh
 ~/backup.sh # Austesten
 
 crontab -e
