@@ -42,17 +42,20 @@ borg key export ~/backups/Server1 ~/key-export # Diesen Schlüssel sicher aufbew
 sudo apt install borgbackup -y
 nano ~/backup.sh
     #!/bin/bash
-    
+
     # Dump all databases
     #mysqldump -u root --all-databases > all_databases.sql
 
     # Restore a Single MySQL Database from a Full MySQL Dump:
     # mysql --one-database database_name < all_databases.sql
-    
+
     DATE=`date +"%Y-%m-%d"`
     REPOSITORY="ssh://serverbackup@1.2.3.4:22/~/backups/Server1"
     export BORG_PASSPHRASE="MeineSuperSicherePassphrase"
     borg create $REPOSITORY::$DATE /etc /home /opt /usr /var/www /var/lib /var/log --exclude-caches
+
+    # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
+    #borg create --remote-path /usr/local/bin/borg $REPOSITORY::$DATE /etc /home /opt /usr /var/www /var/lib /var/log --exclude-caches
     
 
    
