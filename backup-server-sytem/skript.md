@@ -88,6 +88,7 @@ borg prune -v ~/backups/Server1 \
 
 ```bash
 chmod +x ~/prune-backup.sh # Austesten
+~/prune-backup.sh
 
 crontab -e
 0 9 * * * /home/serverbackup/prune-backup.sh # Jeden Tag um 9:00 Uhr
