@@ -16,7 +16,7 @@ sudo -i && cd && ssh-keygen && cat ~/.ssh/id_rsa.pub
 ## BackUp Server:
 
 ```bash
-sudo apt install borgbackup vim ncdu && sudo adduser serverbackup # Keine Root Rechte!
+sudo apt install borgbackup vim ncdu -y && sudo adduser serverbackup # Keine Root Rechte!
 
 su serverbackup 
 cd && mkdir .ssh
@@ -33,7 +33,7 @@ borg key export ~/backups/Server1 ~/key-export && cat ~/key-export && rm ~/key-e
 ## Source Serer:
 
 ```bash
-sudo apt install borgbackup vim -y
+sudo apt install borgbackup vim ncdu -y
 vim ~/backup.sh
 ```
 ##### backup.sh:
