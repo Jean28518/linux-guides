@@ -16,7 +16,7 @@ sudo -i && cd && ssh-keygen && cat ~/.ssh/id_rsa.pub
 ## BackUp Server:
 
 ```bash
-sudo apt install borgbackup vim && sudo adduser serverbackup # Keine Root Rechte!
+sudo apt install borgbackup vim ncdu && sudo adduser serverbackup # Keine Root Rechte!
 
 su serverbackup && cd && mkdir .ssh
 
