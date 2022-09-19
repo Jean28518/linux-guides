@@ -18,7 +18,8 @@ sudo -i && cd && ssh-keygen && cat ~/.ssh/id_rsa.pub
 ```bash
 sudo apt install borgbackup vim ncdu && sudo adduser serverbackup # Keine Root Rechte!
 
-su serverbackup && cd && mkdir .ssh
+su serverbackup 
+cd && mkdir .ssh
 
 vim ~/.ssh/authorized_keys # Den Public key vom Source Server hinzufügen
 command="borg serve --restrict-to-path /home/serverbackup/backups/Server --append-only" # Das vor dem eben eingefügten Public Key einfügen
