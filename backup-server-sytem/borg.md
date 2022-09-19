@@ -58,7 +58,7 @@ borg create $REPOSITORY::$DATE /etc /home /opt /root /usr /var/www /var/lib /var
     
 
 ```bash   
-chmod +x ~/backup.sh && ~/backup.sh # Austesten
+chmod 700 ~/backup.sh && ~/backup.sh # Austesten
 
 crontab -e
 0 2 * * * /home/jean/backup.sh # Jeden Tag um 2:00 Uhr
