@@ -49,7 +49,7 @@ vim ~/backup.sh
 DATE=`date +"%Y-%m-%d"`
 REPOSITORY="ssh://serverbackup@1.2.3.4:22/~/backups/Server1"
 export BORG_PASSPHRASE="MeineSuperSicherePassphrase"
-borg create $REPOSITORY::$DATE /etc /home /opt /root /usr /var/www /var/lib /var/log--exclude-caches
+borg create $REPOSITORY::$DATE /etc /home /opt /root /usr /var/www /var/lib /var/log --exclude-caches
 
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
 #borg create --remote-path /usr/local/bin/borg $REPOSITORY::$DATE /etc /home /opt /root /usr /var/www /var/lib /var/log --exclude-caches
