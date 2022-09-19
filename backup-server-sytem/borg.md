@@ -20,6 +20,7 @@ cat ~/.ssh/id_rsa.pub
 sudo adduser serverbackup # Keine Root Rechte!
 
 su serverbackup
+cd
 mkdir .ssh
 
 vim ~/.ssh/authorized_keys # Den Public key vom Source Server hinzufügen
