@@ -46,6 +46,9 @@ vim ~/backup.sh
 # Restore a Single MySQL Database from a Full MySQL Dump:
 # mysql --one-database database_name < all_databases.sql
 
+# Get apt selection of packages:
+/usr/bin/dpkg --get-selections | /usr/bin/awk '!/deinstall|purge|hold/'|/usr/bin/cut -f1 |/usr/bin/tr '\n' ' '  > installed-packages  2>&1
+
 DATE=`date +"%Y-%m-%d"`
 REPOSITORY="ssh://serverbackup@1.2.3.4:22/~/backups/Server1"
 export BORG_PASSPHRASE="MeineSuperSicherePassphrase"
