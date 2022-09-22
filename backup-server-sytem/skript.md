@@ -15,13 +15,13 @@ In dieser Anleitung wird gezeigt, wie man auf einem Debian oder Ubuntu Server mi
 
 ```bash
 ssh-keygen
-less ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_rsa.pub
 ```
 
 ## BackUp Server:
 
 ```bash
-sudo adduser serverbackup # Keine Root Rechte!
+sudo adduser serverbackup # Dem Nutzer keine Root Rechte erteilen!
 
 su serverbackup
 mkdir .ssh && nano ~/.ssh/authorized_keys
@@ -47,18 +47,22 @@ nano ~/backup.sh
 #!/bin/bash
 
 # Dump all databases
-#mysqldump -u root --all-databases > all_databases.sql
+mysqldump -u root --all-databases > all_databases.sql
+# To restore a Single MySQL Database from a Full MySQL Dump:
+# mysql -u root -p database_name < all_databases.sql
 
-# Restore a Single MySQL Database from a Full MySQL Dump:
-# mysql --one-database database_name < all_databases.sql
+# Get apt selection of packages:
+/usr/bin/dpkg --get-selections | /usr/bin/awk '!/deinstall|purge|hold/'|/usr/bin/cut -f1 |/usr/bin/tr '\n' ' '  > installed-packages.txt  2>&1
+# To restore apt packages:
+# sudo apt install </root/installed-packages.txt
 
 DATE=`date +"%Y-%m-%d"`
 REPOSITORY="ssh://serverbackup@1.2.3.4:22/~/backups/Server1"
 export BORG_PASSPHRASE="MeineSuperSicherePassphrase"
-borg create $REPOSITORY::$DATE /etc /home /opt /usr /var/www /var/lib /var/log --exclude-caches
+borg create $REPOSITORY::$DATE /etc /home /opt /root /usr /var/www /var/lib /var/log --exclude-caches
 
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
-#borg create --remote-path /usr/local/bin/borg $REPOSITORY::$DATE /etc /home /opt /usr /var/www /var/lib /var/log --exclude-caches
+#borg create --remote-path /usr/local/bin/borg $REPOSITORY::$DATE /etc /home /opt /root /usr /var/www /var/lib /var/log --exclude-caches
 ```
    
     
