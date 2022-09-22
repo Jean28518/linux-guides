@@ -41,13 +41,14 @@ vim ~/backup.sh
 #!/bin/bash
 
 # Dump all databases
-#mysqldump -u root --all-databases > all_databases.sql
-
-# Restore a Single MySQL Database from a Full MySQL Dump:
-# mysql --one-database database_name < all_databases.sql
+mysqldump -u root --all-databases > all_databases.sql
+# To restore a Single MySQL Database from a Full MySQL Dump:
+# mysql -u root -p database_name < all_databases.sql
 
 # Get apt selection of packages:
-/usr/bin/dpkg --get-selections | /usr/bin/awk '!/deinstall|purge|hold/'|/usr/bin/cut -f1 |/usr/bin/tr '\n' ' '  > installed-packages  2>&1
+/usr/bin/dpkg --get-selections | /usr/bin/awk '!/deinstall|purge|hold/'|/usr/bin/cut -f1 |/usr/bin/tr '\n' ' '  > installed-packages.txt  2>&1
+# To restore apt packages:
+# sudo apt install </root/installed-packages.txt
 
 DATE=`date +"%Y-%m-%d"`
 REPOSITORY="ssh://serverbackup@1.2.3.4:22/~/backups/Server1"
