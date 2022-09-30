@@ -1,6 +1,8 @@
 # Matrix-Synapse auf Ubuntu 22.04 Server installieren
 
 ## Synapse installieren:
+https://matrix-org.github.io/synapse/latest/setup/installation.html
+
 ```bash
 sudo apt install -y lsb-release wget apt-transport-https
 sudo wget -O /usr/share/keyrings/matrix-org-archive-keyring.gpg https://packages.matrix.org/debian/matrix-org-archive-keyring.gpg
