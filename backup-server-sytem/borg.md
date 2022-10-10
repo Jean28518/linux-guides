@@ -82,7 +82,8 @@ borg mount $REPOSITORY /mnt
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
 #borg mount --remote-path /usr/local/bin/borg $REPOSITORY /mnt
 
-echo "You can find your backups in /mnt. Please don't forget to umount your backups with '~/umount_backup.sh' afterwards."
+echo "You can find your backups in /mnt. To copy files execute e.g. 'cp -ra /mnt/1970-01-01/var/* /var'"
+echo "Please don't forget to umount your backups with '~/umount_backup.sh' afterwards."
 ```
 
 ```bash
