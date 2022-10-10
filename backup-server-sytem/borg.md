@@ -26,7 +26,9 @@ command="borg serve --restrict-to-path /home/serverbackup/backups/Server --appen
 
 mkdir -p ~/backups/Server1
 
+
 borg init --encryption=repokey ~/backups/Server1
+borg config ~/backups/Server1 additional_free_space 10G
 borg key export ~/backups/Server1 ~/key-export && cat ~/key-export && rm ~/key-export # Diesen Schlüssel sicher aufbewahren und die Datei danach vom Server löschen.
 ```
 
