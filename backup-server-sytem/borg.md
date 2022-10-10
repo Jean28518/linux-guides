@@ -10,7 +10,8 @@ In dieser Anleitung wird gezeigt, wie man auf einem Debian oder Ubuntu Server mi
 ## Source Server:
 
 ```bash
-sudo -i && cd && ssh-keygen && cat ~/.ssh/id_rsa.pub
+sudo -i 
+cd && ssh-keygen && cat ~/.ssh/id_rsa.pub
 ```
 
 ## BackUp Server:
