@@ -68,6 +68,29 @@ crontab -e
 0 2 * * * /root/backup.sh # daily at 2 am
 ```
 
+### Create restore files:
+```bash
+vim ~/mount_backup.sh && chmod 700 ~/mount_backup.sh && vim ~/umount_backup.sh && chmod 700 ~/umount_backup.sh
+```
+
+```bash
+#!/bin/bash
+
+REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
+borg mount $REPOSITORY /mnt
+
+# Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
+#borg mount --remote-path /usr/local/bin/borg $REPOSITORY /mnt
+
+echo "You can find your backups in /mnt. Please don't forget to umount your backups with '~/umount_backup.sh' afterwards."
+```
+
+```bash
+#!/bin/bash
+
+borg umount /mnt
+```
+
 ## Backup Server
 
 ```bash
@@ -88,3 +111,7 @@ chmod 700 ~/prune-backup.sh && ~/prune-backup.sh # Austesten
 crontab -e
 0 9 * * * /home/borg/prune-backup.sh # daily at 9 am
 ```
+
+
+
+
