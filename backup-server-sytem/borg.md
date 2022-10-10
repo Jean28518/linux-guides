@@ -131,3 +131,4 @@ cp -ra /mnt/1970-01-01/home/* /home/
 cp -ra /mnt/1970-01-01/root/* /root/
 cp -ra /mnt/1970-01-01/var/* /var/
 reboot
+# Afterwards you have to renew the ssh certifcates at the backup server for the automatic backup
