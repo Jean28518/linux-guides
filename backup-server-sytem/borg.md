@@ -49,7 +49,7 @@ mysqldump -u root --all-databases > all_databases.sql
 # Get apt selection of packages:
 /usr/bin/dpkg --get-selections | /usr/bin/awk '!/deinstall|purge|hold/'|/usr/bin/cut -f1 |/usr/bin/tr '\n' ' '  > installed-packages.txt  2>&1
 # To restore apt packages:
-# sudo apt install </root/installed-packages.txt
+# sudo xargs apt install </root/installed-packages.txt
 
 DATE=`date +"%Y-%m-%d"`
 REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
@@ -82,7 +82,6 @@ borg mount $REPOSITORY /mnt
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
 #borg mount --remote-path /usr/local/bin/borg $REPOSITORY /mnt
 
-echo "If you wan't to restore the complete server, run for example 'cp -ra /mnt/1970-01-01/ / && reboot'"
 echo "You can find your backups in /mnt. Please don't forget to umount your backups with '~/umount_backup.sh' afterwards."
 ```
 
