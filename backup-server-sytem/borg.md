@@ -16,26 +16,25 @@ sudo -i && cd && ssh-keygen && cat ~/.ssh/id_rsa.pub
 ## BackUp Server:
 
 ```bash
-sudo apt install borgbackup vim ncdu -y && sudo adduser serverbackup # Keine Root Rechte!
+sudo apt install borgbackup vim ncdu -y && sudo adduser borg # Keine Root Rechte!
 
-su serverbackup 
+su borg 
 cd && mkdir .ssh
 
 vim ~/.ssh/authorized_keys # Den Public key vom Source Server hinzufügen
-command="borg serve --restrict-to-path /home/serverbackup/backups/Server --append-only" # Das vor dem eben eingefügten Public Key einfügen
+command="borg serve --restrict-to-path /home/borg/backups/Server1 --append-only" # Das vor dem eben eingefügten Public Key einfügen
 
 mkdir -p ~/backups/Server1
 
 
-borg init --encryption=repokey ~/backups/Server1
+borg init --encryption=none ~/backups/Server1
 borg config ~/backups/Server1 additional_free_space 10G
-borg key export ~/backups/Server1 ~/key-export && cat ~/key-export && rm ~/key-export # Diesen Schlüssel sicher aufbewahren und die Datei danach vom Server löschen.
 ```
 
 ## Source Serer:
 
 ```bash
-sudo apt install borgbackup vim ncdu -y
+apt install borgbackup vim ncdu -y
 vim ~/backup.sh
 ```
 ##### backup.sh:
@@ -53,12 +52,11 @@ mysqldump -u root --all-databases > all_databases.sql
 # sudo apt install </root/installed-packages.txt
 
 DATE=`date +"%Y-%m-%d"`
-REPOSITORY="ssh://serverbackup@1.2.3.4:22/~/backups/Server1"
-export BORG_PASSPHRASE="MeineSuperSicherePassphrase"
-borg create $REPOSITORY::$DATE /etc /home /opt /root /usr /var/www /var/lib /var/log --exclude-caches
+REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
+borg create --exclude-caches --one-file-system $REPOSITORY::$DATE / -e /dev -e /prox -e /sys -e /tmp -e /run -e /media -e /mnt
 
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
-#borg create --remote-path /usr/local/bin/borg $REPOSITORY::$DATE /etc /home /opt /root /usr /var/www /var/lib /var/log --exclude-caches
+#borg create --remote-path /usr/local/bin/borg --exclude-caches --one-file-system $REPOSITORY::$DATE / -e /dev -e /prox -e /sys -e /tmp -e /run -e /media -e /mnt
 ```
    
     
@@ -67,7 +65,7 @@ borg create $REPOSITORY::$DATE /etc /home /opt /root /usr /var/www /var/lib /var
 chmod 700 ~/backup.sh && ~/backup.sh # Austesten
 
 crontab -e
-0 2 * * * /home/jean/backup.sh # Jeden Tag um 2:00 Uhr
+0 2 * * * /root/backup.sh # daily at 2 am
 ```
 
 ## Backup Server
@@ -78,7 +76,6 @@ vim ~/prune-backup.sh
 ##### prune-backup.sh
 ```bash
 #!/bin/bash
-export BORG_PASSPHRASE="MeineSuperSicherePassphrase"
 borg prune -v ~/backups/Server1 \
     --keep-daily=10 \
     --keep-weekly=6 \
@@ -89,5 +86,5 @@ borg prune -v ~/backups/Server1 \
 chmod 700 ~/prune-backup.sh && ~/prune-backup.sh # Austesten
 
 crontab -e
-0 9 * * * /home/serverbackup/prune-backup.sh # Jeden Tag um 9:00 Uhr
+0 9 * * * /home/serverbackup/prune-backup.sh # daily at 9 am
 ```
