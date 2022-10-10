@@ -114,5 +114,20 @@ crontab -e
 ```
 
 
-
-
+# How to restore a complete server:
+```bash
+# Start on a fresh server as root
+apt update && apt dist-upgrade
+apt install borgbackup
+borg mount ssh://borg@1.2.3.4:22/~/backups/Server1 /mnt
+cp /mnt/1970-01-01/root/installed-packages.txt /root/
+xargs apt install <installed-packages.txt -y
+reboot
+borg mount ssh://borg@1.2.3.4:22/~/backups/Server1 /mnt
+cp -ra /mnt/1970-01-01/var/* /var/
+cp -ra /mnt/1970-01-01/etv/* /etc/
+cp -ra /mnt/1970-01-01/opt/* /opt/
+cp -ra /mnt/1970-01-01/home/* /home/
+cp -ra /mnt/1970-01-01/root/* /root/
+cp -ra /mnt/1970-01-01/var/* /var/
+reboot
