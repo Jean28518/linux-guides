@@ -49,7 +49,7 @@ mysqldump -u root --all-databases > all_databases.sql
 # Get apt selection of packages:
 /usr/bin/dpkg --get-selections | /usr/bin/awk '!/deinstall|purge|hold/'|/usr/bin/cut -f1 |/usr/bin/tr '\n' ' '  > installed-packages.txt  2>&1
 # To restore apt packages:
-# sudo xargs apt install </root/installed-packages.txt
+# sudo apt update && sudo xargs apt install </root/installed-packages.txt
 
 DATE=`date +"%Y-%m-%d"`
 REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
