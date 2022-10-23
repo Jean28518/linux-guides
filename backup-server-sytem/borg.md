@@ -45,7 +45,7 @@ vim ~/backup.sh
 # Dump all databases
 mysqldump -u root --all-databases > all_databases.sql
 # To restore a Single MySQL Database from a Full MySQL Dump:
-# mysql -u root -p database_name < all_databases.sql
+# mysql -p -o database_name < all_databases.sql
 
 # Get apt selection of packages:
 /usr/bin/dpkg --get-selections | /usr/bin/awk '!/deinstall|purge|hold/'|/usr/bin/cut -f1 |/usr/bin/tr '\n' ' '  > installed-packages.txt  2>&1
@@ -126,7 +126,7 @@ xargs apt install <installed-packages.txt -y
 reboot
 borg mount ssh://borg@1.2.3.4:22/~/backups/Server1 /mnt
 cp -ra /mnt/1970-01-01/var/* /var/
-cp -ra /mnt/1970-01-01/etv/* /etc/
+cp -ra /mnt/1970-01-01/etc/* /etc/
 cp -ra /mnt/1970-01-01/opt/* /opt/
 cp -ra /mnt/1970-01-01/home/* /home/
 cp -ra /mnt/1970-01-01/root/* /root/
