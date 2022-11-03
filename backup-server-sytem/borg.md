@@ -54,10 +54,10 @@ mysqldump -u root --all-databases > all_databases.sql
 
 DATE=`date +"%Y-%m-%d"`
 REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
-borg create --exclude-caches --one-file-system $REPOSITORY::$DATE / -e /dev -e /prox -e /sys -e /tmp -e /run -e /media -e /mnt
+borg create --exclude-caches --one-file-system $REPOSITORY::$DATE / -e /dev -e /proc -e /sys -e /tmp -e /run -e /media -e /mnt
 
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
-#borg create --remote-path /usr/local/bin/borg --exclude-caches --one-file-system $REPOSITORY::$DATE / -e /dev -e /prox -e /sys -e /tmp -e /run -e /media -e /mnt
+#borg create --remote-path /usr/local/bin/borg --exclude-caches --one-file-system $REPOSITORY::$DATE / -e /dev -e /proc -e /sys -e /tmp -e /run -e /media -e /mnt
 ```
    
     
