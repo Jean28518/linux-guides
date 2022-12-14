@@ -2,7 +2,7 @@
 
 
 ```
-# Login and become root:
+# Login and become root
 
 apt update && apt dist-upgrade -y
 
