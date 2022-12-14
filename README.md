@@ -1,4 +1,4 @@
 # linux-guides
-Anleitungen rund um Linux und Open Source
+Instructions around Linux and Open Source
 
-Feedback, Verbesserungen und Anregungen sind explizit erwünscht!
+Feedback, improvements and suggestions are explicitly welcome!
