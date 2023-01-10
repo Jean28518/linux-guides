@@ -32,3 +32,7 @@
 - Any passwords in plain files found? What do they reveal?
 - Are the owners/groups of the file correct?
 - Can others see the files?
+
+
+## Checks with:
+- arachni-scanner
