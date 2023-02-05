@@ -14,7 +14,7 @@ sudo apt install docker.io docker certbot
 # Wenn eine nextcloud unter mehreren domains erreichbar sein soll, trennt man die domains in der aliasgroup1 mit einem ','
 # Also: aliasgroup1=https://nx22507\\.your-storageshare\\.de:443,https://my\\.robo7\\.de:443
 
-docker run -t -d -p 9980:9980 -e "aliasgroup1=https://nx22507\\.your-storageshare\\.de:443" -e "username=admin" -e "password=eeJ0beil" --restart always collabora/code 
+docker run -t -d -p 9980:9980 -e "aliasgroup1=https://nx22507\\.your-storageshare\\.de:443" -e "username=admin" -e "password=eeJ0beil" --restart unless-stopped collabora/code 
 
 
 certbot certonly
