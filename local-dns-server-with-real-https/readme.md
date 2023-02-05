@@ -12,6 +12,7 @@ sudo vim /etc/resolv.conf
 Insert the following content:
 ```bash
 nameserver 127.0.0.1
+nameserver 192.168.178.84 # The ip of the server itself, needed for dns for docker containers
 nameserver 192.168.178.1
 nameserver 8.8.8.8
 ```
@@ -63,8 +64,9 @@ cloud.int.de 192.168.178.84 {
 }
 ```
 
-# Setup the devices to use the domains and the good https:
+# Setup the devices to use the domains and the good https (also needed for docker containers):
 - Set the dns server of the system to the ip of the new dns server.
+  - In docker containers the nameserver should be already configured. Check /etc/resolv.conf for that.
 - Reconnect to the network
 - Download the certificate of the server. (If you did everything right a valid address would be '192.168.178.84/lan.crt')
 - Add this certificate to your browsers (because they have their own certificate handling)

@@ -1,12 +1,12 @@
 # Setup Collabora CODE Document Server for nextcloud
-In this we create a docker container and an nginx reverse proxy with certbot.
+In this we create a docker container and a reverse proxy.
 Instructions from: https://sdk.collaboraonline.com/docs/installation/CODE_Docker_image.html
 
 - Auf den Server als root einloggen und folgende Befehle ausführen:
 
 ```
 apt update && apt upgrade
-sudo apt install docker.io docker certbot
+sudo apt install docker.io docker
 
 # (https://sdk.collaboraonline.com/docs/installation/CODE_Docker_image.html)
 # Der username und das passwort sind für die Admin-Konsole dann erreichbar unter: https://office.robo7.de/browser/dist/admin/admin.html
@@ -15,8 +15,25 @@ sudo apt install docker.io docker certbot
 # Also: aliasgroup1=https://nx22507\\.your-storageshare\\.de:443,https://my\\.robo7\\.de:443
 
 docker run -t -d -p 9980:9980 -e "aliasgroup1=https://nx22507\\.your-storageshare\\.de:443" -e "username=admin" -e "password=eeJ0beil" --restart unless-stopped collabora/code 
+```
+
+# Caddy Reverse Proxy
+```
+office.robo7.de {
+  encode gzip
+  reverse_proxy https://127.0.0.1:9980 {
+    transport http {
+      tls_insecure_skip_verify
+    }
+  }
+}
+```
 
 
+# Nginx Reverse Proxy
+
+```bash
+sudo apt install certbot nginx
 certbot certonly
 ```
 - (1: Spin up a temporary webserver)
