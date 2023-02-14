@@ -101,3 +101,15 @@ sudo crontab -u www-data -e
 Go to the nextcloud admin page and change 'background tasks' to "Cron (recommended)"
 
 **You are finished!**
+
+## Move data directory to other partition:
+In this example our partition is mounted under `/data`
+```bash
+sudo -i
+mkdir /data/nextcloud
+mv /var/www/nextcloud/data /data/nextcloud/
+chmod a+rwx /data # Or alternatively chown the /data/ dir to www-data:www-data.
+chown -R www-data:www-data /data/nextcloud/
+vim /var/www/nextcloud/config/config.php
+# Change datadirectory to: /data/nextcloud/data/
+```
