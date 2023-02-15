@@ -1,7 +1,41 @@
-# Odoo ERP System from Equitania
+## Official Odoo ERP System
 
 
-## docker-compose.yml
+### docker-compose.yml
+```
+version: "3.7"
+
+services:
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=postgres
+    volumes: 
+      - postgres-data:/var/lib/postgresql/data
+  odoo:
+    image: odoo
+    restart: unless-stopped
+    volumes:
+      - odoo-data:/opt/odoo/data
+    ports:
+      - 5000:8069
+    depends_on:
+      - db
+
+volumes:
+  postgres-data:
+  odoo-data:
+```
+
+The masterpassword for the setup is `ownerp2021`.
+
+## Odoo ERP System from Equitania
+
+
+### docker-compose.yml
 ```
 version: "3.7"
 
@@ -20,17 +54,15 @@ services:
     restart: unless-stopped
     command: start
     volumes:
-      - myodoo13-data:/opt/odoo/data
+      - odoo-data:/opt/odoo/data
     ports:
       - 5000:8069
     depends_on:
       - live-db
 
-
-
 volumes:
   postgres-data:
-  myodoo13-data:
+  odoo-data:
 ```
 
 The masterpassword for the setup is `ownerp2021`.
