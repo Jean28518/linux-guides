@@ -67,7 +67,7 @@ sudo pam-auth-update
 # Make sure that 'create home directory on login' is activated
 ```
 
-### Deactivate user list on gdm:
+### Disable user list on gdm:
 <https://help.gnome.org/admin/system-admin-guide/stable/login-userlist-disable.html.en>
 
 Create two files:
@@ -87,6 +87,35 @@ disable-user-list=true
 
 # Update dconf:
 sudo dconf update
+```
+
+### Issues:
+
+####  User sometimes is not able to log in because the FreeIPA server says "old password ..."
+- Try to reset the password in the admin interface
+- The user should log in to the ipa interface. There he is requested to change the password.
+#### Computer got locked out because too many wrong password attempts
+- Login as admin in the free ipa console, go to rules -> password rules
+- Change max duration (days) to 0
+- Changee min duration (hours) to 0
+- Save
+- Try to login at the computer again.
+
+#### Give freeipa user(s) sudo rights on computer(s)
+- Rules -> Sudo -> Sudo Rules
+- Add a new rule
+- You can leave sudo order, options blank.
+- Add users or groups which should have sudo access
+- Add hosts or host groups on which they should have sudo access
+- You can select "every command" in the command sections
+- you can leave "as who" to specific users groups while leaving the rest empty.
+- save the rule and restart the clients.
+
+##### Examples for a sudo command:
+Of course you can e.g. allow every user on every host to issue apt update.
+```bash
+/usr/local/bin/apt update
+/bin/bash      # <- sudo -i
 ```
 
 ## Configure Nextcloud to use ldap of FreeIPA
