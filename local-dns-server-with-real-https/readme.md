@@ -1,9 +1,7 @@
 # Setup local DNS Server on Ubuntu
 
 ```bash
-# Disable resolv.conf
-sudo systemctl stop systemd-resolved.service
-sudo systemctl disable systemd-resolved.service
+
 
 sudo apt install dnsmasq vim
 sudo rm /etc/resolv.conf # Remove symlink
@@ -35,8 +33,13 @@ Here are some example entries:
 ```
 Please avoid .local adresses because they are used in another ways. A not existent domain but with an existant top level domain is recommended that the browsers don't open the search automatically.
 
-Finally restart the service
+Finally switch the services
 ```bash
+# Disable resolv.conf
+sudo systemctl stop systemd-resolved.service
+sudo systemctl disable systemd-resolved.service
+
+sudo systemctl enable dnsmasq
 sudo systemctl restart dnsmasq
 sudo ufw allow 53
 ```
