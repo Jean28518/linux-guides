@@ -4,7 +4,53 @@ Spreadsheets on steroids. Datafields and handling of data is very good. But when
 ## Instructions for installation with docker:
 <https://github.com/nocodb/nocodb/blob/develop/docker-compose/mysql/docker-compose.yml>
 
+docker-compose.yml:
+
+```docker-compose
+version: "2.1"
+services: 
+  nocodb: 
+    depends_on: 
+      root_db: 
+        condition: service_healthy
+    environment: 
+      NC_DB: "mysql2://root_db:3306?u=noco&p=faiTh8ra&d=root_db"
+    image: "nocodb/nocodb:0.105.3" # Update the number to the latest version here: https://hub.docker.com/r/nocodb/nocodb/tags
+    ports: 
+      - "23260:8080"
+    restart: unless-stopped
+    volumes: 
+      - "nc_data:/usr/app/data"
+  root_db: 
+    environment: 
+      MYSQL_DATABASE: root_db
+      MYSQL_PASSWORD: faiTh8ra
+      MYSQL_ROOT_PASSWORD: faiTh8ra
+      MYSQL_USER: noco
+    healthcheck: 
+      retries: 10
+      test: 
+        - CMD
+        - mysqladmin
+        - ping
+        - "-h"
+        - localhost
+      timeout: 20s
+    image: "mysql:8.0.32"
+    restart: unless-stopped
+    volumes: 
+      - "db_data:/var/lib/mysql"
+#    below line shows how to change charset and collation
+#    uncomment it if necessary
+#    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+volumes: 
+  db_data: {}
+  nc_data: {}
+```
+
 (You will need a proxy reverse server for https and advanced stuff)
+
+
 
 ## How to call the nocodb API with python script and implement fully automatic workflows
 ```bash
