@@ -19,7 +19,7 @@ sudo docker-compose -f docker-compose.yml -f docker-compose.without-nginx.yml up
 ## Caddy reverse proxy configuration
 Super easy..
 ```
-chat.int.de {
+mm.int.de {
   reverse_proxy localhost:8065
 }
 ```
