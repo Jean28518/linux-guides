@@ -5,7 +5,7 @@ We will install it with caddy as reverse proxy.
 Instructions from: <https://mattermost.com/deploy/>
 
 ```bash
-apt install git vim docker docker-compose
+apt install git vim
 git clone https://github.com/mattermost/docker && cd docker
 cp env.example .env
 vim .env
