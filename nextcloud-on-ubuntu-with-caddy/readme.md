@@ -80,7 +80,7 @@ sudo vim /etc/php/8.1/fpm/php.ini
 ```
 
 ```bash
-sudo vim /tc/php/8.1/fpm/pool.d/www.conf 
+sudo vim /etc/php/8.1/fpm/pool.d/www.conf 
 
 # uncomment following lines by removing ';'
 # ;env[HOSTNAME] = $HOSTNAME
