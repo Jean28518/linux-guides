@@ -13,6 +13,7 @@ sudo vim /etc/ssh/sshd_config
 
 # Ensure following line
 PasswordAuthentication no
+PubkeyAuthentication yes
 ```
 
 ## Install fail2ban
