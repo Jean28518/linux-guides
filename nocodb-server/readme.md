@@ -50,6 +50,13 @@ volumes:
 
 (You will need a proxy reverse server for https and advanced stuff)
 
+Example caddy file:
+```
+DOMAIN {
+  reverse_proxy localhost:23260
+}
+```
+
 
 
 ## How to call the nocodb API with python script and implement fully automatic workflows
