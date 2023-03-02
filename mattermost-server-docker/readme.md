@@ -6,7 +6,7 @@ Instructions from: <https://mattermost.com/deploy/>
 
 ```bash
 apt install git vim
-git clone https://github.com/mattermost/docker && cd docker
+git clone https://github.com/mattermost/docker && mv docker mattermost && cd mattermost
 cp env.example .env
 vim .env
 # Change the Domain (this should be enough for us)
