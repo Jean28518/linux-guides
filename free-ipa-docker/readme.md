@@ -7,7 +7,7 @@ vim /etc/docker/daemon.json
 #Insert:
 { "userns-remap": "default" }
 
-
+## ATTENTION!!! THIS BREAKS ALL OTHER RUNNING CONTAINERS BECAUSE OF OTHER PERMISSONS!!!
 systemctl restart docker*
 
 
