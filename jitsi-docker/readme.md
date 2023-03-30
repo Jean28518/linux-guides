@@ -14,6 +14,7 @@ cp env.example .env
 vim .env 
 # Change HTTP_PORT to 30323
 # Comment out HTTPS_PORT
+# Comment out the PUBLIC_URL and change it to e.g. https://meet.int.de
 
 vim docker-compose.yml
 # Comment out the Port 443
@@ -26,7 +27,6 @@ mkdir -p ~/.jitsi-meet-cfg/{web,transcripts,prosody/config,prosody/prosody-plugi
 
 docker-compose up -d # Do not use sudo here or execute the mkdir command also with sudo.
 
-sudo ufw allow 4443/tcp
 sudo ufw allow 10000/udp
 ```
 
