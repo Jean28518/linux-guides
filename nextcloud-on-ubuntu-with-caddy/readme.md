@@ -113,3 +113,9 @@ chown -R www-data:www-data /data/nextcloud/
 vim /var/www/nextcloud/config/config.php
 # Change datadirectory to: /data/nextcloud/data/
 ```
+
+## On Nextcloud Updates
+
+Check before the update, if the installed php version is supported by the following nextcloud version!!
+
+* Nextcloud 25 needs php 8.0 or higher
