@@ -80,6 +80,13 @@ sudo vim /etc/php/8.1/fpm/php.ini
 ```
 
 ```bash
+sudo vim /var/www/nextcloud/config/config.php
+
+# Add the following setting:
+"default_phone_region" => 'DE',
+```
+
+```bash
 sudo vim /etc/php/8.1/fpm/pool.d/www.conf 
 
 # uncomment following lines by removing ';'
