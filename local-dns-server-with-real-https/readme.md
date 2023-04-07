@@ -79,3 +79,8 @@ cloud.int.de 192.168.178.84 {
     - `sudo update-ca-certificates`
 - repeat this on every device which should use it
 
+
+## Set Fritz!Box DNS-Settings:
+- Internet -> Access Data -> DNS-Server
+- **Also disable for DNS-Rebind-Protection in: Local Network -> Network -> Network Settings:**
+    - insert `int.de` into the DNS-Rebind-Protection field
