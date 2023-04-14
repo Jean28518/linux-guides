@@ -76,7 +76,11 @@ Open webbrowser with the ip adress of the server, fill the setup dialog.
 ```bash
 sudo vim /etc/php/8.1/fpm/php.ini
 
-# Set memory_limit to 512M
+# Set 
+# memory_limit = 512M
+# upload_max_filesize = 10G
+# max_file_uploads = 1000
+
 ```
 
 ```bash
