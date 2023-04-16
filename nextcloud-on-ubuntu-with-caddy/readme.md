@@ -88,6 +88,9 @@ sudo vim /var/www/nextcloud/config/config.php
 
 # Add the following setting:
 "default_phone_region" => 'DE',
+
+# Change the ip adress to the IPv4 adress of the nextcloud server itself.
+'trusted_proxies' => ['192.168.178.10'],
 ```
 
 ```bash
