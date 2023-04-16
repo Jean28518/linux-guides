@@ -28,6 +28,7 @@ listen-address=192.168.178.84 # Ip of the server itself
 These are stored in the /etc/hosts file.
 Here are some example entries:
 ```
+192.168.178.84 cert.int.de # Add this for the distribution of the cert file, which we will create in some steps
 192.168.178.84 cloud.int.de
 192.168.178.84 chat.int.de
 ```
@@ -49,13 +50,26 @@ sudo ufw allow 53
 ```bash
 sudo apt install libnss3-tools
 sudo caddy trust
-# Copy the ca certificate to the webroot that other local machines can easily obtain it:
-sudo cp /etc/ssl/certs/Caddy_Local_Authority_[...].pem /var/www/nextcloud/lan.crt
+
+# Distribute the ca certificate on an own webserver:
+sudo mkdir -p /var/www/cert/
+sudo cp /etc/ssl/certs/Caddy_Local_Authority_[...].pem /var/www/cert/lan.crt
 
 vim /etc/caddy/Caddyfile
 ```
-- On every host add the apropriate dns entry
-- Add for every host the following line:
+1. add the following configuration for the distribution webserver:
+
+```
+cert.int.de {
+  tls internal
+  root * /var/www/cert/
+  file_server browse
+}
+```
+
+2. On every other host add the apropriate dns entry
+3. Add for every host the following line:
+
 ```
 tls internal
 ```
