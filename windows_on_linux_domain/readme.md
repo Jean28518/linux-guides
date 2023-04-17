@@ -1,5 +1,19 @@
 # Connect Windows to Linux Workspace
 
+## Prepare Virtual Machine
+
+- Start Download for Windows 10
+- Install the newest VirtualBox version from the official website
+- Download the extension pack for VirtualBox.
+- Install VirtualBox and the extension pack.
+- Run `sudo usermod -a -G vboxusers username`
+- Restart the computer
+- Create a new Virtual Machine and assign 4 to 8 GB of RAM and at least 2 CPU-Cores.
+- Install Windows 10, you can call the user "Linux"
+- Install the VirtualBoxGuestAdditions in Windows.
+- Create a shared folder and activate the bidirectional copy buffer.
+- Create a desktop shortcut for the virtual machine and move it to .local/share/applications.
+
 ## Update DNS-Server
 
 - In the start menu search for "Network Connections"
