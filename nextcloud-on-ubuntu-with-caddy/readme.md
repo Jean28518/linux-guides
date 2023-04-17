@@ -1,16 +1,18 @@
 # Nextcloud on Ubuntu Server with Caddy as Webserver
 
 **Sources:**
+
 - <https://docs.nextcloud.com/server/latest/admin_manual/installation/example_ubuntu.html>
 - <https://caddyserver.com/docs/install#debian-ubuntu-raspbian>
 
-
 ## Install prerequisites
+
 ```bash
-sudo apt update && sudo apt upgrade && sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list && sudo apt update && sudo apt install mariadb-server php-gd php-mysql php-curl php-mbstring php-intl php-gmp php-bcmath php-xml php-imagick libmagickcore-6.q16-6-extra php-zip php-fpm caddy unzip vim
+sudo apt update && sudo apt upgrade && sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list && sudo apt update && sudo apt install mariadb-server php-gd php-mysql php-curl php-mbstring php-intl php-gmp php-bcmath php-xml php-imagick libmagickcore-6.q16-6-extra php-zip php-fpm php-redis php-acpu caddy unzip vim
 ```
 
 ## Prepare database
+
 ```bash
 sudo mysql
 
@@ -22,6 +24,7 @@ QUIT;
 ```
 
 ## Installation
+
 ```bash
 wget https://download.nextcloud.com/server/releases/latest.zip
 wget https://download.nextcloud.com/server/releases/latest.zip.md5
@@ -81,6 +84,9 @@ sudo vim /etc/php/8.1/fpm/php.ini
 # upload_max_filesize = 10G
 # max_file_uploads = 1000
 
+# Add in the end:
+opcache.interned_strings_buffer = 64
+
 ```
 
 ```bash
@@ -114,10 +120,43 @@ sudo crontab -u www-data -e
 
 Go to the nextcloud admin page and change 'background tasks' to "Cron (recommended)"
 
+## Redis
+
+```bash
+cd && mkdir redis-nextcloud && cd redis-nextcloud && vim docker-compose.yml
+
+# Create the following file:
+version: "3.9"
+services:
+  redis:
+    restart: unless-stopped
+    image: "redis:alpine3.17"
+    ports:
+      - 17423:6379
+    command: redis-server --requirepass rahBieF7
+
+docker-compose up -d
+
+vim /var/www/nextcloud/config/config.php
+# Add the following lines:
+  'memcache.distributed' => '\OC\Memcache\Redis',
+  'redis' => array(
+     'host' => 'localhost',
+     'port' => 17423,
+     'timeout' => 0.0,
+     'password' => 'rahBieF7'
+  ),
+  'memcache.locking' => '\OC\Memcache\Redis',
+  'filelocking.enabled' => true,
+  'memcache.local' => '\OC\Memcache\APCu',
+```
+
 **You are finished!**
 
-## Move data directory to other partition:
+## Move data directory to other partition
+
 In this example our partition is mounted under `/data`
+
 ```bash
 sudo -i
 mkdir /data/nextcloud
@@ -132,4 +171,4 @@ vim /var/www/nextcloud/config/config.php
 
 Check before the update, if the installed php version is supported by the following nextcloud version!!
 
-* Nextcloud 25 needs php 8.0 or higher
+- Nextcloud 25 needs php 8.0 or higher
