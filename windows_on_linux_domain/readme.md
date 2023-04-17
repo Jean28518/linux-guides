@@ -16,11 +16,7 @@
 - Click on okay, next and finish.
 - Restart Computer
 
-## Add Nextcloud WebDAV
+## Add Nextcloud Drive
 
-- Open Windows Explorer, select "This PC".
-- Select the "Computer" tab at the top
-- Select the "Connect Networkdrive"
-- Select the blue underlined "Connect to website on which documents and pictures can be stored"
-- Insert the webdav adress
-- Follow the instructions
+- WebDAV doesn't work properly. Use the official nextcloud client with virtual sync instead.
+- Disable the server notifications in the nextcloud app settings.
