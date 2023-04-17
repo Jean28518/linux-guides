@@ -31,15 +31,18 @@ Insert `192.168.178.20 ipa.int.de` into your DNS-Server.
 
 You can then log in at the browser interface with "admin" and your set password.
 
-## Configure Custom DNS-Server for Alma Linux:
+## Configure Custom DNS-Server for Alma Linux
+
 ```bash
 # Change enp0s3 to your specific connection name which you can see with 'ip a'
 nmcli connection modify enp0s3 ipv4.dns "192.168.178.84 8.8.8.8"
 service NetworkManager restart
 ```
 
-## Add Linux Client to FreeIPA Server:
+## Add Linux Client to FreeIPA Server
+
 Set a FQDN to the client via hostnamectl. The domain name should be in the same domain space like the freeipa server. In our example this is int.de.
+
 ```bash
 sudo hostnamectl set-hostname client001.int.de
 
@@ -67,10 +70,12 @@ sudo pam-auth-update
 # Make sure that 'create home directory on login' is activated
 ```
 
-### Disable user list on gdm:
+### Disable user list on gdm
+
 <https://help.gnome.org/admin/system-admin-guide/stable/login-userlist-disable.html.en>
 
 Create two files:
+
 ```bash
 sudo vim /etc/dconf/profile/gdm
 # Insert:
@@ -89,12 +94,15 @@ disable-user-list=true
 sudo dconf update
 ```
 
-### Issues:
+### Issues
 
-####  User sometimes is not able to log in because the FreeIPA server says "old password ..."
+#### User sometimes is not able to log in because the FreeIPA server says "old password ..."
+
 - Try to reset the password in the admin interface
 - The user should log in to the ipa interface. There he is requested to change the password.
+
 #### Computer got locked out because too many wrong password attempts
+
 - Login as admin in the free ipa console, go to rules -> password rules
 - Change max duration (days) to 0
 - Changee min duration (hours) to 0
@@ -102,6 +110,7 @@ sudo dconf update
 - Try to login at the computer again.
 
 #### Give freeipa user(s) sudo rights on computer(s)
+
 - Rules -> Sudo -> Sudo Rules
 - Add a new rule
 - You can leave sudo order, options blank.
@@ -111,44 +120,50 @@ sudo dconf update
 - you can leave "as who" to specific users groups while leaving the rest empty.
 - save the rule and restart the clients.
 
-##### Examples for a sudo command:
+##### Examples for a sudo command
+
 Of course you can e.g. allow every user on every host to issue apt update.
+
 ```bash
 /usr/local/bin/apt update
 /bin/bash      # <- sudo -i
 ```
 
 ## Configure Nextcloud to use ldap of FreeIPA
+
 - Create a new user in the FreeIPA Interface called 'nextcloudsysuser' and assign it to the groups admins and ipausers.
+
 ```bash
 sudo apt install php-ldap
 ```
+
 - Install the LDAP App in Nextcloud
 - In the LDAP/AD Integration:
-    - Server: ipa.int.de
-    - Port: 389
-    - User: uid=nextcloudsysuser,cn=users,cn=accounts,dc=int,dc=de
-    - Password: pw nextcloudsysuser
-    - Base DN: dc=int,dc=de
+  - Server: ipa.int.de
+  - Port: 389
+  - User: uid=nextcloudsysuser,cn=users,cn=accounts,dc=int,dc=de
+  - Password: pw nextcloudsysuser
+  - Base DN: dc=int,dc=de
 - In the Users Section of LDAP/AD Integration:
-    - Expand the LDAP-Query and ensure: `(objectclass=*)`
+  - Expand the LDAP-Query and ensure: `(objectclass=*)`
 - In the Login Attributes change nothing and click on next
 - In the Groups tab expand the LDAP Query and ensure: `(|(cn=ipausers))`
 - No go back to the Login Attributes and ensure the ldap query: `(&(objectclass=*)(uid=%uid))`
-    - Click on next so we are back into the groups settings
+  - Click on next so we are back into the groups settings
 - Click 'advanced' at the upper right corner
-    - Under Folder/directory Settings ensure:
-        - Base user tree: `cn=users,cn=accounts,dc=int,dc=de`
-        - Group Display Name: `cn`
-        - Group grup tree: `cn=groups,cn=accounts,dc=int,dc=de`
-        - Association between users and groups: Select 'uniqueMember'
-    - Under Special Attributes:
-        - email: '`mail`
-        - naming rule: `
-    - now click on 'test configuration'. 
+  - Under Folder/directory Settings ensure:
+    - Base user tree: `cn=users,cn=accounts,dc=int,dc=de`
+    - Group Display Name: `cn`
+    - Group grup tree: `cn=groups,cn=accounts,dc=int,dc=de`
+    - Association between users and groups: Select 'uniqueMember'
+  - Under Special Attributes:
+    - email: '`mail`
+    - naming rule: `
+  - now click on 'test configuration'.
 - You are finished!
 
-## Configure Mattermost with LDAP:
+## Configure Mattermost with LDAP
+
 **Warning:** In tests this progress deleted all messages of existing users, which are named equally.
 
 <https://docs.mattermost.com/configure/authentication-configuration-settings.html#ad-ldap>
