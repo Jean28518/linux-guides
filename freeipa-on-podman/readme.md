@@ -25,6 +25,11 @@ bash run.sh
 # Fook5uef
 # Warning: The web interface could be up and running but the login may fails for the first minutes. 
 # Wait for about 10 minutes at a minimum.
+
+# Configure automatic start after reboot.
+sudo podman generate systemd --new --name freeipa-server-container > /etc/systemd/system/freeipa.service
+sudo systemctl enable freeipa.service
+# Test it out by rebooting the whole server.
 ```
 
 ## Caddyfile entry
