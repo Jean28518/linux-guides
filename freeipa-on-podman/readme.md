@@ -39,6 +39,15 @@ ipa.int.de {
 }
 ```
 
+## Firewall
+
+```bash
+ufw allow 389   # For LDAP
+ufw allow 636   # For LDAPS
+ufw allow 88    # For Keberos
+ufw allow 464   # For Kerberos
+```
+
 ## Further documentation
 
 <https://github.com/Jean28518/linux-guides/tree/main/freeipa-alma-linux-9>
