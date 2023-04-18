@@ -17,7 +17,7 @@ podman run -d --name freeipa-server-container -ti \
 # Inspect the latest tag here: https://hub.docker.com/r/freeipa/freeipa-server/tags
 # Change the hostname ipa.int.de to your needs
 
-bash run.sh
+sudo bash run.sh
 
 # The first startup takes a lot of time and needs **really** at least 2GB of free RAM.
 # Credentials on web ui are:

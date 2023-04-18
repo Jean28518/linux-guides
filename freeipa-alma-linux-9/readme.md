@@ -135,11 +135,12 @@ Of course you can e.g. allow every user on every host to issue apt update.
 
 ```bash
 sudo apt install php-ldap
+# Also restart php service
 ```
 
 - Install the LDAP App in Nextcloud
 - In the LDAP/AD Integration:
-  - Server: ipa.int.de
+  - Server: ipa.int.de (localhost would also be fine)
   - Port: 389
   - User: uid=nextcloudsysuser,cn=users,cn=accounts,dc=int,dc=de
   - Password: pw nextcloudsysuser
@@ -154,13 +155,15 @@ sudo apt install php-ldap
   - Under Folder/directory Settings ensure:
     - Base user tree: `cn=users,cn=accounts,dc=int,dc=de`
     - Group Display Name: `cn`
-    - Group grup tree: `cn=groups,cn=accounts,dc=int,dc=de`
+    - Base group tree: `cn=groups,cn=accounts,dc=int,dc=de`
     - Association between users and groups: Select 'uniqueMember'
   - Under Special Attributes:
-    - email: '`mail`
-    - naming rule: `
+    - email: `mail`
+    - naming rule: `cn`
   - now click on 'test configuration'.
 - You are finished!
+
+*The user login may still not work. When this is the case for you, check the login credentials with the 'dc's in the end.*
 
 ## Configure Mattermost with LDAP
 

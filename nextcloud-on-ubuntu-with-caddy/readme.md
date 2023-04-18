@@ -8,7 +8,7 @@
 ## Install prerequisites
 
 ```bash
-sudo apt update && sudo apt upgrade && sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list && sudo apt update && sudo apt install mariadb-server php-gd php-mysql php-curl php-mbstring php-intl php-gmp php-bcmath php-xml php-imagick libmagickcore-6.q16-6-extra php-zip php-fpm php-redis php-acpu caddy unzip vim
+sudo apt update && sudo apt upgrade && sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list && sudo apt update && sudo apt install mariadb-server php-gd php-mysql php-curl php-mbstring php-intl php-gmp php-bcmath php-xml php-imagick libmagickcore-6.q16-6-extra php-zip php-fpm php-redis php-acpu php-memcache caddy unzip vim
 ```
 
 ## Prepare database
@@ -115,7 +115,8 @@ sudo systemctl restart php8.1-fpm.service
 
 sudo crontab -u www-data -e
 # Insert:
-*/5  *  *  *  * php -f /var/www/nextcloud/cron.php
+*/5  *  *  *  * php -f /var/www/nextcloud/cron.php --define apc.enable_cli=1
+# You need the argument apc.enable_cli=1 if you enabled the redis module with apc
 ```
 
 Go to the nextcloud admin page and change 'background tasks' to "Cron (recommended)"
@@ -165,6 +166,15 @@ chmod a+rwx /data # Or alternatively chown the /data/ dir to www-data:www-data.
 chown -R www-data:www-data /data/nextcloud/
 vim /var/www/nextcloud/config/config.php
 # Change datadirectory to: /data/nextcloud/data/
+```
+
+## To many requests from your IP
+
+If you tried to login too many times:
+
+```bash
+sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ security:bruteforce:reset <IP>
+# You need only the '--define apc.enable_cli=1' if you have the redis module enabled.
 ```
 
 ## On Nextcloud Updates
