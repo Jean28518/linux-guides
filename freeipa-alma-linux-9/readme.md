@@ -31,6 +31,12 @@ Insert `192.168.178.20 ipa.int.de` into your DNS-Server.
 
 You can then log in at the browser interface with "admin" and your set password.
 
+## Recommended settings
+
+- Rules -> Password Rules -> global_policy
+  - Set max duration (days) to 0 (new passwords are valid forever)
+  - Set min duration (hours) to 0 (passwords can be changed everytime, even if the current password is very new)
+
 ## Configure Custom DNS-Server for Alma Linux
 
 ```bash
@@ -187,5 +193,38 @@ sudo apt install php-ldap
 - Attribute "Login ID": `uid`
 - Attribute Username: `cn`
 - E-Mail Attribute: `mail`
-- Keep the rest blank and click on 'Sync AD/LDAP now' at the very bottom. This takes some seconds. Reload the page and check the status.
+- Keep the rest blank and click on 'Save'.
+- Then click 'Sync AD/LDAP now' at the very bottom. This takes some seconds. Reload the page and check the status.
 - You are finished!
+
+### Automatic Team Join
+
+- Go to the team settings, enable joining for every user of the server
+- Go the the Authentication -> Signup settings and disable account creation
+
+## Configure Rocket.Chat with LDAP
+
+- Create a new User `rocketchatsysuser` in FreeIPA and assign him to ipausers and admins
+- Administration -> Settings -> LDAP
+- Activate LDAP
+- Server type: Other
+- ldap host: ipa.int.de
+- LDAP-Port: 389
+- Enable reconnect
+- Enable login fallback
+- Enable Authentication
+- User-DN: `uid=rocketchatsysuser,cn=users,cn=accounts,dc=int,dc=de`
+- Password: password of the rocketchatsysuser.
+- Encryption: StartTLS
+- Disable reject unauthorized
+- Save the changes. Click on "test connection"
+- Go to the tab 'user search'
+- Base-DN: `dc=int,dc=de`
+- Save the changes and test the ldap search at the very top. A green message should appear in the top right corner.
+- LDAP is configured!
+
+### Disable signup and two factor authentication via mail
+
+- Administration -> Settings -> Accounts ("Konten")
+- In the section Two Factor Authentication disable it
+- In the section registration form change 'registration form' from public to disabled.

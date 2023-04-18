@@ -1,10 +1,11 @@
 # Setup Collabora CODE Document Server for nextcloud
+
 In this we create a docker container and a reverse proxy.
-Instructions from: https://sdk.collaboraonline.com/docs/installation/CODE_Docker_image.html
+Instructions from: <https://sdk.collaboraonline.com/docs/installation/CODE_Docker_image.html>
 
 - Auf den Server als root einloggen und folgende Befehle ausführen:
 
-```
+```bash
 apt update && apt upgrade
 sudo apt install docker.io docker
 
@@ -17,8 +18,9 @@ sudo apt install docker.io docker
 docker run -t -d -p 9980:9980 -e "aliasgroup1=https://nx22507\\.your-storageshare\\.de:443" -e "username=admin" -e "password=eeJ0beil" --restart unless-stopped collabora/code 
 ```
 
-# Caddy Reverse Proxy
-```
+## Caddy Reverse Proxy
+
+```caddyfile
 office.robo7.de {
   encode gzip
   reverse_proxy https://127.0.0.1:9980 {
@@ -29,13 +31,13 @@ office.robo7.de {
 }
 ```
 
-
-# Nginx Reverse Proxy
+## Nginx Reverse Proxy
 
 ```bash
 sudo apt install certbot nginx
 certbot certonly
 ```
+
 - (1: Spin up a temporary webserver)
 - E-Mail angeben
 - ...
@@ -45,7 +47,7 @@ certbot certonly
 
 Dann folgendes eintragen, und `office.robo7.de` mit der eigenen domain ersetzen
 
-```
+```nginx
 http {
     server {
      listen       443 ssl;
@@ -108,27 +110,29 @@ http {
 
 `systemctl restart nginx`
 
-
-
 In der Nextcloud den integrierten CODE Server deinstallieren \
 Dann "Nextcloud Office" installieren, und in den Einstellungen unter: Nextcloud Office:
 
-- `Verwenden Sie Ihren eigenen Server` auswählen 
+- `Verwenden Sie Ihren eigenen Server` auswählen
 - folgende Adresse eintragen:`https://office.robo7.de`
 
 ## Verbindungsprobleme?
+
 - Wenn sich die DNS-Einstellung geändert hat, kann dies bis zu einem Tag dauern, bis der neue Server wieder von Storage Share erreichbar ist
 - Verbindungstest schlägt immer noch fehl? Dann kann Collabora nicht erreicht werden
 - Verbingungstest ist grün, dennoch laden keine Dokumente? \
     Sichergehen, dass beim Starten des Docker-Containers die aliasgroup1 richtig definiert wurde. Ansonsten den log des docker containers ansehen: `docker logs CONTAINERID`
 
-### Erklärung aliasgroup:
+### Erklärung aliasgroup
+
 Nur domains, die in einer aliasgroup sind, werden akzeptiert.  Wichtig ist bei den domains vor einem Punkt zwei '\' anzugeben.
 Wenn eine nextcloud unter mehreren domains erreichbar sein soll, trennt man die domains in der aliasgroup1 mit einem ','
-Also bspw heißt dann das docker Befehlsstück am Ende: 
-```
+Also bspw heißt dann das docker Befehlsstück am Ende:
+
+```bash
 -e "aliasgroup1=https://nx22507\\.your-storageshare\\.de:443,https://my\\.robo7\\.de:443"
 ```
 
-### Admin Konsole Collabora:
+### Admin Konsole Collabora
+
 - URL: <https://office.robo7.de/browser/dist/admin/admin.html>
