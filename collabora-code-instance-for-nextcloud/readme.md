@@ -8,20 +8,26 @@ Instructions from: <https://sdk.collaboraonline.com/docs/installation/CODE_Docke
 ```bash
 apt update && apt upgrade
 sudo apt install docker.io docker
+cd && mkdir collabora && cd collabora && vim run.sh
 
 # (https://sdk.collaboraonline.com/docs/installation/CODE_Docker_image.html)
-# Der username und das passwort sind für die Admin-Konsole dann erreichbar unter: https://office.robo7.de/browser/dist/admin/admin.html
+# Der username und das passwort sind für die Admin-Konsole dann erreichbar unter: https://office.int.de/browser/dist/admin/admin.html
 # Nur domains, die in einer aliasgroup sind, werden akzeptiert.  Wichtig ist bei den domains vor einem Punkt zwei '\' anzugeben.
 # Wenn eine nextcloud unter mehreren domains erreichbar sein soll, trennt man die domains in der aliasgroup1 mit einem ','
-# Also: aliasgroup1=https://nx22507\\.your-storageshare\\.de:443,https://my\\.robo7\\.de:443
+# Also: aliasgroup1=https://cloud\\.int\\.de:443,https://my\\.int\\.de:443
 
-docker run -t -d -p 9980:9980 -e "aliasgroup1=https://nx22507\\.your-storageshare\\.de:443" -e "username=admin" -e "password=eeJ0beil" --restart unless-stopped collabora/code 
+# Insert
+
+docker run -t -d -p 9980:9980 -e "aliasgroup1=https://cloud\\.int\\.de:443" -e "username=admin" -e "password=eeJ0beil" --restart unless-stopped collabora/code 
+
+
+bash run.sh
 ```
 
 ## Caddy Reverse Proxy
 
 ```caddyfile
-office.robo7.de {
+office.int.de {
   encode gzip
   reverse_proxy https://127.0.0.1:9980 {
     transport http {
@@ -41,21 +47,21 @@ certbot certonly
 - (1: Spin up a temporary webserver)
 - E-Mail angeben
 - ...
-- Domain: bspw. 'office.robo7.de' angeben
+- Domain: bspw. 'office.int.de' angeben
 
 `vim /etc/nginx/nginx.conf`
 
-Dann folgendes eintragen, und `office.robo7.de` mit der eigenen domain ersetzen
+Dann folgendes eintragen, und `office.int.de` mit der eigenen domain ersetzen
 
 ```nginx
 http {
     server {
      listen       443 ssl;
-     server_name  office.robo7.de;
+     server_name  office.int.de;
 
 
-     ssl_certificate /etc/letsencrypt/live/office.robo7.de/fullchain.pem;
-     ssl_certificate_key /etc/letsencrypt/live/office.robo7.de/privkey.pem;
+     ssl_certificate /etc/letsencrypt/live/office.int.de/fullchain.pem;
+     ssl_certificate_key /etc/letsencrypt/live/office.int.de/privkey.pem;
 
 
      # static files
@@ -114,7 +120,7 @@ In der Nextcloud den integrierten CODE Server deinstallieren \
 Dann "Nextcloud Office" installieren, und in den Einstellungen unter: Nextcloud Office:
 
 - `Verwenden Sie Ihren eigenen Server` auswählen
-- folgende Adresse eintragen:`https://office.robo7.de`
+- folgende Adresse eintragen:`https://office.int.de`
 
 ## Verbindungsprobleme?
 
@@ -130,9 +136,9 @@ Wenn eine nextcloud unter mehreren domains erreichbar sein soll, trennt man die 
 Also bspw heißt dann das docker Befehlsstück am Ende:
 
 ```bash
--e "aliasgroup1=https://nx22507\\.your-storageshare\\.de:443,https://my\\.robo7\\.de:443"
+-e "aliasgroup1=https://cloud\\.int\\.de:443,https://my\\.int\\.de:443"
 ```
 
 ### Admin Konsole Collabora
 
-- URL: <https://office.robo7.de/browser/dist/admin/admin.html>
+- URL: <https://office.int.de/browser/dist/admin/admin.html>
