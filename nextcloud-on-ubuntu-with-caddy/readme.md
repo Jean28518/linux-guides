@@ -16,7 +16,7 @@ sudo apt update && sudo apt upgrade && sudo apt install -y debian-keyring debian
 ```bash
 sudo mysql
 
-CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'PASSWORD';
+CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'phoo2Oot';
 CREATE DATABASE IF NOT EXISTS nextcloud CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';
 FLUSH PRIVILEGES;
@@ -73,6 +73,7 @@ sudo systemctl restart caddy
 ```
 
 Open webbrowser with the ip adress of the server, fill the setup dialog.
+Mysql PW: `phoo2Oot`
 
 ## Optimizations (recommended)
 
