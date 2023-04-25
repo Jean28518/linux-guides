@@ -19,6 +19,13 @@ PubkeyAuthentication yes
 ## Install fail2ban
 ```bash
 sudo apt install fail2ban
+sudo vim /etc/fail2ban/jail.conf
+
+# Uncomment:
+#[sshd]
+#enabled = true
+
+sudo systemctl restart fail2ban
 ```
 
 ## Setup unattended upgrades:
