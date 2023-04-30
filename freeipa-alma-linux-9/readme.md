@@ -252,4 +252,4 @@ sudo apt install php-ldap
 - Default User Role: All
 - Click on "Activate" at the very top of the site
 - Then save the site.
-- 
+- You can now configure unter "users" the roles of the user. (You can also select all.) The message whith the id for employee is currently not fixed at our instance
