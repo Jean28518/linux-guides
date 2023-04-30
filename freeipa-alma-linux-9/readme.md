@@ -185,6 +185,7 @@ sudo apt install php-ldap
 - Connection Security: STARTTLS
 - Skip Certificate Test: True
 - Bind username: `uid=mattermostsysuser,cn=users,cn=accounts,dc=int,dc=de`
+  - (if you are unsure with the dc, pick the one of <https://ipa.int.de/ipa/ui/#/e/topologysuffix/search>)
 - Bind password: password of the mattermostsysuser
 - Base-DN: `dc=int,dc=de`
 - User filter: `(objectclass=*)`
@@ -214,6 +215,7 @@ sudo apt install php-ldap
 - Enable login fallback
 - Enable Authentication
 - User-DN: `uid=rocketchatsysuser,cn=users,cn=accounts,dc=int,dc=de`
+  - (if you are unsure with the dc, pick the one of <https://ipa.int.de/ipa/ui/#/e/topologysuffix/search>)
 - Password: password of the rocketchatsysuser.
 - Encryption: StartTLS
 - Disable reject unauthorized
@@ -228,3 +230,26 @@ sudo apt install php-ldap
 - Administration -> Settings -> Accounts ("Konten")
 - In the section Two Factor Authentication disable it
 - In the section registration form change 'registration form' from public to disabled.
+
+## Configure ERP Next with LDAP
+
+- Create a new User `erpnextsysuser` in FreeIPA and assign him to ipausers and admins
+- Search for LDAP-Settings
+- Directory server: OpenLDAP
+- LDAP-Server URL: `ldap://ipa.int.de:389
+- LDAP Auth: (if you are unsure with the dc, pick the one of <https://ipa.int.de/ipa/ui/#/e/topologysuffix/search>)
+  - `uid=erpnextsysuser,cn=users,cn=accounts,dc=int,dc=de`
+- Search path for users: `cn=users,cn=accounts,dc=int,dc=de`
+- Search path for groups: `cn=groups,cn=accounts,dc=int,dc=de`
+- LDAP search string: `(&(objectclass=*)(uid={0}))`
+- LDAP mail field: mail
+- LDAP field username: uid
+- LDAP Field first name: givenName
+- LDAP Fiield surname: sn
+- SSL/TLS Mode: StartTLS
+- Request trusted certufucate: nothing
+- Default User Type: System User
+- Default User Role: All
+- Click on "Activate" at the very top of the site
+- Then save the site.
+- 
