@@ -2,7 +2,8 @@
 
 ```bash
 git clone https://github.com/frappe/frappe_docker.git
-cd frappe_docker
+mv frappe_docker erp-next
+cd erp-next
 vim pwd.yml
 # Change Port 8080 to 29323 in the frontend service
 # The rest should be fine.
