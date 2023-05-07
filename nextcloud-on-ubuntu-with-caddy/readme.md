@@ -42,7 +42,12 @@ IP_ADRESS_OR_DOMAIN {
   root * /var/www/nextcloud
   file_server
 
-  php_fastcgi unix//var/run/php/php-fpm.sock
+  php_fastcgi unix//var/run/php/php-fpm.sock {
+    dial_timeout 60s
+    read_timeout 60s
+    write_timeout 60s
+  }
+
   header {
     Strict-Transport-Security max-age=31536000; # enable HSTS
   }
