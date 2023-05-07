@@ -169,6 +169,22 @@ vim /var/www/nextcloud/config/config.php
 # Change datadirectory to: /data/nextcloud/data/
 ```
 
+## Import data from old machine:
+
+```bash
+## On the new machine:
+mkdir /data/import
+
+## Start on the other machine:
+sftp user@newserver
+put -r /path/to/old/data/* /data/import/
+
+## On the new machine:
+sudo mv /data/import/* /data/nextcloud/users/...
+sudo -u www-data php /var/www/nextcloud/occ files:scan --all --define apc.enable_cli=1
+sudo chown www-data:www-data -R /data/nextcloud
+```
+
 ## To many requests from your IP
 
 If you tried to login too many times:
