@@ -103,6 +103,7 @@ sudo vim /var/www/nextcloud/config/config.php
 
 # Change the ip adress to the IPv4 adress of the nextcloud server itself.
 'trusted_proxies' => ['192.168.178.10'],
+'bulkupload.enabled' => false,
 ```
 
 ```bash
