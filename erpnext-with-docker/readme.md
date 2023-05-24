@@ -7,6 +7,8 @@ cd erp-next
 vim pwd.yml
 # Change Port 8080 to 29323 in the frontend service
 # The rest should be fine.
+# Change all restart policies to:
+#     restart: unless-stopped
 docker-compose -f pwd.yml up -d
 ```
 
