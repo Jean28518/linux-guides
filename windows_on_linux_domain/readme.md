@@ -9,6 +9,7 @@
 - Run `sudo usermod -a -G vboxusers username`
 - Restart the computer
 - Create a new Virtual Machine and assign 4 to 8 GB of RAM and at least 2 CPU-Cores.
+- 3D acceleration is NOt recommended
 - Install Windows 10, you can call the user "Linux"
 - Install the VirtualBoxGuestAdditions in Windows.
 - Create a shared folder and activate the bidirectional copy buffer.
