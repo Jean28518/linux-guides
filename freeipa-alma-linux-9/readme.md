@@ -148,7 +148,7 @@ sudo apt install php-ldap
 - In the LDAP/AD Integration:
   - Server: ipa.int.de (localhost would also be fine)
   - Port: 389
-  - User: uid=nextcloudsysuser,cn=users,cn=accounts,dc=int,dc=de
+  - User: `uid=nextcloudsysuser,cn=users,cn=accounts,dc=int,dc=de`  (**not only the username, the whole string!!**)
   - Password: pw nextcloudsysuser
   - Base DN: dc=int,dc=de
 - In the Users Section of LDAP/AD Integration:
