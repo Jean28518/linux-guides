@@ -41,6 +41,8 @@ volumes:
 docker-compose up -d
 ```
 
+If mongodb says "illegal instructions" at beginning change the version of mongodb to `4.4`.
+
 ## Caddyfile
 
 ```caddyfile
