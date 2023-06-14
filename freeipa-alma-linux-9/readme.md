@@ -221,7 +221,7 @@ sudo apt install php-ldap
 - Disable reject unauthorized
 - Save the changes. Click on "test connection"
 - Go to the tab 'user search'
-- Base-DN: `dc=int,dc=de`
+- Base-DN: `cn=users,cn=accounts,dc=int,dc=de`
 - Save the changes and test the ldap search at the very top. A green message should appear in the top right corner.
 - LDAP is configured!
 
