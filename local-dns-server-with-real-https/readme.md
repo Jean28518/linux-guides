@@ -12,7 +12,7 @@ Insert the following content:
 nameserver 127.0.0.1
 nameserver 192.168.178.84 # The ip of the server itself, needed for dns for docker containers
 nameserver 192.168.178.1
-nameserver 8.8.8.8
+nameserver 208.67.222.222 # OpenDNS
 ```
 
 ```bash
