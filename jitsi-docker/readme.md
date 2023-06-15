@@ -37,3 +37,16 @@ meet.int.de {
     reverse_proxy localhost:30323
 }
 ```
+
+## How to update
+
+Latest tag:
+<https://github.com/jitsi/docker-jitsi-meet/releases/latest>
+
+```bash
+vim .env
+# Set JITSI_IMAGE_VERSION at the very end to e.g. 'stable-8719'
+
+
+docker-compose up -d
+```
