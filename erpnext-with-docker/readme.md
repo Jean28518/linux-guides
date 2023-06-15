@@ -1,5 +1,7 @@
 # ERP Next
 
+<https://hub.docker.com/r/frappe/erpnext/tags>
+
 ```bash
 git clone https://github.com/frappe/frappe_docker.git && mv frappe_docker erp-next && cd erp-next && vim pwd.yml
 # Change Port 8080 to 29323 in the frontend service
@@ -27,6 +29,15 @@ erp.int.de {
 
 ## How to backup and restore
 
+### ERPNext has error after upgrade?
+
+```bash
+docker ps # Take ID from erp-next_backend_1
+docker exec -it #ID# bash -l
+/usr/local/bin/bench migrate
+exit
+```
+
 ### Backup
 
 ```bash
@@ -41,7 +52,7 @@ cd && mkdir "backup_erp_$(date +'%Y-%m-%d_%H-%M-%S')" && mv /var/lib/docker/volu
 ### Restore
 
 ```bash
-sudo
+sudo -i
 # Change into folder where backed up files are
 
 cp -a * /var/lib/docker/volumes/erp-next_sites/_data/frontend/private/backups/

@@ -18,7 +18,7 @@ cd && mkdir collabora && cd collabora && vim run.sh
 
 # Insert
 
-docker run -t -d -p 9980:9980 -e "aliasgroup1=https://cloud\\.int\\.de:443" -e "username=admin" -e "password=eeJ0beil" --restart unless-stopped collabora/code 
+docker run -t -d -p 9980:9980 -e "aliasgroup1=https://cloud\\.int\\.de:443" -e "username=admin" -e "password=eeJ0beil" --restart unless-stopped collabora/code:latest
 
 
 bash run.sh
@@ -142,3 +142,12 @@ Also bspw heißt dann das docker Befehlsstück am Ende:
 ### Admin Konsole Collabora
 
 - URL: <https://office.int.de/browser/dist/admin/admin.html>
+
+## How to update
+
+```bash
+docker ps # Get ID of container
+docker stop ID
+docker rm ID
+bash run.sh
+```

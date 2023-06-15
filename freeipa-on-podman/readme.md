@@ -1,5 +1,7 @@
 # FreeIPA with podman
 
+<https://hub.docker.com/r/freeipa/freeipa-server/tags>
+
 ```bash
 mkdir /var/lib/ipa-data/ && mkdir freeipa && cd freeipa && vim run.sh
 
@@ -11,7 +13,7 @@ podman run -d --name freeipa-server-container -ti \
     -p 88:88/udp -p 464:464/udp -p 123:123/udp \
     --sysctl net.ipv6.conf.all.disable_ipv6=0 \
     -e PASSWORD=Fook5uef \
-    -v /var/lib/ipa-data:/data:Z docker.io/freeipa/freeipa-server:almalinux-9-4.10.0 \
+    -v /var/lib/ipa-data:/data:Z docker.io/freeipa/freeipa-server:almalinux-9-4.10.1 \
     ipa-server-install -U -r INT.DE --no-ntp
 
 # Inspect the latest tag here: https://hub.docker.com/r/freeipa/freeipa-server/tags
@@ -56,3 +58,17 @@ ufw allow 464   # For Kerberos
 ## Further documentation
 
 <https://github.com/Jean28518/linux-guides/tree/main/freeipa-alma-linux-9>
+
+## How to update
+
+```bash
+vim run.sh
+# Update the tag, comment out the last line 'ipa-server-install'
+systemctl disable freeipa --now
+
+podman ps -a
+podman rm ID # If the container is available
+
+# Now run the run.sh and regenerate and reactivate the systemctl as described in the setup.
+# Hint: The startup of freeipa takes five minute until it is reachable and fully working again.
+```

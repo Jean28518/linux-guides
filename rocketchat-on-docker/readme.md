@@ -1,5 +1,7 @@
 # Rocket.Chat with docker
 
+<https://hub.docker.com/_/rocket-chat?tab=tags>
+
 ```bash
 cd && mkdir rocket.chat && cd rocket.chat && vim docker-compose.yml
 
@@ -37,7 +39,8 @@ services:
 volumes:
   mongodb_data:
 
-## See latest rocket.chat tag: https://hub.docker.com/_/rocket-chat?tab=tags
+# Change the TAG and the root url
+
 
 docker-compose up -d
 ```

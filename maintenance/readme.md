@@ -1,18 +1,33 @@
 # Maintenance
 
 ```bash
+# Check available diskspace
+df -h
+
+## CHECK, IF ENOUGH DISKSPACE IS AVAILABLE!
+
 # Check, if the backups are working
 sudo -i
 cd
-./mount-backups.sh
+./mount_backup.sh
 ls /mnt/
-./ummount-backups.sh
+./umount_backup.sh
+
+## ONLY RESUME IF A GOOD BACKUP IS AVAILABLE!
+## (Because updates can have high fail potential)
 
 # Check, if the firewall is working and if all open ports are for a service
 ufw status numbered
 netstat -tulpn | grep PORT
-ufw delete NUMBER
+ufw delete NUMBER && ufw status numbered
 # Note every service which could be upgradeable seperately!!
+
+# Some ports explained:
+# - 389: LDAP
+# - 636: LDAPS
+# - 88: Kerberos
+# - 464: kpasswd (used by FreeIPA)
+# - 10000: Jitsi UDP?
 
 # Update the machine
 sudo apt dist-upgrade
@@ -24,9 +39,16 @@ cat /etc/os-release
 netstat-tulpn
 docker ps
 podman ps
+# - Any PHP sites like Nextcloud ?
 
 # Check the caddy file for active services:
 vim /etc/caddy/Caddyfile
+
+# Free diskspace:
+docker image prune -a
+podman system prune --all
+apt clean
+ncdu /
 
 reboot
 ```

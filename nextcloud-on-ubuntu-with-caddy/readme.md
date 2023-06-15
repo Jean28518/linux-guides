@@ -175,7 +175,7 @@ vim /var/www/nextcloud/config/config.php
 # Change datadirectory to: /data/nextcloud/data/
 ```
 
-## Import data from old machine:
+## Import data from old machine
 
 ```bash
 ## On the new machine:
@@ -205,3 +205,21 @@ sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ security:b
 Check before the update, if the installed php version is supported by the following nextcloud version!!
 
 - Nextcloud 25 needs php 8.0 or higher
+
+```bash
+sudo -u www-data php --define apc.enable_cli=1 occ db:add-missing-indices # helps after update
+```
+
+## Nextcloud down? Nothing works?
+
+Check, if a basic command runs. Otherwise it is printed a stack trace.
+
+```bash
+cd /var/www/nextcloud
+sudo -u www-data php --define apc.enable_cli=1 occ -V
+sudo -u www-data php occ -V # For Instances without redis memcache
+
+# Sometimes it just helps to restart the mysql service
+```
+
+Good luck!
