@@ -35,3 +35,9 @@ reboot
 <https://github.com/Jean28518/linux-guides/tree/main/basic-security-for-server>
 
 **Set next appointment for maintenance check!**
+
+## Update your documentation accordinly
+
+- All Versions of installed software
+- Ensure that every software is documented and all old entries got deleted
+- Update the basic information about the server

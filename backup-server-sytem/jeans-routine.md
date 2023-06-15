@@ -2,19 +2,22 @@
 
 In dieser Anleitung wird gezeigt, wie man auf einem Debian oder Ubuntu Server mit Borg ein vollautomatisches, sicheres und inkrementelles BackUp-System einrichtet. Als darunterliegende Technologie wird Borg verwendet.
 
-## Vorbereitungen: 
+## Vorbereitungen
 
 * Debian oder Ubuntu Server als BackUp Server einrichten
 * Am besten diesen Server bei einem anderen Serveranbieter mieten, oder bei sich Zuhause haben. Auf jeden Fall an einem anderen pyhsischen Ort.
 
-## Source Server:
+## Source Server
 
 ```bash
 sudo -i 
 cd && ssh-keygen && cat ~/.ssh/id_rsa.pub
+apt install borgbackup vim ncdu -y
 ```
 
-## BackUp Server:
+## BackUp Server
+
+### Linux-Server
 
 ```bash
 sudo apt install borgbackup vim ncdu -y && sudo adduser borg # Keine Root Rechte!
@@ -32,13 +35,28 @@ borg init --encryption=none ~/backups/Server1
 borg config ~/backups/Server1 additional_free_space 10G
 ```
 
-## Source Serer:
+### Hetzner Storage Box
+
+* enable SSH Support on your Hetzner Storage Box
+* run on the source server:
 
 ```bash
-apt install borgbackup vim ncdu -y
+ssh-copy-id -i .ssh/id_rsa -p 23 -s USER@SERVERADRESS
+borg init --encryption=repokey ssh://USER@SERVERADRESS:23/./borg-SERVERNAME
+# Create a strong password WITHOUT special characters and save it safe!
+borg key export ssh://USER@SERVERADRESS:23/./borg-SERVERNAME
+# Save this repokey securely!
+# You will need both parts to recover borg-backup
+```
+
+## Source Serer
+
+```bash
 vim ~/backup.sh
 ```
-##### backup.sh:
+
+### backup.sh
+
 ```bash
 #!/bin/bash
 
@@ -54,22 +72,30 @@ mysqldump -u root --all-databases > all_databases.sql
 
 DATE=`date +"%Y-%m-%d"`
 REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
+#REPOSITORY="ssh://USER@SERVERADRESS:23/./borg-SERVERNAME"
+#export BORG_PASSPHRASE="XXXXX"
+
 borg create --exclude-caches --one-file-system $REPOSITORY::$DATE / -e /dev -e /proc -e /sys -e /tmp -e /run -e /media -e /mnt
 
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
 #borg create --remote-path /usr/local/bin/borg --exclude-caches --one-file-system $REPOSITORY::$DATE / -e /dev -e /proc -e /sys -e /tmp -e /run -e /media -e /mnt
-```
-   
-    
 
-```bash   
+
+borg prune -v $REPOSITORY \
+    --keep-daily=10 \
+    --keep-weekly=6 \
+    --keep-monthly=12
+```
+
+```bash
 chmod 700 ~/backup.sh && ~/backup.sh # Austesten
 
 crontab -e
 0 2 * * * /root/backup.sh # daily at 2 am
 ```
 
-### Create restore files:
+### Create restore files
+
 ```bash
 vim ~/mount_backup.sh && chmod 700 ~/mount_backup.sh && vim ~/umount_backup.sh && chmod 700 ~/umount_backup.sh
 ```
@@ -78,6 +104,9 @@ vim ~/mount_backup.sh && chmod 700 ~/mount_backup.sh && vim ~/umount_backup.sh &
 #!/bin/bash
 
 REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
+#REPOSITORY="ssh://USER@SERVERADRESS:23/./borg-SERVERNAME"
+#export BORG_PASSPHRASE="XXXXX"
+
 borg mount $REPOSITORY /mnt
 
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
@@ -93,29 +122,8 @@ echo "Please don't forget to umount your backups with '~/umount_backup.sh' after
 borg umount /mnt
 ```
 
-## Backup Server
+## How to restore a complete server
 
-```bash
-vim ~/prune-backup.sh
-```
-##### prune-backup.sh
-```bash
-#!/bin/bash
-borg prune -v ~/backups/Server1 \
-    --keep-daily=10 \
-    --keep-weekly=6 \
-    --keep-monthly=12
-```
-
-```bash
-chmod 700 ~/prune-backup.sh && ~/prune-backup.sh # Austesten
-
-crontab -e
-0 9 * * * /home/borg/prune-backup.sh # daily at 9 am
-```
-
-
-# How to restore a complete server:
 ```bash
 # Start on a fresh server as root
 apt update && apt dist-upgrade
