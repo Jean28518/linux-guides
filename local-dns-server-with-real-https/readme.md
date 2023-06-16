@@ -85,7 +85,7 @@ cloud.int.de 192.168.178.84 {
 - Set the dns server of the system to the ip of the new dns server.
   - In docker containers the nameserver should be already configured. Check /etc/resolv.conf for that.
 - Reconnect to the network
-- Download the certificate of the server. (If you did everything right a valid address would be '192.168.178.84/lan.crt')
+- Download the certificate of the server. (If you did everything right a valid address would be 'cert.int.de/lan.crt')
 - Add this certificate to your browsers (because they have their own certificate handling)
     - Settings -> Privady & Security -> Show certificates (-> Certificate Authorities) -> Add certificate
 - Add the certificate to your system by issuing the following commands
