@@ -49,6 +49,39 @@ borg key export ssh://USER@SERVERADRESS:23/./borg-SERVERNAME
 # You will need both parts to recover borg-backup
 ```
 
+### Synology
+
+* create group called 'borg'
+* create user called 'borg' in synology admin interface
+* add SynoCommunity repo
+* intall Borg from Synco Community Repo
+* enable ssh in the system settings under 'Terminal & SNMP'
+* connect to ssh with the borg user.
+* ensure that the borg user can write in his home directory and the home directory points to a volume. You can become root by typing 'sudo -i' and entering the password of the borg user.
+
+#### Add SSH-Key
+
+```bash
+mkdir -p /var/services/homes/borg/.ssh
+chmod 0700 /var/services/homes/borg-backup
+chmod 0700 /var/services/homes/borg-backup/.ssh
+echo "FULL_PUBKEY" > /var/services/homes/borg-backup/.ssh/authorized_keys
+chmod 0600 /var/services/homes/borg-backup/.ssh/authorized_keys
+```
+
+On the source server add an special ssh config file
+
+```bash
+vim ~/.ssh/config
+
+# Paste this into:
+Host *
+  SendEnv LANG LC_*
+  Ciphers +aes256-cbc
+```
+
+Now the ssh key should work properly.
+
 ## Source Serer
 
 ```bash
