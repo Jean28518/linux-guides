@@ -4,13 +4,17 @@
 
 ```bash
 cd && mkdir uptime-kuma && cd uptime-kuma && vim run.sh
+
+# Insert
 docker run -d --restart=unless-stopped -p 20623:3001 -v ./uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:1
+
+bash run.sh
 ```
 
 ## Caddyfile
 
 ```Caddyfile
-DOMAIN {
+kuma.int.de {
   #tls internal
   reverse_proxy localhost:20623
 }
