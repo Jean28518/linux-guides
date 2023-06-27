@@ -47,6 +47,18 @@ sudo crontab -e
 50 1 * * * reboot # daily at 1:50 am
 ```
 
+## Set log limit:
+
+```
+vim /etc/systemd/journald.conf
+
+# Append
+SystemMaxUse=1G
+
+
+systemctl restart systemd-journald.service
+```
+
 ## Setup automatic backup system
 <https://github.com/Jean28518/linux-guides/tree/main/backup-server-sytem>
 
