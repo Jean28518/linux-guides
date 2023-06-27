@@ -41,6 +41,13 @@ sudo ufw allow # The ports/services which should be accesible from the outside
 sudo ufw enable
 ```
 
+## Setup automatic restart
+```bash
+sudo crontab -e
+50 1 * * * reboot # daily at 1:50 am
+```
+
 ## Setup automatic backup system
 <https://github.com/Jean28518/linux-guides/tree/main/backup-server-sytem>
+
 
