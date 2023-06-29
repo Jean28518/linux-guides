@@ -159,6 +159,21 @@ vim /var/www/nextcloud/config/config.php
   'memcache.local' => '\OC\Memcache\APCu',
 ```
 
+## Setup in Nextcloud itself
+
+- Install Notes
+- Install Groupfolders
+- Install External sites
+
+### External sites
+
+| Service     | Name     | Additional information                                     |
+|-------------|----------|------------------------------------------------------------|
+| Jitsi       | Meetings | Activate 'This site does not allow iframe' because of video and camera |
+| NocoDB      | NocoDB   |                                                            |
+| Rocket.Chat | Chat     | Change X-Frame-Options to: sameorigin https://cloud.int.de |
+| Videoportal | Videos   |                                                            |
+
 **You are finished!**
 
 ## Move data directory to other partition
