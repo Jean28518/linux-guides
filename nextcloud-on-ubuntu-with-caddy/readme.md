@@ -167,12 +167,13 @@ vim /var/www/nextcloud/config/config.php
 
 ### External sites
 
-| Service     | Name     | Additional information                                     |
-|-------------|----------|------------------------------------------------------------|
-| Jitsi       | Meetings | Activate 'This site does not allow iframe' because of video and camera |
-| NocoDB      | NocoDB   |                                                            |
-| Rocket.Chat | Chat     | Change X-Frame-Options to: sameorigin https://cloud.int.de |
-| Videoportal | Videos   |                                                            |
+| Service     | Name     | Additional information                                     | Activate forwarding |
+|-------------|----------|------------------------------------------------------------| ------------------- |
+| Jitsi       | Meetings |                                                            |           X         |
+| NocoDB      | NocoDB   |                                                            |                     |
+| Rocket.Chat | Chat     | Change X-Frame-Options to: sameorigin https://cloud.int.de |                     |
+| Videoportal | Videos   |                                                            |                     |
+| IPA         | Passwort ändern | Only upload dark key icon, position: settings menu  |           X         |
 
 **You are finished!**
 
