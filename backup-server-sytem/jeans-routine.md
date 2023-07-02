@@ -94,7 +94,8 @@ vim ~/backup.sh
 #!/bin/bash
 
 # Dump all databases
-mysqldump -u root --all-databases > all_databases.sql
+# --default-character-set=utf8mb4: For emojis and similar, otherwise its broken 
+mysqldump -u root --all-databases --default-character-set=utf8mb4 > all_databases.sql    
 # To restore a Single MySQL Database from a Full MySQL Dump:
 # mysql -p -o database_name < all_databases.sql
 
