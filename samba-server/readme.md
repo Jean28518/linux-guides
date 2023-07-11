@@ -42,6 +42,14 @@ systemctl restart smbd.service
 ufw allow 445
 ```
 
+### Add user
+
+Samba seems to have their own user management with password database
+
+```bash
+sudo smbpasswd -a USERNAME
+```
+
 ## Linux Client:
 ### Nautilus:
 - select 'other' in the left bar
