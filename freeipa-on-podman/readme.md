@@ -3,7 +3,7 @@
 <https://hub.docker.com/r/freeipa/freeipa-server/tags>
 
 ```bash
-mkdir /var/lib/ipa-data/ && mkdir freeipa && cd freeipa && vim run.sh
+mkdir /var/lib/ipa-data/ && cd && mkdir freeipa && cd freeipa && vim run.sh
 
 # Insert the following text.
 podman run -d --name freeipa-server-container -ti \
