@@ -8,7 +8,7 @@ cd && mkdir rocket.chat && cd rocket.chat && vim docker-compose.yml
 # Insert:
 services:
   rocketchat:
-    image: registry.rocket.chat/rocketchat/rocket.chat:TAG
+    image: rocket.chat:TAG
     restart: unless-stopped
     environment:
       MONGO_URL: "mongodb://mongodb:27017/rocketchat?replicaSet=rs0"
