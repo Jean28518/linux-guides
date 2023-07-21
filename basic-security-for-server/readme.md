@@ -50,13 +50,13 @@ sudo crontab -e
 ## Set log limit:
 
 ```
-vim /etc/systemd/journald.conf
+sudo vim /etc/systemd/journald.conf
 
 # Append
 SystemMaxUse=1G
 
 
-systemctl restart systemd-journald.service
+sudo systemctl restart systemd-journald.service
 ```
 
 ## Setup automatic backup system
