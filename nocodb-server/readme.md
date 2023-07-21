@@ -8,6 +8,10 @@ Spreadsheets on steroids. Datafields and handling of data is very good. But when
 
 <https://github.com/nocodb/nocodb/blob/develop/docker-compose/mysql/docker-compose.yml>
 
+```bash
+cd && mkdir nocodb && cd nocodb && vim docker-compose.yml
+```
+
 docker-compose.yml:
 
 ```docker-compose
