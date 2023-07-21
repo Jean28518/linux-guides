@@ -38,7 +38,7 @@ sudo systemctl enable freeipa.service
 
 ```caddyfile
 ipa.int.de {
-  reverse_proxy https://ipa.int.de:10443 {
+  reverse_proxy https://localhost:10443 {
     transport http {
       tls_insecure_skip_verify
     }
