@@ -16,6 +16,7 @@ services:
       ROOT_URL: "https://chat.int.de"
       PORT: 3000
       DEPLOY_METHOD: "docker"
+      OVERWRITE_SETTING_Show_Setup_Wizard: "completed" # You can uncomment this if you want to go through the setup wizard
     depends_on:
       - mongodb
     ports:
