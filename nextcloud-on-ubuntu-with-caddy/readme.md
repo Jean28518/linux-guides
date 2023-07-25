@@ -195,7 +195,7 @@ vim /var/www/nextcloud/config/config.php
 
 ```bash
 ## On the new machine:
-mkdir /data/import
+mkdir /data/import # run this as user, not as root, if you have the option
 
 ## Start on the other machine:
 sftp user@newserver
@@ -203,8 +203,8 @@ put -r /path/to/old/data/* /data/import/
 
 ## On the new machine:
 sudo mv /data/import/* /data/nextcloud/users/...
-sudo -u www-data php /var/www/nextcloud/occ files:scan --all --define apc.enable_cli=1
 sudo chown www-data:www-data -R /data/nextcloud
+sudo -u www-data php /var/www/nextcloud/occ files:scan --all --define apc.enable_cli=1
 ```
 
 ## To many requests from your IP
