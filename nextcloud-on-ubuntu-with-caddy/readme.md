@@ -92,6 +92,7 @@ sudo vim /etc/php/8.1/fpm/php.ini
 
 # Add in the end:
 opcache.interned_strings_buffer = 64
+opcache.memory_consumption = 1024
 
 ```
 
