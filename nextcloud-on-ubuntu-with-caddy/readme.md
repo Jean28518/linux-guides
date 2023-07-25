@@ -165,6 +165,7 @@ vim /var/www/nextcloud/config/config.php
 - Install Notes
 - Install Groupfolders
 - Install External sites
+- Install Deck
 
 ### External sites
 
