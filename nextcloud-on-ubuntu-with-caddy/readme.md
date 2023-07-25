@@ -204,7 +204,7 @@ put -r /path/to/old/data/* /data/import/
 ## On the new machine:
 sudo mv /data/import/* /data/nextcloud/users/...
 sudo chown www-data:www-data -R /data/nextcloud
-sudo -u www-data php /var/www/nextcloud/occ files:scan --all --define apc.enable_cli=1
+sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ files:scan --all 
 ```
 
 ## To many requests from your IP
