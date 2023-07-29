@@ -39,6 +39,7 @@ cat /etc/os-release
 netstat-tulpn
 docker ps
 podman ps
+snap list
 # - Any PHP sites like Nextcloud ?
 
 # Check the caddy file for active services:
