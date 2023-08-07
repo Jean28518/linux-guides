@@ -4,6 +4,9 @@
 # Check available diskspace
 df -h
 
+# Check RAID Status
+cat /proc/mdstat
+
 ## CHECK, IF ENOUGH DISKSPACE IS AVAILABLE!
 
 # Check, if the backups are working
