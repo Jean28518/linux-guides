@@ -6,7 +6,7 @@
 git clone https://github.com/frappe/frappe_docker.git && mv frappe_docker erp-next && cd erp-next && vim pwd.yml
 # Change Port 8080 to 29323 in the frontend service
 # The rest should be fine.
-# Change all restart policies to:
+# Change all restart policies unless-stopped (at the best in the graphical text editor) to:
 #     restart: unless-stopped
 docker-compose -f pwd.yml up -d
 ```
