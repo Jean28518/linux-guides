@@ -55,3 +55,31 @@ chat.int.de {
   reverse_proxy localhost:18423
 }
 ```
+
+## Remove annoying buttons
+
+- In the settings open up "Layout":
+- In "customized css" insert this to hide the "free edition message"
+
+```css
+.rcx-css-ke6y0k {
+  display: none;
+}
+```
+
+- In "customized script for logged in users" add this to remove the call button
+
+```js
+var el1 = null;
+function hideCallButton() {
+  console.log("run")
+  el1 = document.querySelector('[data-qa-id="ToolBoxAction-phone"]');
+  if (el1 !== null) {
+    console.log(el1);
+    el1.style.display = "none";
+  } else {
+    setTimeout(hideCallButton, 50);
+  }
+}
+setTimeout(hideCallButton, 50);
+```
