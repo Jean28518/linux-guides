@@ -39,7 +39,7 @@ sudo apt dist-upgrade
 cat /etc/os-release
 
 # Check every service for updates and remove unused ones.
-netstat-tulpn
+ss -tlpn
 docker ps
 podman ps
 snap list
