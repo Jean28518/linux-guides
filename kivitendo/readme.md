@@ -136,7 +136,7 @@ kivi.int.de {
   - Change the .css design to "design40.css"
 - Create a new "Mandant"
   - Name: company1
-  - dbname: kivitendo
+  - dbname: company1
   - Run taskserver as: username
   - Add the user with access to the "Mandant"
   - Add "Vollzugriff"
