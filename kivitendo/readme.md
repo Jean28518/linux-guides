@@ -6,7 +6,7 @@ With Caddy as reverse proxy on ubuntu.
 
 ```bash
 sudo -i
-apt install  libarchive-zip-perl libclone-perl \
+apt install apache2 libarchive-zip-perl libclone-perl \
   libconfig-std-perl libdatetime-perl libdbd-pg-perl libdbi-perl \
   libemail-address-perl  libemail-mime-perl libfcgi-perl libjson-perl \
   liblist-moreutils-perl libnet-smtp-ssl-perl libnet-sslglue-perl \
@@ -14,7 +14,7 @@ apt install  libarchive-zip-perl libclone-perl \
   librose-db-perl librose-object-perl libsort-naturally-perl \
   libstring-shellquote-perl libtemplate-perl libtext-csv-xs-perl \
   libtext-iconv-perl liburi-perl libxml-writer-perl libyaml-perl \
-  libimage-info-perl libgd-gd2-perl \
+  libimage-info-perl libgd-gd2-perl libapache2-mod-fcgid \
   libfile-copy-recursive-perl postgresql libalgorithm-checkdigits-perl \
   libcrypt-pbkdf2-perl git libcgi-pm-perl libtext-unidecode-perl libwww-perl \
   postgresql-contrib poppler-utils libhtml-restrict-perl \
