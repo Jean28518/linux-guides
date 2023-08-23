@@ -54,10 +54,8 @@ default_manager = german
 # Under [task_server] ensure:
 run_as = www-data
 
-sudo systemctl restart postgresql
 sudo -u postgres createuser -P -d kivitendo # PW: iXie1XaC
 sudo -u postgres createdb -O kivitendo kivitendo 
-sudo -u postgres createdb -O kivitendo kivitendo_auth
 vim /etc/postgresql/14/main/pg_hba.conf
 # Add: 
 local all kivitendo password
@@ -69,6 +67,7 @@ psql
 \password postgres
 # Enter iXie1XaC
 \q
+exit
 
 
 sudo systemctl restart postgresql
@@ -111,6 +110,8 @@ systemctl restart apache2
 cp scripts/boot/systemd/kivitendo-task-server.service /etc/systemd/system/
 systemctl daemon-reload
 systemctl enable kivitendo-task-server.service --now
+# It is completely normal that the startup fails at this time. Just ignore it. 
+# After we completed the first steps further down, the service works nomally.
 ```
 
 ## Caddy configuration
