@@ -53,7 +53,7 @@ borg key export ssh://USER@SERVERADRESS:23/./borg-SERVERNAME
 
 * create group called 'borg'
 * create user called 'borg' in synology admin interface
-* add SynoCommunity repo
+* add SynoCommunity repo `https://packages.synocommunity.com/`
 * intall Borg from Synco Community Repo
 * enable ssh in the system settings under 'Terminal & SNMP'
 * connect to ssh with the borg user.
