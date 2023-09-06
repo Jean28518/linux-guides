@@ -59,6 +59,14 @@ borg key export ssh://USER@SERVERADRESS:23/./borg-SERVERNAME
 * connect to ssh with the borg user.
 * ensure that the borg user can write in his home directory and the home directory points to a volume. You can become root by typing 'sudo -i' and entering the password of the borg user.
 
+```
+mkdir -p ~/backups/Server1
+
+
+borg init --encryption=none ~/backups/Server1
+borg config ~/backups/Server1 additional_free_space 10G
+```
+
 #### Add SSH-Key
 
 ```bash
