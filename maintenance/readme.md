@@ -21,7 +21,7 @@ ls /mnt/
 
 # Check, if the firewall is working and if all open ports are for a service
 ufw status numbered
-netstat -tulpn | grep PORT
+ss -tlpn
 ufw delete NUMBER && ufw status numbered
 # Note every service which could be upgradeable seperately!!
 
@@ -39,7 +39,6 @@ sudo apt dist-upgrade
 cat /etc/os-release
 
 # Check every service for updates and remove unused ones.
-ss -tlpn
 docker ps
 podman ps
 snap list
