@@ -1,6 +1,9 @@
 # Maintenance
 
 ```bash
+# Check current processes and resource usage
+htop
+
 # Check available diskspace
 df -h
 
