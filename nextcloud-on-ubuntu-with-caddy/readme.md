@@ -166,10 +166,10 @@ vim /var/www/nextcloud/config/config.php
 
 ## Setup in Nextcloud itself
 
-- Install Notes
 - Install Groupfolders
 - Install External sites
 - Install Deck
+- Install Tasks
 
 ### External sites
 
