@@ -47,9 +47,7 @@ IP_ADRESS_OR_DOMAIN {
   file_server
 
   php_fastcgi unix//var/run/php/php-fpm.sock {
-    dial_timeout 60s
-    read_timeout 60s
-    write_timeout 60s
+
   }
 
   header {
