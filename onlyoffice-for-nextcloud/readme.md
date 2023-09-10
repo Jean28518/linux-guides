@@ -26,6 +26,6 @@ onlyoffice.int.de {
 
 ## How to configure in Nectcloud
 
-- Deactivate Nextcloud Office
+- Deactivate and remove Nextcloud Office
 - Install ONLYOFFICE
 - In the administration settings go to OnlyOffice and enter the adress and the password `Ohgeaf6scha7Iu9U` (The start of the docker container takes about 1 min)
