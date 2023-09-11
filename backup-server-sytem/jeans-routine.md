@@ -129,7 +129,7 @@ borg create --exclude-caches $REPOSITORY::$DATE / -e /dev -e /proc -e /sys -e /t
 
 # Send Mail
 if [ $? -eq 0 ]; then
-  echo -e "Backup for $HOSTNAME successful." | mail -a 'From: SERVERNAME <kunden@linuxguides.de>' -s "💾 $HOSTNAME: Backup Success ✅" $RECEPIENT -A backup_errors.txt
+  echo -e "Backup for $HOSTNAME was successful." | mail -a 'From: SERVERNAME <kunden@linuxguides.de>' -s "💾 $HOSTNAME: Backup Success ✅" $RECEPIENT -A backup_errors.txt
 else
   echo -e "Backup for $HOSTNAME was not successful. The attachement file should explain why." | mail -a 'From: SERVERNAME <kunden@linuxguides.de>' -s "💾 $HOSTNAME: Backup ERROR ❌" $RECEPIENT -A backup_errors.txt
 fi
