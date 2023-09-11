@@ -100,6 +100,8 @@ vim ~/backup.sh
 
 ```bash
 #!/bin/bash
+HOSTNAME=$(hostname)
+RECEPIENT=mail@int.de
 
 # Dump all databases
 # --default-character-set=utf8mb4: For emojis and similar, otherwise its broken 
@@ -112,21 +114,40 @@ mysqldump -u root --all-databases --default-character-set=utf8mb4 > all_database
 # To restore apt packages:
 # sudo apt update && sudo xargs apt install </root/installed-packages.txt
 
+# Stop docker services
+systemctl stop docker
+
 DATE=`date +"%Y-%m-%d"`
 REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
 #REPOSITORY="ssh://USER@SERVERADRESS:23/./borg-SERVERNAME"
 #export BORG_PASSPHRASE="XXXXX"
 
-borg create --exclude-caches $REPOSITORY::$DATE / -e /dev -e /proc -e /sys -e /tmp -e /run -e /media -e /mnt
+borg create --exclude-caches $REPOSITORY::$DATE / -e /dev -e /proc -e /sys -e /tmp -e /run -e /media -e /mnt 2> backup_errors.txt
 
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
-#borg create --remote-path /usr/local/bin/borg --exclude-caches --one-file-system $REPOSITORY::$DATE / -e /dev -e /proc -e /sys -e /tmp -e /run -e /media -e /mnt
+#borg create --remote-path /usr/local/bin/borg --exclude-caches --one-file-system $REPOSITORY::$DATE / -e /dev -e /proc -e /sys -e /tmp -e /run -e /media -e /mnt 2> backup_errors.txt
+
+# Send Mail
+if [ $? -eq 0 ]; then
+  echo -e "Backup for $HOSTNAME successful." | mail -a 'From: SERVERNAME <kunden@linuxguides.de>' -s "💾 $HOSTNAME: Backup Success ✅" $RECEPIENT -A backup_errors.txt
+else
+  echo -e "Backup for $HOSTNAME was not successful. The attachement file should explain why." | mail -a 'From: SERVERNAME <kunden@linuxguides.de>' -s "💾 $HOSTNAME: Backup ERROR ❌" $RECEPIENT -A backup_errors.txt
+fi
 
 
 borg prune -v $REPOSITORY \
-    --keep-daily=10 \
-    --keep-weekly=6 \
-    --keep-monthly=12
+    --keep-daily=14 \
+    --keep-weekly=12 \
+    --keep-monthly=24
+
+# MAINTENANCE ###############################
+
+# Update system after backup
+export DEBIAN_FRONTEND="noninteractive"
+apt dist-upgrade -y
+
+# Reboot server
+/sbin/reboot
 ```
 
 ```bash
