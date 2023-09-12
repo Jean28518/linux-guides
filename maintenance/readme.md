@@ -45,7 +45,12 @@ cat /etc/os-release
 docker ps
 podman ps
 snap list
-# - Any PHP sites like Nextcloud ?
+# Any PHP sites ?
+# Nextcloud:
+# Check for big updates
+# Check for app updates
+# Are all really apps used?
+
 
 # Check the caddy file for active services:
 vim /etc/caddy/Caddyfile
