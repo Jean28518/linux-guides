@@ -49,7 +49,7 @@ snap list
 # Nextcloud:
 # Check for big updates
 # Check for app updates
-# Are all really apps used?
+# Are all apps really used?
 
 
 # Check the caddy file for active services:
