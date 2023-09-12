@@ -165,9 +165,10 @@ vim /var/www/nextcloud/config/config.php
 ## Setup in Nextcloud itself
 
 - Install Groupfolders
-- Install External sites
-- Install Deck
-- Install Tasks
+- (Install External sites)
+- (Install Deck)
+- (Install Tasks)
+- Uninstall Talk (and all other main apps which are not used)
 
 ### External sites
 
