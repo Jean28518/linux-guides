@@ -1,5 +1,11 @@
 # Implement basic security hardening for ubuntu server
 
+## Install basic packages
+
+```bash
+sudo apt install vim ufw ncdu
+```
+
 ## Add public key for ssh login
 Run this command of your machine, from which you want to connect to the server
 ```bash
