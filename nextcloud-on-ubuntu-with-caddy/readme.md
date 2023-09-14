@@ -231,6 +231,12 @@ Check before the update, if the installed php version is supported by the follow
 sudo -u www-data php --define apc.enable_cli=1 occ db:add-missing-indices # helps after update
 ```
 
+## Reset password manually
+
+```bash
+sudo -u www-data php /var/www/nextcloud/occ user:resetpassword USERNAME
+```
+
 ## Nextcloud down? Nothing works?
 
 Check, if a basic command runs. Otherwise it is printed a stack trace.
