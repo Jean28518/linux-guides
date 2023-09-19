@@ -88,7 +88,7 @@ Mysql PW: `phoo2Oot`
 sudo vim /etc/php/8.1/fpm/php.ini
 
 # Set 
-# memory_limit = 512M
+# memory_limit = 1024M
 # upload_max_filesize = 10G
 # max_file_uploads = 1000
 
