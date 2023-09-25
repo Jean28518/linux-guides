@@ -78,3 +78,10 @@ docker exec -it #ID# bash -l
 /usr/local/bin/bench migrate
 exit
 ```
+
+## Errors?
+
+```bash
+docker ps # Take ID from erp-next_backend_1
+docker exec ID bench migrate
+```
