@@ -5,6 +5,7 @@ Guide from: <https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-doc
 <https://github.com/jitsi/docker-jitsi-meet/releases/latest>
 
 ```bash
+cd
 wget https://github.com/jitsi/docker-jitsi-meet/archive/refs/tags/stable-####.zip # Get the latest reelease zip archive
 unzip stable-####.zip
 mv docker-jitsi-meet-stable-#### jitsi
