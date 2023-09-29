@@ -1,4 +1,6 @@
-# Install docker on ubuntu server without snap
+# Install docker
+
+## Ubuntu 
 
 <https://docs.docker.com/engine/install/ubuntu/>
 
@@ -9,4 +11,9 @@ sudo snap remove docker && sudo apt remove docker* containerd runc && sudo apt i
 # If something fails, try to reboot
 sudo docker run hello-world
 
+```
+
+## Debian
+```bash
+sudo apt install docker docker-compose
 ```
