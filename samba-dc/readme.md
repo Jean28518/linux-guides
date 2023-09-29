@@ -1,5 +1,9 @@
 # Samba as Domain Controller
 
+Inspired by <https://www.considerednormal.com/2022/11/samba-based-active-directory-on-ubuntu-22-04/>
+
+Chrony is not configured in this example.
+
 ```bash
 sudo -i
 hostnamectl set-hostname la
