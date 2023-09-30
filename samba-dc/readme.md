@@ -58,6 +58,30 @@ samba-tool domain passwordsettings set --min-pwd-age=0
 samba-tool domain passwordsettings set --max-pwd-age=0
 ```
 
+## Enable ldaps
+
+Currently they are self signed.
+
+```bash
+cd /etc/samba/tls/
+openssl req -newkey rsa:2048 -keyout myKey.pem -nodes -x509 -days 3650 -out myCert.pem
+chmod 600 myKey.pem
+cp myCert.pem /var/www/cert/samba.crt
+
+vim /etc/samba/smb.conf
+# Add in [global]
+    tls enabled  = yes
+    tls keyfile  = /etc/samba/tls/myKey.pem
+    tls certfile = /etc/samba/tls/myCert.pem
+    tls cafile   = 
+```
+
+### Test
+
+```bash
+LDAPTLS_REQCERT=never ldapsearch -x -H ldaps://la.int.de -b "dc=int,dc=de" -v
+```
+
 ## Usermanagement
 
 ```bash
