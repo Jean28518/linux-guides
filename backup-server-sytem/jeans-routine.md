@@ -114,8 +114,11 @@ mysqldump -u root --all-databases --default-character-set=utf8mb4 > all_database
 # To restore apt packages:
 # sudo apt update && sudo xargs apt install </root/installed-packages.txt
 
-# Stop docker services
-systemctl stop docker
+# Stop all services
+#systemctl stop docker
+#systemctl stop freeipa.service
+#systemctl stop vm-li-ar.service
+
 
 DATE=`date +"%Y-%m-%d"`
 REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
