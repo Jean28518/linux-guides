@@ -18,6 +18,7 @@ cd
 ./mount_backup.sh
 ls /mnt/
 ./umount_backup.sh
+# Check the diskspace of the backup server
 
 ## ONLY RESUME IF A GOOD BACKUP IS AVAILABLE!
 ## (Because updates can have high fail potential)
