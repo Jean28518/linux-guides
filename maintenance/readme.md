@@ -46,6 +46,7 @@ cat /etc/os-release
 docker ps
 podman ps
 snap list
+pstree
 # Any PHP sites ?
 # Nextcloud:
 # Check for big updates
