@@ -37,7 +37,7 @@ ufw delete NUMBER && ufw status numbered
 # - 10000: Jitsi UDP?
 
 # Update the machine
-sudo apt dist-upgrade
+apt update && apt dist-upgrade
 
 # Check the current OS Version:
 cat /etc/os-release
