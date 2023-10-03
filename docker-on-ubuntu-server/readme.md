@@ -15,5 +15,5 @@ sudo docker run hello-world
 
 ## Debian
 ```bash
-sudo apt install docker.io docker-compose
+sudo apt install docker.io docker-compose apparmor
 ```
