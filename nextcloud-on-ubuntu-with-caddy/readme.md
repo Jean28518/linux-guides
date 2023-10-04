@@ -168,6 +168,7 @@ vim /var/www/nextcloud/config/config.php
 - (Install External sites)
 - (Install Deck)
 - (Install Tasks)
+- Uninstall Activities
 - Uninstall Talk (and all other main apps which are not used)
 - Change background: https://raw.githubusercontent.com/Jean28518/linux-arbeitsplatz-portal/main/images/background.webp
 
