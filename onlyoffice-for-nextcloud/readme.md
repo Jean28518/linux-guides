@@ -19,10 +19,16 @@ docker restart onlyoffice
 
 ```Caddyfile
 onlyoffice.int.de {
+    header {
+        X-Forwarded-Proto: https;
+        access-control-allow-origin: *;
+    }
     root * /var/www/cert/
     reverse_proxy http://localhost:10923
 }
 ```
+
+Why the headers? -> look here: <https://github.com/ONLYOFFICE/onlyoffice-nextcloud/issues/664#issuecomment-1454938212>
 
 ## How to configure in Nectcloud
 
