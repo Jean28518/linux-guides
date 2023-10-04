@@ -169,7 +169,14 @@ vim /var/www/nextcloud/config/config.php
 - (Install Deck)
 - (Install Tasks)
 - Uninstall Activities
+- Uninstall Circles
+- Uninstall collaborative Tags
+- Uninstall First run wizard
 - Uninstall Talk (and all other main apps which are not used)
+- Uninstall Log Reader
+- Uninsstall Nextcloud Announcements
+- Uninstall Support
+- Uninstall Usage Survey
 - Change background: https://raw.githubusercontent.com/Jean28518/linux-arbeitsplatz-portal/main/images/background.webp
 
 ### External sites
