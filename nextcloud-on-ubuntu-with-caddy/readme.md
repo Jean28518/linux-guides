@@ -181,6 +181,11 @@ vim /var/www/nextcloud/config/config.php
 | Videoportal | Videos   |                                                            |                     |
 | IPA         | Passwort ändern | Only upload dark key icon, position: settings menu  |           X         |
 
+## Quality Check:
+- All Nextcloud sites should be loaded in 2 seconds.
+- Enter every nextcloud site at the top (sometimes the activities app makes trouble)
+- Open a document for online editing (if collabora or only office are included)
+
 **You are finished!**
 
 ## Move data directory to other partition
