@@ -76,6 +76,8 @@ IP_ADRESS_OR_DOMAIN {
 ```
 
 ```bash
+sudo ufw allow http
+sudo ufw allow https
 sudo systemctl restart caddy
 ```
 
