@@ -23,7 +23,6 @@ onlyoffice.int.de {
         X-Forwarded-Proto: https;
         access-control-allow-origin: *;
     }
-    root * /var/www/cert/
     reverse_proxy http://localhost:10923
 }
 ```
