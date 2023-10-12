@@ -46,7 +46,7 @@ samba-tool domain provision
 # Server Role: dc
 # Backend: SAMBA_INTERNAL
 # DNS forwarder IP adress: 208.67.222.222
-# Administrator password: Gae7Eexo
+# Administrator password: Gae7Eexo # Or take a password without bash special characters!
 
 mv /etc/krb5.conf /etc/krb5.conf.orig
 cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
@@ -93,6 +93,9 @@ sudo samba-tool user edit USERNAME
 
 sudo samba-tool user list
 sudo samba-tool user show USERNAME
+
+# Reset password
+sudo samba-tool user setpassword USERNAME
 ```
 
 ## Add dns entry
