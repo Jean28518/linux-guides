@@ -15,7 +15,7 @@ docker exec onlyoffice sed -i 's/"rejectUnauthorized": true/"rejectUnauthorized"
 docker restart onlyoffice
 ```
 
-## Caddfile
+## Caddyfile
 
 ```Caddyfile
 onlyoffice.int.de {
@@ -34,4 +34,5 @@ Why the headers? -> look here: <https://github.com/ONLYOFFICE/onlyoffice-nextclo
 - Deactivate and remove Nextcloud Office
 - Install ONLYOFFICE
 - In the administration settings go to OnlyOffice and enter the adress and the password `Ohgeaf6scha7Iu9U` (The start of the docker container takes about 1 min)
-- Disable document preview in the "OnlyOffice" Settings of Nextcloud (Don't forget to hit 'save' in the bottom of "editor settings"
+- Disable document preview in the "OnlyOffice" Settings of Nextcloud
+- Don't forget to hit 'save' in the bottom of "editor settings"
