@@ -152,5 +152,6 @@ sudo systemctl restart php8.2-fpm
   - Disable the certificate check
 - Click on save
 - Click on test connection
-- In Usersearch:
+- In User search:
   - Base-DN: `cn=users,dc=int,dc=de`
+  - Searchfield: `cn`
