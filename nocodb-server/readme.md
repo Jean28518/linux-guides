@@ -23,7 +23,7 @@ services:
         condition: service_healthy
     environment: 
       NC_DB: "mysql2://root_db:3306?u=noco&p=faiTh8ra&d=root_db"
-    image: "nocodb/nocodb:0.105.3" # Update the number to the latest version here: https://hub.docker.com/r/nocodb/nocodb/tags
+    image: "nocodb/nocodb:0.202.4"
     ports: 
       - "23260:8080"
     restart: unless-stopped
@@ -54,6 +54,8 @@ services:
 volumes: 
   db_data: {}
   nc_data: {}
+
+# Update the number to the latest version here: https://hub.docker.com/r/nocodb/nocodb/tags
 ```
 
 (You will need a proxy reverse server for https and advanced stuff)
