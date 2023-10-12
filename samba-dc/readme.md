@@ -134,7 +134,7 @@ sudo systemctl restart php8.2-fpm
 - In tab "Advanced":
   - Folder-Settings:
     - Base user tree: `cn=users,dc=int,dc=de`
-    - Base group tree: `cn=groups,dc=int,dc=de`
+    - Base group tree: `cn=users,dc=int,dc=de`
     - Group Member association: member (AD)
   - Special Properties:
     - Mail field: `mail`
