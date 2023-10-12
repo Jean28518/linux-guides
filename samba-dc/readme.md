@@ -76,6 +76,7 @@ vim /etc/samba/smb.conf
         tls certfile = /etc/samba/tls/myCert.pem
         tls cafile   =
 
+systemctl restart samba-ad-dc.service 
 ufw allow ldaps
 ```
 
