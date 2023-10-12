@@ -36,7 +36,7 @@ sudo systemctl restart fail2ban
 
 ## Setup unattended upgrades:
 ```bash
-sudo apt install unattended-upgrades apt-listchanges
+sudo apt install unattended-upgrades apt-listchanges -y
 sudo dpkg-reconfigure -plow unattended-upgrades
 ```
 
