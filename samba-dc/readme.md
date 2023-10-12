@@ -30,7 +30,7 @@ search int.de
 
 # Make /etc/resolv.conf immutable because the system sometimes overwrites it.
 sudo chattr +i /etc/resolv.conf
-apt update && apt install -y acl attr samba samba-dsdb-modules samba-vfs-modules smbclient winbind libpam-winbind libnss-winbind libpam-krb5 krb5-config krb5-user dnsutils chrony net-tools
+apt update && apt install -y acl attr samba samba-dsdb-modules samba-vfs-modules smbclient winbind libpam-winbind libnss-winbind libpam-krb5 krb5-config krb5-user dnsutils chrony net-tools samba-ad-provision
 # Default Keberos Realm: INT.DE
 # Kerberos Server for your realm: la.int.de
 # Administrations server for your realm: la.int.de
