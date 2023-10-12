@@ -170,12 +170,12 @@ vim /var/www/nextcloud/config/config.php
 - (Install External sites)
 - (Install Deck)
 - (Install Tasks)
+- (Install Collectives)
 - Uninstall Activities
 - Uninstall Circles
 - Uninstall collaborative Tags
 - Uninstall First run wizard
 - Uninstall Talk (and all other main apps which are not used)
-- Uninstall Log Reader
 - Uninsstall Nextcloud Announcements
 - Uninstall Support
 - Uninstall Usage Survey
