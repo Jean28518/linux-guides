@@ -17,6 +17,7 @@ unlink /etc/resolv.conf
 # Make sure you are not running any dns server 
 sudo apt purge dnsmasq
 
+chattr -i -a /etc/resolv.conf
 vim /etc/resolv.conf
 # Samba server IP address
 nameserver 192.168.178.57
