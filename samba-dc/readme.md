@@ -120,6 +120,7 @@ samba_dnsupdate --all-names
 
 ```bash
 sudo apt install php-ldap
+sudo systemctl restart php8.2-fpm
 ```
 - Enable the LDAP-App in Nextcloud
 - Server: `ldaps://localhost` Port: 636
