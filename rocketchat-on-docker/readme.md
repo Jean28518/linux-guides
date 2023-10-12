@@ -56,6 +56,12 @@ chat.int.de {
 }
 ```
 
+## Disable signup and two factor authentication via mail
+
+- Administration -> Settings -> Accounts ("Konten")
+- In the section Two Factor Authentication disable it
+- In the section registration form change 'registration form' from public to disabled.
+
 ## Remove annoying buttons
 
 - In the settings open up "Layout":
