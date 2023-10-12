@@ -112,3 +112,38 @@ samba-tool dns add la.int.de int.de chat A 192.168.178.57 -U administrator
 ```bash
 samba_dnsupdate --all-names
 ```
+
+## Add different apps
+
+### Add nextcloud
+
+- Server: `ldaps://localhost` Port: 636
+- Bind-DN `cn=Administrator,cn=users,dc=int,dc=de`
+- Password
+- Base-DN: dc=int,dc=de
+- In tab "Advanced" enable "Disable SSL-Check"
+- In tab "User": Custom LDAP-Request: `(objectclass=*)`
+- In tab "Login Atttributes": Custom LDAP-Request: `(&(objectclass=*)(cn=%uid))`
+- In tab "Groups": Custom LDAP-Request: `(|(cn=users))`
+- In tab "Advanced":
+  - Folder-Settings:
+    - Base user tree: `cn=users,dc=int,dc=de`
+    - Base group tree: `cn=groups,dc=int,dc=de`
+  - Special Properties:
+    - Mail field: `mail`
+
+### Add Rocket.Chat
+
+- LDAP-Host: IP-Adress of the server
+- LDAP-Port: 636
+- Authentification:
+  - Enable
+  - `cn=Administrator,cn=users,dc=int,dc=de`
+  - Password
+- Encryption
+  - Encyption: SSL/LDAPS
+  - Disable the certificate check
+- Click on save
+- Click on test connection
+- In Usersearch:
+  - Base-DN: `cn=users,dc=int,dc=de`
