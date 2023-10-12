@@ -25,7 +25,7 @@ nameserver 208.67.222.222
 # Samba server IP address
 nameserver 192.168.178.57
 # fallback
-8.8.8.8
+nameserver 8.8.8.8
 # main domain for Samba
 search int.de
 
