@@ -125,7 +125,7 @@ sudo apt install php-ldap
 - Server: `ldaps://localhost` Port: 636
 - Bind-DN `cn=Administrator,cn=users,dc=int,dc=de`
 - Password
-- Base-DN: dc=int,dc=de
+- Base-DN: `dc=int,dc=de`
 - In tab "Advanced" enable "Disable SSL-Check"
 - In tab "User": Custom LDAP-Request: `(objectclass=*)`
 - In tab "Login Atttributes": Custom LDAP-Request: `(&(objectclass=*)(cn=%uid))`
@@ -134,6 +134,7 @@ sudo apt install php-ldap
   - Folder-Settings:
     - Base user tree: `cn=users,dc=int,dc=de`
     - Base group tree: `cn=groups,dc=int,dc=de`
+    - Group Member association: member (AD)
   - Special Properties:
     - Mail field: `mail`
 
