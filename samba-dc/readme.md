@@ -118,6 +118,10 @@ samba_dnsupdate --all-names
 
 ### Add nextcloud
 
+```bash
+sudo apt install php-ldap
+```
+- Enable the LDAP-App in Nextcloud
 - Server: `ldaps://localhost` Port: 636
 - Bind-DN `cn=Administrator,cn=users,dc=int,dc=de`
 - Password
