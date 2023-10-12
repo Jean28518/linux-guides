@@ -19,14 +19,14 @@ sudo apt purge dnsmasq
 
 chattr -i -a /etc/resolv.conf
 vim /etc/resolv.conf
+# Insert:
 # Samba server IP address
 nameserver 192.168.178.57
-
 # fallback resolver
 nameserver 208.67.222.222
-
 # main domain for Samba
 search int.de
+
 
 # Make /etc/resolv.conf immutable because the system sometimes overwrites it.
 sudo chattr +i /etc/resolv.conf
