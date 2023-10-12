@@ -20,10 +20,12 @@ sudo apt purge dnsmasq
 chattr -i -a /etc/resolv.conf
 vim /etc/resolv.conf
 # Insert:
+# OpenDNS
+nameserver 208.67.222.222
 # Samba server IP address
 nameserver 192.168.178.57
-# fallback resolver
-nameserver 208.67.222.222
+# fallback
+8.8.8.8
 # main domain for Samba
 search int.de
 
