@@ -129,7 +129,7 @@ sudo apt install php-ldap
 - In tab "Advanced" enable "Disable SSL-Check"
 - In tab "User": Custom LDAP-Request: `(objectclass=*)`
 - In tab "Login Atttributes": Custom LDAP-Request: `(&(objectclass=*)(cn=%uid))`
-- In tab "Groups": Custom LDAP-Request: `(|(cn=users))`
+- In tab "Groups": Custom LDAP-Request: `(|(cn=groups))`
 - In tab "Advanced":
   - Folder-Settings:
     - Base user tree: `cn=users,dc=int,dc=de`
