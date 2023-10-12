@@ -154,4 +154,4 @@ sudo systemctl restart php8.2-fpm
 - Click on test connection
 - In User search:
   - Base-DN: `cn=users,dc=int,dc=de`
-  - Searchfield: `cn`
+  - Searchfield: `cn,mail`
