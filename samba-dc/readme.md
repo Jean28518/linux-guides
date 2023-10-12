@@ -129,7 +129,7 @@ sudo systemctl restart php8.2-fpm
 - Base-DN: `dc=int,dc=de`
 - In tab "Advanced" enable "Disable SSL-Check"
 - In tab "User": Custom LDAP-Request: `(objectclass=*)`
-- In tab "Login Atttributes": Custom LDAP-Request: `(&(objectclass=*)(cn=%uid))`
+- In tab "Login Atttributes": Custom LDAP-Request: `(&(&(|(objectclass=*)))(|(cn=%uid)(|(mail=%uid))))`
 - In tab "Groups": Custom LDAP-Request: `(|(cn=groups))`
 - In tab "Advanced":
   - Folder-Settings:
