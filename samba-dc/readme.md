@@ -71,10 +71,12 @@ cp myCert.pem /var/www/cert/samba.crt
 
 vim /etc/samba/smb.conf
 # Add in [global]
-    tls enabled  = yes
-    tls keyfile  = /etc/samba/tls/myKey.pem
-    tls certfile = /etc/samba/tls/myCert.pem
-    tls cafile   = 
+        tls enabled  = yes
+        tls keyfile  = /etc/samba/tls/myKey.pem
+        tls certfile = /etc/samba/tls/myCert.pem
+        tls cafile   =
+
+ufw allow ldaps
 ```
 
 ### Test
