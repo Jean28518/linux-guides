@@ -125,6 +125,8 @@ REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
 #REPOSITORY="ssh://USER@SERVERADRESS:23/./borg-SERVERNAME"
 #export BORG_PASSPHRASE="XXXXX"
 
+echo "Running borg create ..."
+
 borg create --exclude-caches $REPOSITORY::$DATE / -e /dev -e /proc -e /sys -e /tmp -e /run -e /media -e /mnt -e /var/log 2> backup_errors.txt
 
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
