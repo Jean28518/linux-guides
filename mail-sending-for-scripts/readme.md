@@ -2,7 +2,7 @@
 
 ```bash
 sudo -i
-apt install ssmtp mailutils
+apt install ssmtp mailutils -y
 vim /etc/ssmtp/ssmtp.conf
 
 # Config file for sSMTP sendmail
