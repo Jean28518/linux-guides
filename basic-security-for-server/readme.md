@@ -56,12 +56,7 @@ sudo crontab -e
 ## Set log limit:
 
 ```
-sudo vim /etc/systemd/journald.conf
-
-# Append
-SystemMaxUse=1G
-
-
+sudo echo "SystemMaxUse=1G" >> /etc/systemd/journald.conf
 sudo systemctl restart systemd-journald.service
 ```
 
