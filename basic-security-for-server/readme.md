@@ -24,20 +24,12 @@ PubkeyAuthentication yes
 
 ## Install fail2ban
 ```bash
-sudo apt install fail2ban
-sudo vim /etc/fail2ban/jail.conf
-
-# Uncomment:
-#[sshd]
-#enabled = true
-
-sudo systemctl restart fail2ban
+sudo apt install fail2ban && echo "[sshd]" >> /etc/fail2ban/jail.conf && echo "enabled = true" >> /etc/fail2ban/jail.conf && sudo systemctl restart fail2ban
 ```
 
 ## Setup unattended upgrades:
 ```bash
-sudo apt install unattended-upgrades apt-listchanges -y
-sudo dpkg-reconfigure -plow unattended-upgrades
+sudo apt install unattended-upgrades apt-listchanges -y && sudo dpkg-reconfigure -plow unattended-upgrades
 ```
 
 ## Setup firewall
@@ -56,8 +48,7 @@ sudo crontab -e
 ## Set log limit:
 
 ```
-sudo echo "SystemMaxUse=1G" >> /etc/systemd/journald.conf
-sudo systemctl restart systemd-journald.service
+sudo echo "SystemMaxUse=1G" >> /etc/systemd/journald.conf && sudo systemctl restart systemd-journald.service
 ```
 
 ## Setup automatic backup system
