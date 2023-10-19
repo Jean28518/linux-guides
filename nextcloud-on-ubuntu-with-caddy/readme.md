@@ -172,8 +172,7 @@ vim /var/www/nextcloud/config/config.php
 - (Install Tasks)
 - (Install Collectives)
 - Uninstall Activities
-- Uninstall Circles
-- Uninstall collaborative Tags
+- Uninstall Collaborative Tags
 - Uninstall First run wizard
 - Uninstall Talk (and all other main apps which are not used)
 - Uninsstall Nextcloud Announcements
