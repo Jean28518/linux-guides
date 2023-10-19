@@ -141,6 +141,11 @@ sudo systemctl restart php8.2-fpm
   - Special Properties:
     - Mail field: `mail`
 
+```bash
+# Restart again
+sudo systemctl restart php8.2-fpm
+```
+
 ### Add Rocket.Chat
 
 - LDAP-Host: IP-Adress of the server
