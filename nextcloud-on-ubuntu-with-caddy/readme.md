@@ -87,7 +87,7 @@ Mysql PW: `phoo2Oot`
 ## Optimizations (recommended)
 
 ```bash
-sudo vim /etc/php/8.1/fpm/php.ini
+sudo vim /etc/php/8.2/fpm/php.ini
 
 # Set 
 # memory_limit = 1024M
@@ -112,7 +112,7 @@ sudo vim /var/www/nextcloud/config/config.php
 ```
 
 ```bash
-sudo vim /etc/php/8.1/fpm/pool.d/www.conf 
+sudo vim /etc/php/8.2/fpm/pool.d/www.conf 
 
 # uncomment following lines by removing ';'
 # ;env[HOSTNAME] = $HOSTNAME
@@ -123,7 +123,7 @@ sudo vim /etc/php/8.1/fpm/pool.d/www.conf
 ```
 
 ```bash
-sudo systemctl restart php8.1-fpm.service
+sudo systemctl restart php8.2-fpm.service
 
 sudo crontab -u www-data -e
 # Insert:
