@@ -222,9 +222,10 @@ sftp user@newserver
 put -r /path/to/old/data/* /data/import/
 
 ## On the new machine:
+sudo convmv -f utf-8 -t utf-8 -r --notest --nfc /data/import/* # Convert filenames to right name
 sudo mv /data/import/* /data/nextcloud/users/...
 sudo chown www-data:www-data -R /data/nextcloud
-sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ files:scan --all 
+sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ files:scan --all
 ```
 
 ## To many requests from your IP
