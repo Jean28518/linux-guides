@@ -87,6 +87,9 @@ Mysql PW: `phoo2Oot`
 ## Optimizations (recommended)
 
 ```bash
+cd /var/www/nextcloud
+sudo -u www-data php occ config:app:set dav system_addressbook_exposed --value="no"
+
 sudo vim /etc/php/8.2/fpm/php.ini
 
 # Set 
