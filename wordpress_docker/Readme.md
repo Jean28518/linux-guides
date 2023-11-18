@@ -1,3 +1,7 @@
+# Wordporess (with docker)
+
+Docker-Compose:
+
 ```docker-compose
 version: '3.7'
 
@@ -12,13 +16,10 @@ services:
       - db_data:/var/lib/mysql
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_ROOT_PASSWORD=Thu8vee5
       - MYSQL_DATABASE=wordpress
       - MYSQL_USER=wordpress
-      - MYSQL_PASSWORD=wordpress
-        #    expose:
-        # - 3306
-        # - 33060
+      - MYSQL_PASSWORD=Thu8vee5
   wordpress:
     image: wordpress:latest
     volumes:
@@ -29,8 +30,16 @@ services:
     environment:
       - WORDPRESS_DB_HOST=db
       - WORDPRESS_DB_USER=wordpress
-      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_PASSWORD=Thu8vee5
       - WORDPRESS_DB_NAME=wordpress
 volumes:
   db_data:
+```
+
+## Caddyfile:
+
+```ỳaml
+blog.int.de {
+  reverse_proxy localhost:22122
+}
 ```
