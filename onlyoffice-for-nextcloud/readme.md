@@ -12,6 +12,7 @@ docker run -i -t -d -p 10923:80 --restart=unless-stopped \
 bash run.sh
 # 1 minutes after start of the container (if you are using local https)
 docker exec onlyoffice sed -i 's/"rejectUnauthorized": true/"rejectUnauthorized": false/g' /etc/onlyoffice/documentserver/default.json
+docker exec onlyoffice echo "192.168.178.84 cloud.int.de" >> /etc/hosts  # If the DNS in onlyoffice doesnt work, this could help.
 docker restart onlyoffice
 ```
 
