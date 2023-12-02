@@ -247,6 +247,14 @@ Check before the update, if the installed php version is supported by the follow
 
 - Nextcloud 25 needs php 8.0 or higher
 
+### Update via terminal
+
+```bash
+sudo -u www-data php /var/www/nextcloud/updater/updater.phar --no-interaction
+```
+
+### After update
+
 ```bash
 sudo -u www-data php --define apc.enable_cli=1 occ db:add-missing-indices # helps after update
 ```
