@@ -64,6 +64,11 @@ apt autoremove
 apt clean
 ncdu /
 
+# Check all accesses - Are there old users on the services we could delete?
+# - on linux
+# - on nextcloud
+# - on all docker services
+
 reboot
 ```
 
