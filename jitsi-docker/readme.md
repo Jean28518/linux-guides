@@ -29,6 +29,8 @@ mkdir -p ~/.jitsi-meet-cfg/{web,transcripts,prosody/config,prosody/prosody-plugi
 docker-compose up -d # Do not use sudo here or execute the mkdir command also with sudo.
 
 sudo ufw allow 10000/udp
+
+# Make sure your revers proxy supports websockets (in nginx proxy manager you have to enable this at the entry)
 ```
 
 ## Caddy configuration
