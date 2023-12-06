@@ -30,7 +30,7 @@ docker-compose up -d # Do not use sudo here or execute the mkdir command also wi
 
 sudo ufw allow 10000/udp
 
-# Make sure your revers proxy supports websockets (in nginx proxy manager you have to enable this at the entry)
+# Make sure your reverse proxy supports websockets (in nginx proxy manager you have to enable this at the entry)
 ```
 
 ## Caddy configuration
