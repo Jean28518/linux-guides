@@ -175,6 +175,7 @@ vim /var/www/nextcloud/config/config.php
 - (Install Deck)
 - (Install Tasks)
 - (Install Collectives)
+  (Install Draw.io)
 - Uninstall Activities
 - Uninstall Collaborative Tags
 - Uninstall First run wizard
