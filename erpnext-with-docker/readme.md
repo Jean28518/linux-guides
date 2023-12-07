@@ -88,7 +88,8 @@ docker exec ID bench migrate
 
 ## Update
 
-- Update the tag of all images in `pwd.yml` to the latest one. (In vim you can do this with the command: `:%s/OLDTAG/NEWTAG/gc`
+- Start with the update of the test instance
+- Update the tag of all images in `pwd.yml` to the latest one. (In vim you can do this with the command: `:%s/OLDTAG/NEWTAG/gc`)
 ```bash
 docker-compose -f pwd.yml up -d
 ```
