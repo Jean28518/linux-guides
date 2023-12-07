@@ -10,6 +10,7 @@ htop
 
 # Check available diskspace
 df -h
+# - Anywhere over 90% Usage? -> ncdu, check if we can clear something now (look at 'free diskspace' further down)
 
 # Check RAID Status
 cat /proc/mdstat
