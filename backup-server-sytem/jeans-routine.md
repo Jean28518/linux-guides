@@ -149,6 +149,7 @@ borg prune -v $REPOSITORY \
 
 # Update system after backup
 export DEBIAN_FRONTEND="noninteractive"
+apt update
 apt dist-upgrade -y
 
 # Reboot server
@@ -175,6 +176,7 @@ REPOSITORY="ssh://borg@1.2.3.4:22/~/backups/Server1"
 #REPOSITORY="ssh://USER@SERVERADRESS:23/./borg-SERVERNAME"
 #export BORG_PASSPHRASE="XXXXX"
 
+borg info $REPOSITORY
 borg mount $REPOSITORY /mnt
 
 # Alternative run, if server says "Connection closed by remote host. Is borg working on the server?" but borg is definitely installed at the target server. 
