@@ -1,6 +1,9 @@
 # Maintenance
 
 ```bash
+# Become root
+sudo -i
+
 # Check current processes and resource usage
 htop
 # - Check CPU Usage
