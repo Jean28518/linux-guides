@@ -81,11 +81,10 @@ function hideCallButton() {
   console.log("run")
   el1 = document.querySelector('[data-qa-id="ToolBoxAction-phone"]');
   if (el1 !== null) {
-    console.log(el1);
+  	console.log(el1);
     el1.style.display = "none";
-  } else {
-    setTimeout(hideCallButton, 50);
   }
+  setTimeout(hideCallButton, 100);
 }
-setTimeout(hideCallButton, 50);
+setTimeout(hideCallButton, 100);
 ```
