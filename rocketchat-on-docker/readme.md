@@ -1,6 +1,6 @@
 # Rocket.Chat with docker
 
-<https://hub.docker.com/_/rocket-chat?tab=tags>
+<https://hub.docker.com/_/rocket.chat/tags>
 
 ```bash
 cd && mkdir rocket.chat && cd rocket.chat && vim docker-compose.yml
