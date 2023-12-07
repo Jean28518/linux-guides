@@ -85,3 +85,11 @@ exit
 docker ps # Take ID from erp-next_backend_1
 docker exec ID bench migrate
 ```
+
+## Update
+
+- Update the tag of all images in `pwd.yml` to the latest one
+- 
+```bash
+docker-compose -f pwd.yml up -d
+```
