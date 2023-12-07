@@ -3,6 +3,10 @@
 ```bash
 # Check current processes and resource usage
 htop
+# - Check CPU Usage
+# - Check Load average
+# - Check Uptime
+# - Check Processes
 
 # Check available diskspace
 df -h
