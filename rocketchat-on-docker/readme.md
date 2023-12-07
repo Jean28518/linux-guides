@@ -68,7 +68,7 @@ chat.int.de {
 - In "customized css" insert this to hide the "free edition message"
 
 ```css
-.rcx-css-ke6y0k {
+.rcx-css-k29f7k {
   display: none;
 }
 ```
