@@ -1,5 +1,7 @@
 # Nextcloud on Ubuntu Server with Caddy as Webserver
 
+Automation script: <https://github.com/Jean28518/linux-arbeitsplatz-central/blob/main/src/lac/welcome/scripts/setup_nextcloud.sh>
+
 **Sources:**
 
 - <https://docs.nextcloud.com/server/latest/admin_manual/installation/example_ubuntu.html>
@@ -12,7 +14,7 @@
 sudo apt update && sudo apt upgrade && sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list && sudo apt update && sudo apt install caddy
 
 # Install dbms, php and other tools
-sudo apt install mariadb-server php-gd php-mysql php-curl php-mbstring php-intl php-gmp php-bcmath php-xml php-imagick libmagickcore-6.q16-6-extra php-zip php-fpm php-redis php-apcu php-memcache unzip vim
+sudo apt install mariadb-server php-gd php-mysql php-curl php-mbstring php-intl php-gmp php-bcmath php-xml php-imagick libmagickcore-6.q16-6-extra php-zip php-bz2 php-fpm php-redis php-apcu php-memcache unzip vim
 ```
 
 ## Prepare database
