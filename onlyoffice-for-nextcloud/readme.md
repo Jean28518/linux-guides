@@ -1,5 +1,7 @@
 # ONLYOFFICE for Nextcloud
 
+Script: <https://github.com/Jean28518/linux-arbeitsplatz-central/blob/main/src/lac/welcome/scripts/setup_onlyoffice.sh>
+
 ```bash
 sudo -i
 cd && mkdir onlyoffice && cd onlyoffice && vim run.sh
