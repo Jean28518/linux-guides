@@ -19,7 +19,7 @@ docker restart onlyoffice
 ## Caddyfile
 
 ```Caddyfile
-onlyoffice.int.de {
+office.int.de {
     header {
         X-Forwarded-Proto: https;
         access-control-allow-origin: *;
