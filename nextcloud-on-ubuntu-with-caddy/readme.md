@@ -86,6 +86,11 @@ sudo systemctl restart caddy
 Open webbrowser with the ip adress of the server, fill the setup dialog.
 Mysql PW: `phoo2Oot`
 
+```bash
+# Alternative install command:
+sudo -u www-data php /var/www/nextcloud/occ maintenance:install --database "mysql" --database-name "nextcloud"  --database-user "nextcloud" --database-pass "phoo2Oot" --admin-user "Administrator" --admin-pass "PASSWORD"
+```
+
 ## Optimizations (recommended)
 
 ```bash
