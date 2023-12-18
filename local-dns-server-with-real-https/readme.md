@@ -53,7 +53,7 @@ sudo caddy trust
 
 # Distribute the ca certificate on an own webserver:
 sudo mkdir -p /var/www/cert/
-sudo cp /etc/ssl/certs/Caddy_Local_Authority_[...].pem /var/www/cert/lan.crt
+sudo cp /etc/ssl/certs/Caddy_Local_Authority_* /var/www/cert/lan.crt
 
 vim /etc/caddy/Caddyfile
 ```
