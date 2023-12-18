@@ -31,6 +31,7 @@ Here are some example entries:
 192.168.178.84 cert.int.de # Add this for the distribution of the cert file, which we will create in some steps
 192.168.178.84 cloud.int.de
 192.168.178.84 chat.int.de
+192.168.178.84 int.de cert.int.de portal.int.de central.int.de cloud.int.de office.int.de chat.int.de meet.int.de
 ```
 Please avoid .local adresses because they are used in another ways. A not existent domain but with an existant top level domain is recommended that the browsers don't open the search automatically.
 
