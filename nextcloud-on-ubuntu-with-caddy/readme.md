@@ -206,6 +206,8 @@ vim /var/www/nextcloud/config/config.php
 - All Nextcloud sites should be loaded in 2 seconds.
 - Enter every nextcloud site at the top (sometimes the activities app makes trouble)
 - Open a document for online editing (if collabora or only office are included)
+- Verify that the cron job is running
+- Check the administration messages (in administration overview)
 
 **You are finished!**
 
