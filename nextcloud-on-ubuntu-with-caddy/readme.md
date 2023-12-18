@@ -87,7 +87,7 @@ Open webbrowser with the ip adress of the server, fill the setup dialog.
 Mysql PW: `phoo2Oot`
 
 ```bash
-# Alternative install command:
+# Alternative install command (Don't forget to replace 'PASSWORD':
 sudo -u www-data php /var/www/nextcloud/occ maintenance:install --database "mysql" --database-name "nextcloud"  --database-user "nextcloud" --database-pass "phoo2Oot" --admin-user "Administrator" --admin-pass "PASSWORD"
 ```
 
