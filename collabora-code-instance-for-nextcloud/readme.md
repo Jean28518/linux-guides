@@ -18,7 +18,7 @@ cd && mkdir collabora && cd collabora && vim run.sh
 
 # Insert
 
-docker run -t -d -p 9980:9980 -e "aliasgroup1=https://cloud\\.int\\.de:443" -e "username=admin" -e "password=eeJ0beil" --restart unless-stopped collabora/code:latest
+docker run -t -d -p 9980:9980 -e "aliasgroup1=https://cloud\\.int\\.de:443" -e "username=admin" -e "password=eeJ0beil" --restart unless-stopped --name collabora collabora/code:latest
 
 
 bash run.sh
