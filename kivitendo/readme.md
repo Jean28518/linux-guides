@@ -104,6 +104,17 @@ vim /etc/apache2/sites-enabled/000-default.conf
         Include conf-available/serve-cgi-bin.conf
 
 
+vim /etc/apache2/mods-available/fcgid.conf
+# Ensure:
+<IfModule mod_fcgid.c>
+AddHandler fcgid-script .fcgi
+FcgidConnectTimeout 20
+FcgidBusyTimeout 3600
+FcgidIOTimeout 600
+FcgidMaxRequestLen 314572800
+</IfModule>
+
+
 a2enmod fcgid
 systemctl restart apache2
 
