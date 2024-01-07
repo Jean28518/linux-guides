@@ -13,7 +13,7 @@ services:
     #image: mysql:8.0.27
     command: '--default-authentication-plugin=mysql_native_password'
     volumes:
-      - db_data:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=Thu8vee5
@@ -32,8 +32,6 @@ services:
       - WORDPRESS_DB_USER=wordpress
       - WORDPRESS_DB_PASSWORD=Thu8vee5
       - WORDPRESS_DB_NAME=wordpress
-volumes:
-  db_data:
 ```
 
 ## Caddyfile:
