@@ -260,7 +260,7 @@ Check before the update, if the installed php version is supported by the follow
 ### Update via terminal
 
 ```bash
-sudo -u www-data php /var/www/nextcloud/updater/updater.phar --no-interaction
+sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/updater/updater.phar --no-interaction
 ```
 
 ### After update
