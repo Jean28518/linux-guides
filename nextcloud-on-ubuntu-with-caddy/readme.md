@@ -266,13 +266,13 @@ sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/updater/update
 ### After update
 
 ```bash
-sudo -u www-data php --define apc.enable_cli=1 occ db:add-missing-indices # helps after update
+sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ db:add-missing-indices # helps after update
 ```
 
 ## Reset password manually
 
 ```bash
-sudo -u www-data php /var/www/nextcloud/occ user:resetpassword USERNAME
+sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ user:resetpassword USERNAME
 ```
 
 ## Nextcloud down? Nothing works?
