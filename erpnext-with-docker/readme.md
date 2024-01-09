@@ -93,3 +93,12 @@ docker exec ID bench migrate
 ```bash
 docker-compose -f pwd.yml up -d
 ```
+
+### Problems?
+
+Try to clear cache inside the backend container:
+
+```bash
+bench clear-cache
+bench clear-website-cache
+```
