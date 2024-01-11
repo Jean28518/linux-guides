@@ -7,7 +7,7 @@ cd && mkdir linkstack && cd linkstack && vim run.sh
 # Paste:
 docker run --detach \
     --name linkstack \
-    --publish 24105:80 \
+    --publish 24105:443 \
     --restart unless-stopped \
     --mount source=linkstack,target=/htdocs \
     linkstackorg/linkstack
@@ -19,6 +19,10 @@ bash run.sh
 
 ```yaml
 DOMAIN {
-    reverse_proxy localhost:24105
+   reverse_proxy https://127.0.0.1:24105 {
+    transport http {
+      tls_insecure_skip_verify
+    }
+  }
 }
 ```
