@@ -1,6 +1,6 @@
 # Wordporess (with docker)
 
-Docker-Compose:
+Docker-Compose
 
 ```docker-compose
 version: '3.7'
@@ -34,10 +34,19 @@ services:
       - WORDPRESS_DB_NAME=wordpress
 ```
 
-## Caddyfile:
+## Caddyfile
 
 ```ỳaml
 blog.int.de {
   reverse_proxy localhost:22122
 }
+```
+
+## PHP Extensions
+
+Wordpress docker container is an extended php container: <https://github.com/docker-library/docs/blob/master/php/README.md#how-to-install-more-php-extensions>
+
+```bash
+# Run inside the docker container
+docker-php-ext-install pdo_mysql
 ```
