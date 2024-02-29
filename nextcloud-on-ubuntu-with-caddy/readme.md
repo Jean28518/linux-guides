@@ -261,6 +261,11 @@ Check before the update, if the installed php version is supported by the follow
 
 ```bash
 sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/updater/updater.phar --no-interaction
+
+# Manuell:
+sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/updater/updater.phar
+sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ upgrade
+sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ maintenance:mode --off
 ```
 
 ### After update
