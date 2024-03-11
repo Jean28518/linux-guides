@@ -14,6 +14,7 @@
 - Install the VirtualBoxGuestAdditions in Windows.
 - Create a shared folder and activate the bidirectional copy buffer.
 - Create a desktop shortcut for the virtual machine and move it to .local/share/applications.
+- Create Snapshot
 
 ## Update DNS-Server
 
