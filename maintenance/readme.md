@@ -68,6 +68,7 @@ vim /etc/caddy/Caddyfile
 # Free diskspace:
 docker image prune -a
 podman system prune --all
+docker volume prune
 apt autoremove
 apt clean
 ncdu /
