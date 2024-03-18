@@ -103,13 +103,16 @@ sudo samba-tool user show USERNAME
 sudo samba-tool user setpassword USERNAME
 ```
 
-## Add dns entry
+## Add/Remove dns entry
 
 <https://wiki.samba.org/index.php/DNS_Administration#Adding_new_records>
 
 ```bash
 # Example to add chat.int.de DNS record
 samba-tool dns add la.int.de int.de chat A 192.168.178.57 -U administrator
+
+# Remove
+samba-tool dns delete la.int.de int.de chat A 192.168.178.57 -U administrator
 ```
 
 ```bash
