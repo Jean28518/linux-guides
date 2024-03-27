@@ -23,7 +23,7 @@ services:
         condition: service_healthy
     environment: 
       NC_DB: "mysql2://root_db:3306?u=noco&p=faiTh8ra&d=root_db"
-    image: "nocodb/nocodb:0.202.4"
+    image: "nocodb/nocodb:latest"
     ports: 
       - "23260:8080"
     restart: unless-stopped
