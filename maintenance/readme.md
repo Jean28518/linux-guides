@@ -52,9 +52,13 @@ cat /etc/os-release
 
 # Check every service for updates and remove unused ones.
 docker ps
+docker-compose pull
+docker-compose up -d
+
 podman ps
 snap list
 pstree
+
 # Any PHP sites ?
 # Nextcloud:
 # Check for big updates
