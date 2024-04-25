@@ -96,6 +96,7 @@ sudo -u www-data php /var/www/nextcloud/occ maintenance:install --database "mysq
 ```bash
 cd /var/www/nextcloud
 sudo -u www-data php occ config:app:set dav system_addressbook_exposed --value="no"
+sudo -u www-data php /var/www/nextcloud/occ config:system:set maintenance_window_start --value=1
 
 sudo vim /etc/php/8.2/fpm/php.ini
 
@@ -138,8 +139,7 @@ sudo systemctl restart php8.2-fpm.service
 
 sudo crontab -u www-data -e
 # Insert:
-*/5  *  *  *  * php -f /var/www/nextcloud/cron.php --define apc.enable_cli=1
-# You need the argument apc.enable_cli=1 if you enabled the redis module with apc
+*/5  *  *  *  * php -f /var/www/nextcloud/cron.php
 ```
 
 Go to the nextcloud admin page and change 'background tasks' to "Cron (recommended)"
@@ -173,6 +173,11 @@ vim /var/www/nextcloud/config/config.php
   'memcache.locking' => '\OC\Memcache\Redis',
   'filelocking.enabled' => true,
   'memcache.local' => '\OC\Memcache\APCu',
+
+
+PHP_VERSION=`php -v | head -n 1 | cut -d " " -f 2 | cut -d "." -f 1,2`
+echo "apc.enable_cli=1" >> /etc/php/$PHP_VERSION/fpm/php.ini
+echo "apc.enable_cli=1" >> /etc/php/$PHP_VERSION/cli/php.ini
 ```
 
 ## Setup in Nextcloud itself
@@ -239,7 +244,7 @@ put -r /path/to/old/data/* /data/import/
 sudo convmv -f utf-8 -t utf-8 -r --notest --nfc /data/import/* # Convert filenames to right name
 sudo mv /data/import/* /data/nextcloud/users/...
 sudo chown www-data:www-data -R /data/nextcloud
-sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ files:scan --all
+sudo -u www-data php /var/www/nextcloud/occ files:scan --all
 ```
 
 ## To many requests from your IP
@@ -247,7 +252,7 @@ sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ files:scan
 If you tried to login too many times:
 
 ```bash
-sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ security:bruteforce:reset <IP>
+sudo -u www-data php /var/www/nextcloud/occ security:bruteforce:reset <IP>
 # You need only the '--define apc.enable_cli=1' if you have the redis module enabled.
 ```
 
@@ -260,24 +265,24 @@ Check before the update, if the installed php version is supported by the follow
 ### Update via terminal
 
 ```bash
-sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/updater/updater.phar --no-interaction
+sudo -u www-data php /var/www/nextcloud/updater/updater.phar --no-interaction
 
 # Manuell:
-sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/updater/updater.phar
-sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ upgrade
-sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ maintenance:mode --off
+sudo -u www-data php /var/www/nextcloud/updater/updater.phar
+sudo -u www-data php /var/www/nextcloud/occ upgrade
+sudo -u www-data php /var/www/nextcloud/occ maintenance:mode --off
 ```
 
 ### After update
 
 ```bash
-sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ db:add-missing-indices # helps after update
+sudo -u www-data php /var/www/nextcloud/occ db:add-missing-indices # helps after update
 ```
 
 ## Reset password manually
 
 ```bash
-sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ user:resetpassword USERNAME
+sudo -u www-data php /var/www/nextcloud/occ user:resetpassword USERNAME
 ```
 
 ## Nextcloud down? Nothing works?
@@ -285,11 +290,23 @@ sudo -u www-data php --define apc.enable_cli=1 /var/www/nextcloud/occ user:reset
 Check, if a basic command runs. Otherwise it is printed a stack trace.
 
 ```bash
-cd /var/www/nextcloud
-sudo -u www-data php --define apc.enable_cli=1 occ -V
-sudo -u www-data php occ -V # For Instances without redis memcache
+sudo -u www-data php /var/www/nextcloud/occ -V
 
 # Sometimes it just helps to restart the mysql service
 ```
 
 Good luck!
+
+## Restore nextcloud from backup
+
+For example if an update went wrong...
+
+```bash
+systemctl stop mariadb
+# If an update got wrong, then the next line could be useful to reset the updater:
+# rm -r /data/nextcloud/updater*
+rsync -aP /mnt/2024-04-25-system/var/www/nextcloud/ /var/www/nextcloud/ --exclude=/var/www/nextcloud/data/ --delete
+rsync -aP /mnt/2024-04-25-system/var/lib/mysql /var/lib/mysql
+systemctl start mariadb
+sudo -u www-data php /var/www/nextcloud/occ maintenance:mode --off
+```
