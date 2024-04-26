@@ -13,6 +13,12 @@ password_encryption = scram-sha-256
 sudo systemctl restart postgresql
 ```
 
+## Access Postgres Console:
+
+```bash
+sudo -u postgres psql
+```
+
 ## Add user and database:
 In this case we add a user called nocodb.
 ```bash
