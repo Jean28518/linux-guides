@@ -6,7 +6,7 @@ sudo apt install postgresql
 
 # Change localhost to ip adress (needed, if docker containers want to connect)
 # Also remove the '#' from #password_encryption = scram-sha-256
-vim /etc/postgresql/14/main/postgresql.conf
+vim /etc/postgresql/15/main/postgresql.conf
 listen_addresses = '192.168.178.84'
 password_encryption = scram-sha-256
 
