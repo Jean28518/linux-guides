@@ -58,6 +58,7 @@ docker-compose up -d
 podman ps
 snap list
 pstree
+systemctl list-units --type=service --state=running --no-legend --no-pager
 
 # Any PHP sites ?
 # Nextcloud:
