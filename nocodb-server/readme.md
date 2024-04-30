@@ -9,12 +9,15 @@ Spreadsheets on steroids. Datafields and handling of data is very good. But when
 <https://github.com/nocodb/nocodb/blob/develop/docker-compose/mysql/docker-compose.yml>
 
 ```bash
+# For local machines (testing)
+mkdir nocodb && cd nocodb && nano docker-compose.yml
+# For Servers
 cd && mkdir nocodb && cd nocodb && vim docker-compose.yml
 ```
 
 docker-compose.yml:
 
-```docker-compose
+```yaml
 version: "2.1"
 services: 
   nocodb: 
@@ -54,9 +57,12 @@ services:
 volumes: 
   db_data: {}
   nc_data: {}
-
-# Update the number to the latest version here: https://hub.docker.com/r/nocodb/nocodb/tags
 ```
+
+```bash
+docker-compose up -d
+```
+
 
 (You will need a proxy reverse server for https and advanced stuff)
 
