@@ -3,7 +3,7 @@
 ## Install basic packages
 
 ```bash
-sudo apt update && sudo apt dist-upgrade -y && sudo apt install vim ufw ncdu htop -y
+sudo apt update && sudo apt dist-upgrade -y && sudo apt install vim ufw ncdu htop git -y
 ```
 
 ## Add public key for ssh login
