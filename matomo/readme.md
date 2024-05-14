@@ -15,6 +15,7 @@ services:
       - MYSQL_ROOT_PASSWORD=
       - MARIADB_AUTO_UPGRADE=1
       - MARIADB_DISABLE_UPGRADE_BACKUP=1
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
 
   app:
     image: matomo
