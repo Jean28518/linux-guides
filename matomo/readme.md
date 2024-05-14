@@ -15,8 +15,6 @@ services:
       - MYSQL_ROOT_PASSWORD=
       - MARIADB_AUTO_UPGRADE=1
       - MARIADB_DISABLE_UPGRADE_BACKUP=1
-    env_file:
-      - ./db.env
 
   app:
     image: matomo
@@ -25,8 +23,6 @@ services:
       - ./matomo:/var/www/html:z
     environment:
       - MATOMO_DATABASE_HOST=db
-    env_file:
-      - ./db.env
     ports:
       - 14524:80
 ```
