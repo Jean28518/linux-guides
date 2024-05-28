@@ -101,6 +101,8 @@ sudo samba-tool user show USERNAME
 
 # Reset password
 sudo samba-tool user setpassword USERNAME
+
+samba-tool group addmembers GROUPNAME USERNAME
 ```
 
 ## Add/Remove dns entry
