@@ -50,3 +50,15 @@ Wordpress docker container is an extended php container: <https://github.com/doc
 # Run inside the docker container
 docker-php-ext-install pdo_mysql
 ```
+
+## Change PHP-Values (e.g. upload sizce)
+
+```bash
+vim html/.htaccess
+# Append:
+php_value upload_max_filesize 500M
+php_value post_max_size 500M
+
+
+docker-compose restart
+```
