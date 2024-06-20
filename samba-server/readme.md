@@ -6,8 +6,8 @@
 apt install samba
 
 # Prepare Storage space:
-mkdir /media/samba/
-chmod 777 /media/samba/
+mkdir /var/samba
+chmod 777 /var/samba
 
 cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
 
@@ -29,7 +29,7 @@ read only = no
 create mode = 0750
 
 [public]
-path = /media/samba/
+path = /var/samba
 public = yes
 writable = yes
 comment = Fileserver
@@ -38,7 +38,7 @@ guest ok = yes
 ```
 
 ```bash
-systemctl restart smbd.service
+systemctl restart smbd.service samba*
 ufw allow 445
 ```
 
