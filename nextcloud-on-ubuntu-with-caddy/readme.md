@@ -230,6 +230,12 @@ vim /var/www/nextcloud/config/config.php
 # Change datadirectory to: /data/nextcloud/data/
 ```
 
+## Set Refreshrate for subscribed calendars
+
+```bash
+sudo -u www-data php /var/www/nextcloud/occ config:app:set dav calendarSubscriptionRefreshRate --value "P5M"
+```
+
 ## Import data from old machine
 
 ```bash
