@@ -231,9 +231,9 @@ vim /var/www/nextcloud/config/config.php
 ```
 
 ## Set Refreshrate for subscribed calendars
-
+https://www.php.net/manual/de/dateinterval.construct.php
 ```bash
-sudo -u www-data php /var/www/nextcloud/occ config:app:set dav calendarSubscriptionRefreshRate --value "P5M"
+sudo -u www-data php /var/www/nextcloud/occ config:app:set dav calendarSubscriptionRefreshRate --value "P1H"
 ```
 
 ## Import data from old machine
