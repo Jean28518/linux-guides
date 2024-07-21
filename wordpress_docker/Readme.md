@@ -8,7 +8,7 @@ version: '3.7'
 services:
   db:
     # We use a mariadb image which supports both amd64 & arm64 architecture
-    image: mariadb:10.6.4-focal
+    image: mariadb:latest
     # If you really want to use MySQL, uncomment the following line
     #image: mysql:8.0.27
     command: '--default-authentication-plugin=mysql_native_password'
