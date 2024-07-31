@@ -60,7 +60,7 @@ systemctl restart caddy
     - Database name: `dolibarr`
     - Database user: `dolibarr`
     - Database password: `dolibarr`
-    - uncheck the `Create the database if it does not exist` checkbox
+    - leave the rest unchanged
 
 ```bash
 # Let's set the install.lock file
