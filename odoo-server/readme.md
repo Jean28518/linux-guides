@@ -34,7 +34,6 @@ volumes:
 ```
 
 ```bash
-cd && mkdir odoo && cd odoo && vim docker-compose.yml
 docker-compose up -d
 vim /etc/caddy/Caddyfile
 ```
