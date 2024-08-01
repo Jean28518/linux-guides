@@ -1,8 +1,11 @@
 ## Official Odoo ERP System
 
 
-### docker-compose.yml
+```bash
+cd && mkdir odoo && cd odoo && vim docker-compose.yml
 ```
+
+```yaml
 version: "3.7"
 
 services:
