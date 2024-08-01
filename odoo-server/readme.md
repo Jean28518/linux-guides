@@ -21,7 +21,7 @@ services:
     volumes:
       - odoo-data:/opt/odoo/data
     ports:
-      - 5000:8069
+      - 10824:8069
     depends_on:
       - db
 
@@ -31,6 +31,15 @@ volumes:
 ```
 
 The masterpassword for the setup is `ownerp2021`.
+
+Caddy:
+
+```caddy
+odoo.int.de {
+  reverse_proxy localhost:10824
+}
+```
+
 
 ## Odoo ERP System from Equitania
 
