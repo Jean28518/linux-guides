@@ -33,14 +33,28 @@ volumes:
   odoo-data:
 ```
 
-The masterpassword for the setup is `ownerp2021`.
-
-Caddy:
+```bash
+cd && mkdir odoo && cd odoo && vim docker-compose.yml
+docker-compose up -d
+vim /etc/caddy/Caddyfile
+```
 
 ```caddy
 odoo.int.de {
   reverse_proxy localhost:10824
 }
+```
+
+```bash
+systemctl restart caddy
+```
+
+
+The masterpassword for the setup is `ownerp2021`.
+
+Caddy:
+
+
 ```
 
 
