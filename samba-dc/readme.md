@@ -105,6 +105,14 @@ sudo samba-tool user setpassword USERNAME
 samba-tool group addmembers GROUPNAME USERNAME
 ```
 
+### Disable /etc/nsswitch.conf entries
+(Because sometimes the unix user system is tricked)
+
+```bash
+sudo vim /etc/nsswitch.conf
+# Remove "winbind" from the entries
+```
+
 ## Add/Remove dns entry
 
 <https://wiki.samba.org/index.php/DNS_Administration#Adding_new_records>
