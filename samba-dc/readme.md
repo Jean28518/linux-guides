@@ -121,7 +121,7 @@ sudo vim /etc/nsswitch.conf
 # Example to add chat.int.de DNS record
 samba-tool dns add la.int.de int.de chat A 192.168.178.57 -U administrator
 
-# Example to add a new zone:
+# Example to add a new zone (if we want to add different scnd level domains to our server)
 samba-tool dns zonecreate la.int.de int2.de -U administrator
 
 # Remove
