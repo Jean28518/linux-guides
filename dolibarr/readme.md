@@ -24,7 +24,7 @@ cd /var/www/
 git clone https://github.com/Dolibarr/dolibarr.git
 cd dolibarr
 git config --global --add safe.directory /var/www/dolibarr
-git checkout 20.0
+git checkout 19.0
 touch /var/www/dolibarr/htdocs/conf/conf.php
 chown -R www-data:www-data /var/www/dolibarr
 
