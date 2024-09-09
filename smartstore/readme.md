@@ -2,7 +2,7 @@
 
 ```bash
 sudo -i
-cd && && mkdir smartstore && cd smartstore && vim docker-compose.yml
+cd && mkdir smartstore && cd smartstore && vim docker-compose.yml
 # Insert:
 version: '3.7'
 services:
