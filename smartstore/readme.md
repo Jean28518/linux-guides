@@ -38,3 +38,9 @@ shop.int.de {
 
 systemctl restart caddy
 ```
+
+- In the smartstore startup guide insert:
+  - DB HOST: db
+  - DB User: smartstore
+  - DB Name: smartstore
+  - DB User Password: ohb5AwoF
