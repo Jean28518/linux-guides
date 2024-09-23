@@ -211,3 +211,13 @@ cp -ra /mnt/1970-01-01/root/* /root/
 cp -ra /mnt/1970-01-01/var/* /var/
 reboot
 # Afterwards you have to renew the ssh certifcates at the backup server for the automatic backup
+```
+
+## How to break the borg lock
+
+If this error message is displayed for multiple days:
+Failed to create/acquire the lock /home/borg-cloud/lock.exclusive (timeout).
+
+```bash
+borg break-lock ssh://borg@1.2.3.4:22/~/backups/Server1
+```
