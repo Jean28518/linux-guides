@@ -283,6 +283,7 @@ sudo -u www-data php /var/www/nextcloud/occ maintenance:mode --off
 
 ```bash
 sudo -u www-data php /var/www/nextcloud/occ db:add-missing-indices # helps after update
+sudo -u www-data php /var/www/nextcloud/occ maintenance:repair --include-expensive
 ```
 
 ## Reset password manually
