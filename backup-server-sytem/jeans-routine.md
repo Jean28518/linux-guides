@@ -47,6 +47,18 @@ borg init --encryption=repokey ssh://USER@SERVERADRESS:23/./borg-SERVERNAME
 borg key export ssh://USER@SERVERADRESS:23/./borg-SERVERNAME
 # Save this repokey securely!
 # You will need both parts to recover borg-backup
+
+# Set additional_free_space
+sftp -P 23 -i .ssh/id_rsa uxx@uxx.your-storagebox.de
+cd ./borg-SERVERNAME
+get config
+# In another session edit this file locally:
+vim config
+additional_free_space = 2G
+
+# Then upload the file again
+put config
+exit
 ```
 
 ### Synology
@@ -221,3 +233,13 @@ Failed to create/acquire the lock /home/borg-cloud/lock.exclusive (timeout).
 ```bash
 borg break-lock ssh://borg@1.2.3.4:22/~/backups/Server1
 ```
+
+## Complete borg repo full?
+
+- Borg can't operate with 0B free on your disk. Try to delete some files.
+- If you don't have any files to delete, delete some of the segment files with the highest number under repo_dir/data/.... That will likely corrupt some recent backup archive(s), but borg check --repair might be able to bring the repo back into a consistent state without these archives. (Thanks to: https://github.com/borgbackup/borg/issues/8329#issuecomment-2278334610)
+- `borg list $BORG_REPOSITORY`
+- `borg delete $BORG_REPOSITORY::` (Delete the latest backup)
+- `borg check --repair $BORG_REPOSITORY`
+- That this doesn't happen again: Set `additional_free_space = 2G` in the `config` file in the borg repo
+- (It is also possible to do `borg compact $BORG_REPOSITORY`)
