@@ -240,6 +240,6 @@ borg break-lock ssh://borg@1.2.3.4:22/~/backups/Server1
 - If you don't have any files to delete, delete some of the segment files with the highest number under repo_dir/data/.... That will likely corrupt some recent backup archive(s), but borg check --repair might be able to bring the repo back into a consistent state without these archives. (Thanks to: https://github.com/borgbackup/borg/issues/8329#issuecomment-2278334610)
 - `borg list $BORG_REPOSITORY`
 - `borg delete $BORG_REPOSITORY::1970-01-01` (Delete the latest backup)
-- `borg check --repair $BORG_REPOSITORY`
+- `borg check --repair $BORG_REPOSITORY` Caution: This command takes multiple hours for ~ TB of data.
 - That this doesn't happen again: Set `additional_free_space = 2G` in the `config` file in the borg repo
 - (It is also possible to do `borg compact $BORG_REPOSITORY`)
