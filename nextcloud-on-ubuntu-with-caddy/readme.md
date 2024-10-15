@@ -246,6 +246,9 @@ mkdir /data/import # run this as user, not as root, if you have the option
 sftp user@newserver
 put -r /path/to/old/data/* /data/import/
 
+## Otherwise you can mount a backup and restore it like this:
+rsync -aP /mnt/1970-01-01/data/nextcloud/ /data/
+
 ## On the new machine:
 sudo convmv -f utf-8 -t utf-8 -r --notest --nfc /data/import/* # Convert filenames to right name
 sudo mv /data/import/* /data/nextcloud/users/...
