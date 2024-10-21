@@ -59,6 +59,7 @@ additional_free_space = 2G
 # Then upload the file again
 put config
 exit
+rm config
 ```
 
 ### Synology
