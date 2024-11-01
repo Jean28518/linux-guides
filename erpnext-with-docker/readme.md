@@ -42,13 +42,22 @@ erptest.int.de {
   - Username: `Administrator`
   - Password: `admin`
 
+## How to install additional Modules
+
+```bash
+docker-compose exec backend bash
+bench get-app https://github.com/alyf-de/erpnext_germany.git
+bench --site frontend install-app erpnext_germany
+exit
+docker-compose restart
+```
+
 ## How to backup and restore
 
 ### ERPNext has error after upgrade?
 
 ```bash
-docker ps # Take ID from erp-next_backend_1
-docker exec -it #ID# bash -l
+docker-compose exec backend bash
 /usr/local/bin/bench migrate
 exit
 ```
@@ -57,8 +66,7 @@ exit
 
 ```bash
 sudo -i
-docker ps # Take ID from erp-next_backend_1
-docker exec -it #ID# bash -l
+docker-compose exec backend bash
 /usr/local/bin/bench --verbose --site all backup --with-files
 exit
 cd && mkdir "backup_erp_$(date +'%Y-%m-%d_%H-%M-%S')" && mv /var/lib/docker/volumes/erp-next_sites/_data/frontend/private/backups/* "backup_erp_$(date +'%Y-%m-%d_%H-%M-%S')/"
@@ -71,8 +79,7 @@ sudo -i
 # Change into folder where backed up files are
 
 cp -a * /var/lib/docker/volumes/erp-next_sites/_data/frontend/private/backups/
-docker ps # Take ID from erp-next_backend_1
-docker exec -it #ID# bash -l
+docker-compose exec backend bash
 /usr/local/bin/bench --force restore sites/frontend/private/backups/DATE_TIME-frontend-database.sql.gz --with-private-files sites/frontend/private/backups/DATE_TIME-frontend-private-files.tar --with-public-files sites/frontend/private/backups/DATE_TIME-frontend-files.tar
 # MySQL Password is: admin
 /usr/local/bin/bench migrate
@@ -82,8 +89,7 @@ exit
 ## Errors?
 
 ```bash
-docker ps # Take ID from erp-next_backend_1
-docker exec ID bench migrate
+docker-compose exec backend bench migrate
 ```
 
 ## Update
