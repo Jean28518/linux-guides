@@ -45,11 +45,11 @@ erptest.int.de {
 ## How to install additional Modules
 
 ```bash
-docker-compose exec backend bash
+docker-compose -f pwd.yml exec backend bash
 bench get-app https://github.com/alyf-de/erpnext_germany.git
 bench --site frontend install-app erpnext_germany
 exit
-docker-compose restart
+docker-compose -f pwd.yml restart
 ```
 
 ## How to backup and restore
@@ -57,7 +57,7 @@ docker-compose restart
 ### ERPNext has error after upgrade?
 
 ```bash
-docker-compose exec backend bash
+docker-compose -f pwd.yml exec backend bash
 /usr/local/bin/bench migrate
 exit
 ```
@@ -66,7 +66,7 @@ exit
 
 ```bash
 sudo -i
-docker-compose exec backend bash
+docker-compose -f pwd.yml exec backend bash
 /usr/local/bin/bench --verbose --site all backup --with-files
 exit
 cd && mkdir "backup_erp_$(date +'%Y-%m-%d_%H-%M-%S')" && mv /var/lib/docker/volumes/erp-next_sites/_data/frontend/private/backups/* "backup_erp_$(date +'%Y-%m-%d_%H-%M-%S')/"
