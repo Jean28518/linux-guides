@@ -17,6 +17,9 @@ sudo systemctl restart postgresql
 
 ```bash
 sudo -u postgres psql
+
+# List all databases inside shell:
+\l
 ```
 
 ## Add user and database:
