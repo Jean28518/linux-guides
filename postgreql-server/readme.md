@@ -33,7 +33,7 @@ sudo -u postgres createdb -O nocodb nocodb
 
 
 # Set Authentication
-vim /etc/postgresql/14/main/pg_hba.conf
+vim /etc/postgresql/15/main/pg_hba.conf
 # Change here the ip adress subnet from which connections are allowd
 # To allow all change it to 0.0.0.0/0
 host    nocodb          nocodb          192.168.178.0/24        scram-sha-256
