@@ -222,10 +222,10 @@ In this example our partition is mounted under `/data`
 
 ```bash
 sudo -i
-mkdir /data/nextcloud
+mkdir -p /data/nextcloud
+chown -R www-data:www-data /data
 mv /var/www/nextcloud/data /data/nextcloud/
-chmod a+rwx /data # Or alternatively chown the /data/ dir to www-data:www-data.
-chown -R www-data:www-data /data/nextcloud/
+chown -R www-data:www-data /data
 vim /var/www/nextcloud/config/config.php
 # Change datadirectory to: /data/nextcloud/data/
 ```
