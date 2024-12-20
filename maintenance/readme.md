@@ -76,6 +76,7 @@ podman system prune --all
 docker volume prune
 apt autoremove
 apt clean
+sudo journalctl --vacuum-size=100M
 ncdu /
 
 # Check all accesses - Are there old users on the services we could delete?
