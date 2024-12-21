@@ -305,7 +305,11 @@ sudo -u www-data php /var/www/nextcloud/occ -V
 # Sometimes it just helps to restart the mysql service
 
 # Other helpful commands:
+sudo -u www-data php /var/www/nextcloud/occ db:add-missing-columns
+sudo -u www-data php /var/www/nextcloud/occ db:add-missing-indices
+sudo -u www-data php /var/www/nextcloud/occ db:add-missing-primary-keys
 sudo -u www-data php /var/www/nextcloud/occ maintenance:repair
+
 
 ```
 
