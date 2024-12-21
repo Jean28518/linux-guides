@@ -113,7 +113,7 @@ sudo vim /etc/nsswitch.conf
 # Remove "winbind" from the entries
 ```
 
-## Add/Remove dns entry
+## Add/Remove/Update dns entry
 
 <https://wiki.samba.org/index.php/DNS_Administration#Adding_new_records>
 
@@ -126,6 +126,10 @@ samba-tool dns zonecreate la.int.de int2.de -U administrator
 
 # Remove
 samba-tool dns delete la.int.de int.de chat A 192.168.178.57 -U administrator
+
+# Update
+samba-tool dns update la.int.de int.de chat A 192.168.0.55 192.168.0.66 -U administrator
+                                                 Old IP       New IP
 ```
 
 ```bash
