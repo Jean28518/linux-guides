@@ -303,6 +303,10 @@ Check, if a basic command runs. Otherwise it is printed a stack trace.
 sudo -u www-data php /var/www/nextcloud/occ -V
 
 # Sometimes it just helps to restart the mysql service
+
+# Other helpful commands:
+sudo -u www-data php /var/www/nextcloud/occ maintenance:repair
+
 ```
 
 Good luck!
