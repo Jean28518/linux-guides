@@ -323,8 +323,8 @@ For example if an update went wrong...
 systemctl stop mariadb
 # If an update got wrong, then the next line could be useful to reset the updater:
 # rm -r /data/nextcloud/updater*
-rsync -aP /mnt/2024-04-25-system/var/www/nextcloud/ /var/www/nextcloud/ --exclude=/var/www/nextcloud/data/ --delete
-rsync -aP /mnt/2024-04-25-system/var/lib/mysql /var/lib/mysql
+rsync -aP /baclups/2024-04-25-system/var/www/nextcloud/ /var/www/nextcloud/ --exclude=/var/www/nextcloud/data/ --delete
+rsync -aP /baclups/2024-04-25-system/var/lib/mysql /var/lib/mysql --delete
 systemctl start mariadb
 sudo -u www-data php /var/www/nextcloud/occ maintenance:mode --off
 ```
