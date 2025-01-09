@@ -69,8 +69,18 @@ rm config
 * add SynoCommunity repo `https://packages.synocommunity.com/`
 * intall Borg from Synco Community Repo
 * enable ssh in the system settings under 'Terminal & SNMP'
+* Create a shared folder called "borgbackup"
 * connect to ssh with the borg user.
-* ensure that the borg user can write in his home directory and the home directory points to a volume. You can become root by typing 'sudo -i' and entering the password of the borg user.
+* ensure that the borg user can write in his home directory and the home directory points to a volume. You can become root by typing 'sudo -i' and entering the password of the borg user:
+
+```bash
+sudo -i
+mkdir -p /volume1/borgbackup/home-borg/
+chown borg:borg /volume1/borgbackup/home-borg/
+vi /etc/passwd
+# Set the home path of borg to /volume1/borgbackup/home-borg/
+su borg
+```
 
 ```
 mkdir -p ~/backups/Server1
