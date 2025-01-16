@@ -49,7 +49,10 @@ nano ~/backup.sh
 # Dump all databases
 mysqldump -u root --all-databases > all_databases.sql
 # To restore a Single MySQL Database from a Full MySQL Dump:
-# mysql -u root -p database_name < all_databases.sql
+# mysql -p -o database_name < mysql_all_databases.sql
+# Otherwise e.g.:
+# mysql -u nextcloud -p nextcloud
+# MariaDB [nextcloud]> source mysql_export.sql
 
 # Get apt selection of packages:
 /usr/bin/dpkg --get-selections | /usr/bin/awk '!/deinstall|purge|hold/'|/usr/bin/cut -f1 |/usr/bin/tr '\n' ' '  > installed-packages.txt  2>&1
