@@ -11,6 +11,8 @@ cd && mkdir elasticsearch && cd elasticsearch && vim docker-compose.yml
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.17.1
+    labels:
+       - elasticsearch
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -19,4 +21,8 @@ services:
 
 
 docker-compose up -d
+
+docker cp elasticsearch-elasticsearch-1:/usr/share/elasticsearch/config/certs/http_ca.crt .
+cp http_ca.crt /usr/local/share/ca-certificates/
+update-ca-certificates
 ```
