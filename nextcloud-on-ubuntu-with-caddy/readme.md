@@ -216,6 +216,10 @@ echo "apc.enable_cli=1" >> /etc/php/$PHP_VERSION/cli/php.ini
 
 **You are finished!**
 
+## Full text search with elasticsearch:
+
+Have a look [here](https://github.com/Jean28518/linux-guides/blob/main/elasticsearch/README.md#how-to-use-it-with-nextcloud).
+
 ## Move data directory to other partition
 
 In this example our partition is mounted under `/data`
