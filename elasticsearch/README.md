@@ -32,3 +32,9 @@ docker-compose up -d
 # cp http_ca.crt /usr/local/share/ca-certificates/
 # update-ca-certificates
 ```
+
+## How to use it with nextcloud:
+
+- In nextcloud install: `fulltextsearch` and `fulltextsearch_elasticsearch`
+- In the admin settings under full text search configure the server with address `http://localhost:9200` (if you disabled xpack.security) and with index e.g. `my_index`.
+- Then run `sudo -u www-data php /var/www/nextcloud/occ fulltextsearch:index` to start the index. This will take many minutes :)
