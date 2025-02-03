@@ -1,5 +1,7 @@
 # Elastic Search
 
+Very simple setup without proper authentication. For nextcloud single node instances this should be enough though if the network access is restricted.
+
 <https://www.elastic.co/guide/en/elasticsearch/reference/7.5/docker.html>
 
 Tags: <https://hub.docker.com/_/elasticsearch/tags>
@@ -19,6 +21,8 @@ services:
       - "9300:9300"
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=false  # Disable security
+
 
 
 docker-compose up -d
