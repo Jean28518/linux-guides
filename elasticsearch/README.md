@@ -27,7 +27,8 @@ services:
 
 docker-compose up -d
 
-docker cp elasticsearch-elasticsearch-1:/usr/share/elasticsearch/config/certs/http_ca.crt .
-cp http_ca.crt /usr/local/share/ca-certificates/
-update-ca-certificates
+# Only needed if xpack security is enabled.
+# docker cp elasticsearch-elasticsearch-1:/usr/share/elasticsearch/config/certs/http_ca.crt .
+# cp http_ca.crt /usr/local/share/ca-certificates/
+# update-ca-certificates
 ```
