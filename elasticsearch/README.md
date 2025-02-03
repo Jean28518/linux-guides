@@ -35,6 +35,38 @@ docker-compose up -d
 
 ## How to use it with nextcloud:
 
+
+16GB of RAM or more are recommended if you want to index more than 50GB of data.
+
+
 - In nextcloud install: `fulltextsearch` and `fulltextsearch_elasticsearch`
 - In the admin settings under full text search configure the server with address `http://localhost:9200` (if you disabled xpack.security) and with index e.g. `my_index`.
 - Then run `sudo -u www-data php /var/www/nextcloud/occ fulltextsearch:index` to start the index. This will take many minutes :)
+
+### Enable continously file indexing:
+
+Initially posted at: https://www.allerstorfer.at/install-nextcloud-elasticsearch/
+
+```bash
+vim /etc/systemd/system/nextcloud-fulltext-elasticsearch-worker.service
+# Insert:
+[Unit]
+Description=Elasticsearch Worker for Nextcloud Fulltext Search
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/nextcloud
+ExecStart=/usr/bin/php /var/www/nextcloud/occ fulltextsearch:live
+Nice=19
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+
+systemctl enable nextcloud-fulltext-elasticsearch-worker.service --now
+```
+
+
