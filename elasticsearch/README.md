@@ -11,6 +11,7 @@ cd && mkdir elasticsearch && cd elasticsearch && vim docker-compose.yml
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.17.1
+    restart: unless-stopped
     labels:
        - elasticsearch
     ports:
