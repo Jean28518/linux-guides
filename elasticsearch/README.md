@@ -22,6 +22,8 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false  # Disable security
+      # The RAM Usage here is 8 GB: (only use the half of your server RAM here:)
+      - "ES_JAVA_OPTS=-Xms8g -Xmx8g"
 
 
 
