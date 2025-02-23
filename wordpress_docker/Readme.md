@@ -49,6 +49,10 @@ Wordpress docker container is an extended php container: <https://github.com/doc
 ```bash
 # Run inside the docker container
 docker-php-ext-install pdo_mysql
+
+# For e.g. redis run inside the container:
+pecl install redis
+docker-php-ext-enable redis
 ```
 
 ## Change PHP-Values (e.g. upload sizce)
