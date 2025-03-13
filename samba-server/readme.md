@@ -35,9 +35,25 @@ writable = yes
 comment = Fileserver
 printable = no
 guest ok = yes
+
+# For a specific user "laser" inside
+[laser-jobs]
+path = /data/samba_fs/laser-jobs 
+read only = no
+writeable = yes
+browseable = yes
+valid users = laser
+create mask = 0644
+directory mask = 0755
+; if you set this, all files get written as this user
+    #    force user = laser
 ```
 
 ```bash
+# For the laser-jobs
+sudo smbpasswd -a laser
+sudo chown -R laser:laser /data/samba_fs/laser-jobs 
+
 systemctl restart smbd.service samba*
 ufw allow 445
 ```
