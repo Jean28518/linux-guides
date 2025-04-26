@@ -1,4 +1,4 @@
-# Nextcloud on Ubuntu Server with Caddy as Webserver
+# Nextcloud with Caddy as Webserver
 
 Automation script: <https://github.com/Jean28518/linux-arbeitsplatz-central/blob/main/src/lac/welcome/scripts/setup_nextcloud.sh>
 
