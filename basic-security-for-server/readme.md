@@ -42,7 +42,11 @@ sudo ufw enable
 ## Setup automatic restart
 ```bash
 sudo crontab -e
+50 1 * * 0 reboot # sunday at 1:50 am
+
+# Or
 50 1 * * * reboot # daily at 1:50 am
+
 ```
 
 ## Set log limit:
