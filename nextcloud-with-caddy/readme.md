@@ -283,6 +283,7 @@ sudo -u www-data php /var/www/nextcloud/updater/updater.phar --no-interaction
 # Manuell:
 sudo -u www-data php /var/www/nextcloud/updater/updater.phar
 sudo -u www-data php /var/www/nextcloud/occ upgrade
+sudo -u www-data php /var/www/nextcloud/occ app:update --all
 sudo -u www-data php /var/www/nextcloud/occ maintenance:mode --off
 ```
 
