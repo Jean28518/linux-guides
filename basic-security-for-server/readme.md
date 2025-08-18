@@ -1,4 +1,4 @@
-# Implement basic security hardening for debian server
+# Implement basic security hardening for debian trixie server
 
 ## Install basic packages
 
@@ -24,7 +24,7 @@ PubkeyAuthentication yes
 
 ## Install fail2ban
 ```bash
-sudo apt install fail2ban -y && echo "sshd_backend = systemd" >> /etc/fail2ban/paths-debian.conf && sudo systemctl restart fail2ban
+sudo apt install fail2ban
 ```
 
 ## Setup unattended upgrades:
