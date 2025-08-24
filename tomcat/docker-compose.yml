@@ -1,0 +1,26 @@
+
+services:
+  tomcat:
+#    image: tomcat:latest
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+#      - ./sample.war:/usr/local/tomcat/webapps/sample.war
+      - ./sample.war:/usr/local/tomcat/webapps/ROOT.war
+    environment:
+      # JVM memory settings for performance
+      JAVA_OPTS: "-Xms512m -Xmx1024m"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydatabase
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
