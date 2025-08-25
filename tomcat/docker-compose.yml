@@ -8,6 +8,7 @@ services:
     volumes:
 #      - ./sample.war:/usr/local/tomcat/webapps/sample.war
       - ./sample.war:/usr/local/tomcat/webapps/ROOT.war
+      - ./logs:/usr/local/tomcat/logs
     environment:
       # JVM memory settings for performance
       JAVA_OPTS: "-Xms512m -Xmx1024m"
