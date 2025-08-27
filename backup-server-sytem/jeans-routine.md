@@ -229,12 +229,12 @@ xargs apt install <installed-packages.txt -y
 reboot
 borg mount ssh://borg@1.2.3.4:22/~/backups/Server1 /mnt
 systemctl stop postgresql mariadb-server docker
-cp -ra --exclude='/var/run/*' --exclude='/var/lock/*' /mnt/1970-01-01/var/* /var/
-cp -ra /mnt/1970-01-01/etc/* /etc/
-cp -ra /mnt/1970-01-01/opt/* /opt/
-cp -ra /mnt/1970-01-01/home/* /home/
-cp -ra /mnt/1970-01-01/root/* /root/
-cp -ra /mnt/1970-01-01/var/* /var/
+rsync -raPh --info=progress2 --info=name0 --exclude='/var/run/' --exclude='/var/lock/*' /mnt/1970-01-01/var/* /var/
+rsync -raPh --info=progress2 --info=name0 --exclude='/etc/fstab'  --exclude='/etc/network/' /mnt/1970-01-01/etc/ /etc/
+rsync -raPh --info=progress2 --info=name0 /mnt/1970-01-01/opt/ /opt/
+rsync -raPh --info=progress2 --info=name0 /mnt/1970-01-01/home/ /home/
+rsync -raPh --info=progress2 --info=name0 /mnt/1970-01-01/root/ /root/
+rsync -raPh --info=progress2 --info=name0 /mnt/1970-01-01/var/ /var/
 reboot
 # Afterwards you have to renew the ssh certifcates at the backup server for the automatic backup
 ```
