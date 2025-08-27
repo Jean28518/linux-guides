@@ -12,7 +12,7 @@ In dieser Anleitung wird gezeigt, wie man auf einem Debian oder Ubuntu Server mi
 ```bash
 sudo -i 
 cd && ssh-keygen && cat ~/.ssh/id_rsa.pub
-apt install borgbackup vim ncdu -y
+apt install borgbackup vim ncdu python3-pyfuse3 -y
 ```
 
 ## BackUp Server
@@ -20,7 +20,7 @@ apt install borgbackup vim ncdu -y
 ### Linux-Server
 
 ```bash
-sudo apt install borgbackup vim ncdu -y && sudo adduser borg # Keine Root Rechte!
+sudo apt install borgbackup vim ncdu python3-pyfuse3 -y && sudo adduser borg # Keine Root Rechte!
 
 su borg 
 cd && mkdir .ssh
