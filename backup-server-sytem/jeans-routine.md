@@ -28,6 +28,9 @@ cd && mkdir .ssh
 vim ~/.ssh/authorized_keys # Den Public key vom Source Server hinzufügen
 command="borg serve --restrict-to-path /home/borg/backups/Server1 --append-only" # Das vor dem eben eingefügten Public Key einfügen
 
+chmod 700 .ssh
+chmod 600 .ssh/authorized_keys
+
 mkdir -p ~/backups/Server1
 
 
