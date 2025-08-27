@@ -229,7 +229,7 @@ xargs apt install <installed-packages.txt -y
 reboot
 borg mount ssh://borg@1.2.3.4:22/~/backups/Server1 /mnt
 systemctl stop postgresql mariadb-server docker
-rsync -raPh --info=progress2 --info=name0 --exclude='run/' --exclude='lock/' --exclude='cache/' --exclude='tmp/' --exclude='/var/lib/apt/' /mnt/1970-01-01/var/* /var/
+rsync -raPh --info=progress2 --info=name0 --exclude='run/' --exclude='lock/' --exclude='cache/' --exclude='tmp/' --exclude='lib/apt/' /mnt/1970-01-01/var/* /var/
 rsync -raPh --info=progress2 --info=name0 --exclude='fstab'  --exclude='network/' /mnt/1970-01-01/etc/ /etc/
 rsync -raPh --info=progress2 --info=name0 /mnt/1970-01-01/opt/ /opt/
 rsync -raPh --info=progress2 --info=name0 /mnt/1970-01-01/home/ /home/
