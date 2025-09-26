@@ -225,7 +225,7 @@ apt update && apt dist-upgrade
 apt install borgbackup
 borg mount ssh://borg@1.2.3.4:22/~/backups/Server1 /mnt
 cp /mnt/1970-01-01/root/installed-packages.txt /root/
-xargs apt install <installed-packages.txt -y
+cat installed-packages.txt | xargs -n 1 sudo apt install -y
 reboot
 borg mount ssh://borg@1.2.3.4:22/~/backups/Server1 /mnt
 systemctl stop postgresql mariadb-server docker
