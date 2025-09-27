@@ -234,6 +234,7 @@ rsync -raPh --info=progress2 --info=name0 --exclude='fstab'  --exclude='network/
 rsync -raPh --info=progress2 --info=name0 /mnt/1970-01-01/opt/ /opt/
 rsync -raPh --info=progress2 --info=name0 /mnt/1970-01-01/home/ /home/
 rsync -raPh --info=progress2 --info=name0 /mnt/1970-01-01/root/ /root/
+rsync -raPh --info=progress2 --info=name0 /mnt/1970-01-01/usr/ /usr/
 reboot
 # Afterwards you have to renew the ssh certifcates at the backup server for the automatic backup
 ```
