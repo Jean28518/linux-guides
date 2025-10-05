@@ -285,6 +285,11 @@ sudo -u www-data php /var/www/nextcloud/updater/updater.phar
 sudo -u www-data php /var/www/nextcloud/occ upgrade
 sudo -u www-data php /var/www/nextcloud/occ app:update --all
 sudo -u www-data php /var/www/nextcloud/occ maintenance:mode --off
+
+# If you have the docker nextcloud image:
+docker exec --user www-data nextcloud_app_1 php occ upgrade
+docker exec --user www-data nextcloud_app_1 php occ app:update --all
+docker exec --user www-data nextcloud_app_1 php occ maintenance:mode --off
 ```
 
 ### After update
