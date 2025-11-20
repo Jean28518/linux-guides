@@ -63,6 +63,7 @@ ufw allow 445
 Samba seems to have their own user management with password database
 
 ```bash
+adduser USERNAME
 sudo smbpasswd -a USERNAME
 ```
 
