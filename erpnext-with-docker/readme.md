@@ -70,9 +70,6 @@ docker compose -f pwd.yml down
 # The names of the volumes could be different.
 docker volume rm erpnext_redis-cache-data erpnext_redis-queue-data
 docker compose -f pwd.yml up -d
-docker compose -f pwd.yml run --rm backend bench build --force
-docker compose -f pwd.yml run --rm backend bench --site frontend clear-cache
-docker compose -f pwd.yml run --rm backend bench --site frontend clear-website-cache
 ```
 
 ### Backup
