@@ -66,10 +66,11 @@ docker compose -f pwd.yml exec backend bench build
 ### CSS Errors:
 
 ```bash
-docker compose -f pwd.yml exec backend bench --site frontend  build
-docker compose -f pwd.yml exec backend chmod o+rx /home/frappe
-docker compose -f pwd.yml exec backend bench --site frontend clear-cache
-docker compose -f pwd.yml exec backend bench --site frontend clear-website-cache
+# For me this didn't work but could be such a solution.
+docker compose -f pwd.yml exec frontend bench --site frontend  build
+docker compose -f pwd.yml exec frontend chmod o+rx /home/frappe
+docker compose -f pwd.yml exec frontend bench --site frontend clear-cache
+docker compose -f pwd.yml exec frontend bench --site frontend clear-website-cache
 ```
 
 ### Backup
