@@ -57,7 +57,19 @@ docker compose -f pwd.yml restart
 ### ERPNext has error after upgrade?
 
 ```bash
+docker compose -f pwd.yml stop
+docker compose -f pwd.yml start
 docker compose -f pwd.yml exec backend bench --site frontend migrate
+docker compose -f pwd.yml exec backend bench build
+```
+
+### CSS Errors:
+
+```bash
+docker compose -f pwd.yml exec backend bench --site frontend  build
+docker compose -f pwd.yml exec backend chmod o+rx /home/frappe
+docker compose -f pwd.yml exec backend bench --site frontend clear-cache
+docker compose -f pwd.yml exec backend bench --site frontend clear-website-cache
 ```
 
 ### Backup
@@ -88,6 +100,7 @@ exit
 
 ```bash
 docker compose -f pwd.yml exec backend bench --site frontend migrate
+
 ```
 
 ## Update
