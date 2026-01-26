@@ -89,7 +89,7 @@ exit
 ## Errors?
 
 ```bash
-docker compose exec backend bench migrate
+docker compose -f pwd.yml exec backend bench migrate
 ```
 
 ## Update
