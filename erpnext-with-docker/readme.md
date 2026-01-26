@@ -66,6 +66,9 @@ docker compose -f pwd.yml exec backend bench build
 ### CSS Errors:
 
 ```bash
+docker compose -f pwd.yml down
+docker volume rm erpnext_redis-cache-data erpnext_redis-queue-data
+docker compose up -d
 # For me this didn't work but could be such a solution.
 docker compose -f pwd.yml exec frontend bench --site frontend  build
 docker compose -f pwd.yml exec frontend chmod o+rx /home/frappe
