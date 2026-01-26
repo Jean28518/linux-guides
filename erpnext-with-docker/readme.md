@@ -57,9 +57,7 @@ docker compose -f pwd.yml restart
 ### ERPNext has error after upgrade?
 
 ```bash
-docker compose -f pwd.yml exec backend bash
-/usr/local/bin/bench migrate
-exit
+docker compose -f pwd.yml exec backend bench --site frontend migrate
 ```
 
 ### Backup
@@ -89,7 +87,7 @@ exit
 ## Errors?
 
 ```bash
-docker compose -f pwd.yml exec backend bench migrate
+docker compose -f pwd.yml exec backend bench --site frontend migrate
 ```
 
 ## Update
