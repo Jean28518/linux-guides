@@ -8,7 +8,7 @@ cd && git clone https://github.com/frappe/frappe_docker.git && mv frappe_docker 
 # The rest should be fine.
 # Change all restart policies unless-stopped (at the best in the graphical text editor) to:
 #     restart: unless-stopped
-docker-compose -f pwd.yml up -d
+docker compose -f pwd.yml up -d
 ```
 
 ### Test instance
@@ -19,7 +19,7 @@ git clone https://github.com/frappe/frappe_docker.git && mv frappe_docker erp-ne
 # The rest should be fine.
 # Change all restart policies unless-stopped (at the best in the graphical text editor) to:
 #     restart: unless-stopped
-docker-compose -f pwd.yml up -d
+docker compose -f pwd.yml up -d
 ```
 
 ## Caddyfile
@@ -45,11 +45,11 @@ erptest.int.de {
 ## How to install additional Modules
 
 ```bash
-docker-compose -f pwd.yml exec backend bash
+docker compose -f pwd.yml exec backend bash
 bench get-app https://github.com/alyf-de/erpnext_germany.git
 bench --site frontend install-app erpnext_germany
 exit
-docker-compose -f pwd.yml restart
+docker compose -f pwd.yml restart
 ```
 
 ## How to backup and restore
@@ -57,7 +57,7 @@ docker-compose -f pwd.yml restart
 ### ERPNext has error after upgrade?
 
 ```bash
-docker-compose -f pwd.yml exec backend bash
+docker compose -f pwd.yml exec backend bash
 /usr/local/bin/bench migrate
 exit
 ```
@@ -66,7 +66,7 @@ exit
 
 ```bash
 sudo -i
-docker-compose -f pwd.yml exec backend bash
+docker compose -f pwd.yml exec backend bash
 /usr/local/bin/bench --verbose --site all backup --with-files
 exit
 cd && mkdir "backup_erp_$(date +'%Y-%m-%d_%H-%M-%S')" && mv /var/lib/docker/volumes/erp-next_sites/_data/frontend/private/backups/* "backup_erp_$(date +'%Y-%m-%d_%H-%M-%S')/"
@@ -79,7 +79,7 @@ sudo -i
 # Change into folder where backed up files are
 
 cp -a * /var/lib/docker/volumes/erp-next_sites/_data/frontend/private/backups/
-docker-compose exec backend bash
+docker compose exec backend bash
 /usr/local/bin/bench --force restore sites/frontend/private/backups/DATE_TIME-frontend-database.sql.gz --with-private-files sites/frontend/private/backups/DATE_TIME-frontend-private-files.tar --with-public-files sites/frontend/private/backups/DATE_TIME-frontend-files.tar
 # MySQL Password is: admin
 /usr/local/bin/bench migrate
@@ -89,7 +89,7 @@ exit
 ## Errors?
 
 ```bash
-docker-compose exec backend bench migrate
+docker compose exec backend bench migrate
 ```
 
 ## Update
@@ -97,8 +97,8 @@ docker-compose exec backend bench migrate
 - Start with the update of the test instance
 - Update the tag of all images in `pwd.yml` to the latest one. (In vim you can do this with the command: `:%s/OLDTAG/NEWTAG/gc`)
 ```bash
-docker-compose -f pwd.yml pull
-docker-compose -f pwd.yml up -d
+docker compose -f pwd.yml pull
+docker compose -f pwd.yml up -d
 ```
 
 ### Problems?
