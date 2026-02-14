@@ -3,7 +3,7 @@
 ## Install basic packages
 
 ```bash
-sudo apt update && sudo apt full-upgrade -y && sudo apt install vim ufw ncdu htop git pwgen curl unzip psmisc -y
+sudo apt update && sudo apt full-upgrade -y && sudo apt install vim ufw ncdu htop git pwgen curl unzip psmisc fail2ban -y
 ```
 
 ## Add public key for ssh login
