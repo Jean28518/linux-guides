@@ -305,6 +305,12 @@ sudo -u www-data php /var/www/nextcloud/occ maintenance:repair --include-expensi
 sudo -u www-data php /var/www/nextcloud/occ user:resetpassword USERNAME
 ```
 
+## Clean all trashbins
+
+```bash
+sudo -u www-data php /var/www/nextcloud/occ trashbin:cleanup --all-users
+```
+
 ## Nextcloud down? Nothing works?
 
 Check, if a basic command runs. Otherwise it is printed a stack trace.
