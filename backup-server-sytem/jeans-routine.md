@@ -45,7 +45,7 @@ borg config ~/backups/Server1 additional_free_space 10G
 
 ```bash
 ssh-copy-id -i .ssh/id_rsa -p 23 -s USER@SERVERADRESS
-borg init --encryption=repokey ssh://USER@SERVERADRESS:23/./borg-SERVERNAME
+borg init --encryption=repokey-blake2 ssh://USER@SERVERADRESS:23/./borg-SERVERNAME
 # Create a strong password WITHOUT special characters and save it safe!
 borg key export ssh://USER@SERVERADRESS:23/./borg-SERVERNAME
 # Save this repokey securely!
