@@ -85,6 +85,10 @@ vim playbook.yml
 ```
 ```bash
 ansible-playbook -i inventory.ini playbook.yml
+```
+## Ansible Roles
+
+```bash
 
 # To create a role:
 mkdir roles
