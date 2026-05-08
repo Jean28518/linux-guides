@@ -75,6 +75,18 @@ sudo rsync -aAXPh --numeric-ids --info=progress2 -e ssh \
 ssh -t root@$OLDSERVER "shutdown now"
 
 ## END LIVE MIGRATION, continue down:
+
+# DOCKER SANITIZATION (Split-Brain Prevention)
+echo "Cleaning Docker engine state to prevent kernel desync..."
+sudo systemctl stop docker docker.socket containerd
+sudo rm -rf /var/lib/docker/overlay2/*
+sudo rm -rf /var/lib/docker/containers/*
+sudo rm -rf /var/lib/docker/network/*
+sudo rm -rf /var/lib/docker/image/*
+sudo rm -rf /var/lib/docker/buildkit/*
+sudo rm -rf /var/lib/docker/runtimes/*
+sudo rm -rf /var/lib/docker/swarm/*
+sudo rm -rf /var/lib/docker/tmp/*
   
 sudo apt update
 sudo apt full-upgrade
