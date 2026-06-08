@@ -45,15 +45,15 @@ ufw delete NUMBER && ufw status numbered
 # - 10000: Jitsi UDP?
 
 # Update the machine
-apt update && apt dist-upgrade
+apt update && apt full-upgrade
 
 # Check the current OS Version:
 cat /etc/os-release
 
 # Check every service for updates and remove unused ones.
 docker ps
-docker-compose pull
-docker-compose up -d
+docker compose pull
+docker compose up -d
 
 podman ps
 snap list
@@ -73,7 +73,7 @@ vim /etc/caddy/Caddyfile
 # Free diskspace:
 docker image prune -a
 podman system prune --all
-docker volume prune
+docker system prune --all
 apt autoremove
 apt clean
 sudo journalctl --vacuum-size=100M
