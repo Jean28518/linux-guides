@@ -71,7 +71,6 @@ systemctl list-units --type=service --state=running --no-legend --no-pager
 vim /etc/caddy/Caddyfile
 
 # Free diskspace:
-docker image prune -a
 podman system prune --all
 docker system prune --all
 apt autoremove
