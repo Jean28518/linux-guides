@@ -292,6 +292,35 @@ docker exec --user www-data nextcloud_app_1 php occ app:update --all
 docker exec --user www-data nextcloud_app_1 php occ maintenance:mode --off
 ```
 
+##### Manual Update
+
+If the updater.phar is broken
+
+```bash
+cd /tmp
+OUR_WANTED_VERSION=33.0.5
+wget https://github.com/nextcloud-releases/server/releases/download/v$OUR_WANTED_VERSION/nextcloud-$OUR_WANTED_VERSION.zip
+unzip nextcloud-$OUR_WANTED_VERSION.zip
+
+# Save everything important:
+cp /var/www/nextcloud/config/config.php /tmp/config.php
+mv /var/www/nextcloud/data /var/nextcloud-data
+
+# Move new files in place:
+rm -rf /var/www/nextcloud/*
+cp -r /tmp/nextcloud/* /var/www/nextcloud/
+
+# Put config and data back
+cp /tmp/config.php /var/www/nextcloud/config/config.php
+mv /var/nextcloud-data  /var/www/nextcloud/data
+
+# Complete Update
+chown -R www-data:www-data /var/www/nextcloud/
+sudo -u www-data php /var/www/nextcloud/occ upgrade
+sudo -u www-data php /var/www/nextcloud/occ maintenance:mode --off
+```
+
+
 ### After update
 
 ```bash
