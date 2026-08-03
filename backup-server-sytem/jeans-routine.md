@@ -246,6 +246,10 @@ Failed to create/acquire the lock /home/borg-cloud/lock.exclusive (timeout).
 
 ```bash
 borg break-lock ssh://borg@1.2.3.4:22/~/backups/Server1
+
+# On Libre Workspaces
+. /etc/libre-workspace/libre-workspace.conf
+borg break-lock $BORG_REPOSITORY
 ```
 
 ## Complete borg repo full?
