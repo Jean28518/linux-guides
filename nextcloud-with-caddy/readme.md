@@ -265,6 +265,7 @@ sudo -u www-data php /var/www/nextcloud/occ files:scan --all
 If you tried to login too many times:
 
 ```bash
+sudo -u www-data php /var/www/nextcloud/occ security:bruteforce:attempts <IP>
 sudo -u www-data php /var/www/nextcloud/occ security:bruteforce:reset <IP>
 # You need only the '--define apc.enable_cli=1' if you have the redis module enabled.
 ```
