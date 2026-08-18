@@ -2,17 +2,16 @@
 
 This is not a complete tutorial but provides "building blocks" how my i3 desktop is configured.
 
-## Menu:
+## Basics & Menu:
 ```bash
+# Default Applications
+sudo apt install eog xfce4-terminal mousepad i3 slick-greeter chromium xarchiver gdebi evince thunar thunar-archive-plugin
+
 sudo apt install j4-dmenu-desktop dmenu
+
+vim .config/i3/config
 # Change in the config the starter to j4-dmenu-desktop
-vim .config/i3/config
 
-```
-
-## i3 config:
-```bash
-vim .config/i3/config
 workspace_layout tabbed
 
 bindsym $mod+x exec chromium
@@ -26,13 +25,13 @@ bindsym $mod+g exec chromium --app="https://gemini.google.com"
 
 # Comment:
 #bindsym $mod+Shift+c reload
-
 ```
 
 
 ## Dark Theme
 ```bash
 yay -s arc-gtk-theme lxappearence
+sudo apt install arc-theme lxappearance
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Dark' 
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
@@ -43,12 +42,28 @@ gtk-theme-name=Arc-Dark
 gtk-application-prefer-dark-theme=1
 
 # Set in lxappearence the default heme to Arc-Dark
+
+
+## HOW TO REVERT:
+gsettings set org.gnome.desktop.interface gtk-theme 'Arc' 
+gsettings set org.gnome.desktop.interface color-scheme 'default'
+rm ~/.config/gtk-3.0/settings.ini
 ```
+
+## Xfce4-Terminal
+```bash
+sudo apt install gnome-terminal
+# Rightclick on the blank space of the terminal, there you go to the preferences
+# On general on the bottom disable unsafe paste warning
+# On View disable the menubar
+```
+
 ## Gnome-Terminal
 ```bash
 sudo apt install gnome-terminal
-vim .config/i3/config
-# Change the i3-sensible-terminal to gnome-terminal
+bindsym $mod+Return exec gnome-terminal
+bindsym $mod+KP_Enter exec gnome-terminal
+
 
 # Rightclick on the blank space of the terminal, there you go to the preferences
 ```
@@ -74,9 +89,13 @@ Option "Tapping" "on"
 ## Polkit Agent:
 ```bash
 sudo apt install policykit-1-gnome
+# Bei neueren versionen:
+sudo apt install mate-polkit
 # sudo pacman -S polkit-gnome
 vim .config/i3/config
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+# Oder Mit Mate polkit:
+exec --no-startup-id /usr/libexec/mate-polkit/polkit-mate-authentication-agent-1 &
 
 # Arch:
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -85,6 +104,8 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 ## Gnome Keyring and such stuff (For nextcloud client e.g.)
 ```bash
+sudo apt install seahorse gnome-keyring libsecret-common
+
 sudo pacman -S seahorse
 sudo pacman -S gnome-keyring libsecret
 ```
@@ -123,7 +144,7 @@ sudo apt purge dunst
 ```bash
 sudo apt install i3lock gnome-backgrounds
 vim .config/i3/config
-bindsym $mod+Ctrl+l exec i3lock -i /home/jean/Dokumente/LinuxGuidesPrivat/Media/Hintergruende/Hintergrund_2_dunkel.png
+bindsym $mod+Ctrl+l exec i3lock -i /home/jean/Pictures/myimg.jpg
 ```
 
 ## Window Theme, Icon Theme, etc...
@@ -163,6 +184,13 @@ sudo pacman -S pasystray pavucontrol
 
 vim .config/i3/config
 exec --no-startup-id pasystray &
+# Lautstärke erhöhen
+bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+# Lautstärke reduzieren
+bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+# Stummschalten (Mute)
+bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
 ```
 
 ## Bluetooth
@@ -177,6 +205,14 @@ sudo systemctl enable bluetooth.service --now
 sudo pacman -S feh
 vim .config/i3/config
 exec --no-startup-id feh --bg-fill /home/jean/Pictures/myimg.jpg
+
+
+Bildschirmauflösung:
+sudo apt install arandr
+#Dann in arandr die auflösung speichern unter 16-9.sh
+Dann in den autostart reinmachen
+vim .config/i3/config
+exec --no-startup-id ...
 ```
 
 ## i3status
@@ -280,8 +316,11 @@ exit 0
 
 
 chmod +x .scripts/autostart_i3.sh
-vim .config/i3status/config 
+vim .config/i3/config 
 exec --no-startup-id $HOME/.scripts/autostart_i3.sh
+
+
+# In orage set the default start mode to hidden
 ```
 
 
@@ -299,4 +338,44 @@ workspace 8 output DP-1
 workspace 9 output DP-1
 workspace 10 output DP-1
 
+
+
+# Laptop setup with external monitor:
+vim .scripts/external_monitor_on_i3.sh
+#!/usr/bin/env bash
+
+# Ensure workspaces exist and force-migrate them
+for ws in {1..3}; do
+    i3-msg -q "workspace $ws; move workspace to output HDMI-A-0"
+done
+for ws in {4..10}; do
+    i3-msg -q "workspace $ws; move workspace to output edP"
+done
+
+
+vim .scripts/external_monitor_off_i3.sh
+#!/usr/bin/env bash
+
+# Ensure workspaces exist and force-migrate them
+for ws in {1..10}; do
+    i3-msg -q "workspace $ws; move workspace to output eDP"
+done
+
+
+chmod +x .scripts/external_monitor*
+
+vim .config/i3/config
+bindsym $mod+o exec --no-startup-id ~/.scripts/external_monitor_on_i3.sh
+bindsym $mod+Shift+o exec --no-startup-id ~/.scripts/external_monitor_off_i3.sh
+
+workspace 1 output HDMI-A-0
+workspace 2 output HDMI-A-0
+workspace 3 output HDMI-A-0
+workspace 4 output edP
+workspace 5 output edP
+workspace 6 output edP
+workspace 7 output edP
+workspace 8 output edP
+workspace 9 output edP
+workspace 10 output edP
 ```
