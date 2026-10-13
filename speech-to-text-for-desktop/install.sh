@@ -4,7 +4,14 @@ set -e
 # ==============================================================================
 # Speech-to-Text Desktop Dictation Installer (faster-whisper)
 # Supports: Arch, Debian/Ubuntu, Fedora | Wayland & X11
+# Usage: ./install.sh [language] [model]
+#        e.g. ./install.sh auto small (default)
+#        e.g. ./install.sh de small
+#        e.g. ./install.sh en base
 # ==============================================================================
+
+TARGET_LANG="${1:-auto}"
+TARGET_MODEL="${2:-small}"
 
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
@@ -13,6 +20,8 @@ RED='\033[0;31m'
 NC='\033[0m'
 
 echo -e "${BLUE}==>${NC} Installing Speech-to-Text Desktop Dictation..."
+echo -e "${BLUE}==>${NC} Language configured: ${YELLOW}${TARGET_LANG}${NC} (use 'auto' for automatic multi-language detection)"
+echo -e "${BLUE}==>${NC} Model configured: ${YELLOW}${TARGET_MODEL}${NC}"
 
 # 1. Detect Display Server
 SESSION="${XDG_SESSION_TYPE:-}"
@@ -118,18 +127,19 @@ def main():
     parser = argparse.ArgumentParser(description="Transcribe audio file with faster-whisper")
     parser.add_argument("audio_path", help="Path to wav file")
     parser.add_argument("--model", default="small", help="Model name: tiny, base, small, turbo")
-    parser.add_argument("--lang", default="de", help="Language code (e.g. de, en, or None for auto)")
+    parser.add_argument("--lang", default="auto", help="Language code (auto, de, en, fr, etc.)")
     args = parser.parse_args()
 
     if not os.path.exists(args.audio_path) or os.path.getsize(args.audio_path) < 4000:
         return
 
+    lang = None if args.lang in (None, "auto", "None", "") else args.lang
     model = WhisperModel(args.model, device="cpu", compute_type="int8", cpu_threads=4)
 
     segments, info = model.transcribe(
         args.audio_path,
         beam_size=3,
-        language=args.lang,
+        language=lang,
         condition_on_previous_text=False,
         vad_filter=True,
         vad_parameters=dict(min_silence_duration_ms=500)
@@ -154,81 +164,92 @@ chmod +x "$APP_DIR/transcribe.py"
 
 # 7. Create whisper-dictate Toggle Script
 echo -e "${BLUE}==>${NC} Creating toggle launcher..."
-cat << 'EOF' > "$BIN_DIR/whisper-dictate"
+cat << EOF > "$BIN_DIR/whisper-dictate"
 #!/usr/bin/env bash
-APP_DIR="$HOME/.local/share/whisper-dictation"
-VENV_PYTHON="$APP_DIR/venv/bin/python3"
-TRANSCRIBE_SCRIPT="$APP_DIR/transcribe.py"
+# ==============================================================================
+# Configuration
+# MODEL: tiny, base, small, medium, turbo
+# LANG:  auto (automatic detection), or fixed code: de, en, fr, es, it, etc.
+# ==============================================================================
+MODEL="${TARGET_MODEL}"
+LANG="${TARGET_LANG}"
+
+APP_DIR="\$HOME/.local/share/whisper-dictation"
+VENV_PYTHON="\$APP_DIR/venv/bin/python3"
+TRANSCRIBE_SCRIPT="\$APP_DIR/transcribe.py"
 PID_FILE="/tmp/whisper_dictate.pid"
 LOCK_FILE="/tmp/whisper_dictate.lock"
 AUDIO_FILE="/tmp/whisper_dictate.wav"
 LOG_FILE="/tmp/whisper_dictate.log"
-START_SOUND="$APP_DIR/sounds/start.wav"
-STOP_SOUND="$APP_DIR/sounds/stop.wav"
+START_SOUND="\$APP_DIR/sounds/start.wav"
+STOP_SOUND="\$APP_DIR/sounds/stop.wav"
 
 log() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"
+    echo "[\$(date '+%Y-%m-%d %H:%M:%S')] \$*" >> "\$LOG_FILE"
 }
 
 # 1. Prevent race conditions while transcribing
-if [ -f "$LOCK_FILE" ]; then
+if [ -f "\$LOCK_FILE" ]; then
     log "Transcription in progress, ignoring toggle."
     exit 0
 fi
 
 # 2. Stop recording & transcribe
-if [ -f "$PID_FILE" ]; then
-    REC_PID=$(cat "$PID_FILE")
-    rm -f "$PID_FILE"
+if [ -f "\$PID_FILE" ]; then
+    REC_PID=\$(cat "\$PID_FILE")
+    rm -f "\$PID_FILE"
 
-    if ps -p "$REC_PID" > /dev/null 2>&1; then
-        touch "$LOCK_FILE"
-        kill -INT "$REC_PID" 2>/dev/null
+    if ps -p "\$REC_PID" > /dev/null 2>&1; then
+        touch "\$LOCK_FILE"
+        kill -INT "\$REC_PID" 2>/dev/null
         
-        [ -f "$STOP_SOUND" ] && paplay "$STOP_SOUND" >/dev/null 2>&1 &
+        [ -f "\$STOP_SOUND" ] && paplay "\$STOP_SOUND" >/dev/null 2>&1 &
         
-        while ps -p "$REC_PID" > /dev/null 2>&1; do
+        while ps -p "\$REC_PID" > /dev/null 2>&1; do
             sleep 0.05
         done
 
         log "Recording stopped. Transcribing..."
 
-        if [ -f "$AUDIO_FILE" ] && [ -s "$AUDIO_FILE" ]; then
-            TEXT=$("$VENV_PYTHON" "$TRANSCRIBE_SCRIPT" "$AUDIO_FILE" --model small)
-            log "Transcribed: '$TEXT'"
+        if [ -f "\$AUDIO_FILE" ] && [ -s "\$AUDIO_FILE" ]; then
+            TEXT=\$("\$VENV_PYTHON" "\$TRANSCRIBE_SCRIPT" "\$AUDIO_FILE" --model "\$MODEL" --lang "\$LANG")
+            log "Transcribed: '\$TEXT'"
 
-            if [ -n "$TEXT" ]; then
-                if [ -n "$WAYLAND_DISPLAY" ]; then
-                    wtype -s 10 -d 3 -- "$TEXT "
+            if [ -n "\$TEXT" ]; then
+                if [ -n "\$WAYLAND_DISPLAY" ]; then
+                    wtype -s 10 -d 3 -- "\$TEXT "
                 else
-                    xdotool type --clearmodifiers --delay 2 -- "$TEXT "
+                    xdotool type --clearmodifiers --delay 2 -- "\$TEXT "
                 fi
             fi
         fi
 
-        rm -f "$LOCK_FILE"
+        rm -f "\$LOCK_FILE"
         exit 0
     fi
 fi
 
 # 3. Start recording
-rm -f "$AUDIO_FILE" "$LOCK_FILE"
-[ -f "$START_SOUND" ] && paplay "$START_SOUND" >/dev/null 2>&1 &
+rm -f "\$AUDIO_FILE" "\$LOCK_FILE"
+[ -f "\$START_SOUND" ] && paplay "\$START_SOUND" >/dev/null 2>&1 &
 
-ffmpeg -y -f pulse -i default -ar 16000 -ac 1 "$AUDIO_FILE" >/dev/null 2>&1 &
-echo $! > "$PID_FILE"
-log "Recording started (PID $!)."
+ffmpeg -y -f pulse -i default -ar 16000 -ac 1 "\$AUDIO_FILE" >/dev/null 2>&1 &
+echo \$! > "\$PID_FILE"
+log "Recording started (PID \$!)."
 EOF
 chmod +x "$BIN_DIR/whisper-dictate"
 
 # 8. Pre-download Model
-echo -e "${BLUE}==>${NC} Pre-downloading Whisper model ('small', ~464 MB)..."
-"$APP_DIR/venv/bin/python3" -c "from faster_whisper import WhisperModel; WhisperModel('small', device='cpu', compute_type='int8')"
+echo -e "${BLUE}==>${NC} Pre-downloading Whisper model ('${TARGET_MODEL}')..."
+"$APP_DIR/venv/bin/python3" -c "from faster_whisper import WhisperModel; WhisperModel('${TARGET_MODEL}', device='cpu', compute_type='int8')"
 
 echo ""
 echo -e "${GREEN}================================================================${NC}"
 echo -e "${GREEN}  Installation Complete!${NC}"
 echo -e "${GREEN}================================================================${NC}"
+echo ""
+echo -e "Language: ${YELLOW}${TARGET_LANG}${NC} (change anytime in ~/.local/bin/whisper-dictate)"
+echo -e "Model:    ${YELLOW}${TARGET_MODEL}${NC}"
 echo ""
 echo "Next step: Assign a hotkey to the script:"
 echo -e "  Command: ${YELLOW}$BIN_DIR/whisper-dictate${NC}"

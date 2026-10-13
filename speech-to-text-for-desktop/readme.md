@@ -11,10 +11,15 @@ Transcribes via [faster-whisper](https://github.com/SYSTRAN/faster-whisper) (CPU
 Run this single command in your terminal to automatically detect your package manager (`apt`, `pacman`, `dnf`), detect your display server (**Wayland** or **X11**), install all dependencies, and set up the scripts:
 
 ```bash
+# Default: Automatic multi-language detection (auto)
 wget -qO- https://raw.githubusercontent.com/Jean28518/linux-guides/main/speech-to-text-for-desktop/install.sh | bash
 ```
 
-*(Or via curl: `curl -sSL https://raw.githubusercontent.com/Jean28518/linux-guides/main/speech-to-text-for-desktop/install.sh | bash`)*
+> **Prefer a fixed language?** You can pass a language code (e.g. `de`, `en`, `es`, `fr`):
+> ```bash
+> wget -qO- https://raw.githubusercontent.com/Jean28518/linux-guides/main/speech-to-text-for-desktop/install.sh | bash -s -- de
+> ```
+> *(Or via curl: `curl -sSL https://raw.githubusercontent.com/Jean28518/linux-guides/main/speech-to-text-for-desktop/install.sh | bash -s -- de`)*
 
 ---
 
@@ -114,18 +119,19 @@ def main():
     parser = argparse.ArgumentParser(description="Transcribe audio file with faster-whisper")
     parser.add_argument("audio_path", help="Path to wav file")
     parser.add_argument("--model", default="small", help="Model name: tiny, base, small, turbo")
-    parser.add_argument("--lang", default="de", help="Language code (e.g. de, en, or None for auto)")
+    parser.add_argument("--lang", default="auto", help="Language code (auto, de, en, fr, etc.)")
     args = parser.parse_args()
 
     if not os.path.exists(args.audio_path) or os.path.getsize(args.audio_path) < 4000:
         return
 
+    lang = None if args.lang in (None, "auto", "None", "") else args.lang
     model = WhisperModel(args.model, device="cpu", compute_type="int8", cpu_threads=4)
 
     segments, info = model.transcribe(
         args.audio_path,
         beam_size=3,
-        language=args.lang,
+        language=lang,
         condition_on_previous_text=False,
         vad_filter=True,
         vad_parameters=dict(min_silence_duration_ms=500)
@@ -171,6 +177,10 @@ LOG_FILE="/tmp/whisper_dictate.log"
 START_SOUND="$APP_DIR/sounds/start.wav"
 STOP_SOUND="$APP_DIR/sounds/stop.wav"
 
+# Configuration
+MODEL="small"      # Options: tiny, base, small, medium, turbo
+LANG="auto"        # Language: "auto" for auto-detection, or e.g. "de", "en", "fr"
+
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"
 }
@@ -199,7 +209,7 @@ if [ -f "$PID_FILE" ]; then
         log "Recording stopped. Transcribing..."
 
         if [ -f "$AUDIO_FILE" ] && [ -s "$AUDIO_FILE" ]; then
-            TEXT=$("$VENV_PYTHON" "$TRANSCRIBE_SCRIPT" "$AUDIO_FILE" --model small)
+            TEXT=$("$VENV_PYTHON" "$TRANSCRIBE_SCRIPT" "$AUDIO_FILE" --model "$MODEL" --lang "$LANG")
             log "Transcribed: '$TEXT'"
 
             if [ -n "$TEXT" ]; then
