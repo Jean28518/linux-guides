@@ -32,6 +32,11 @@ sudo apt install fail2ban
 sudo apt install unattended-upgrades apt-listchanges -y && sudo dpkg-reconfigure -plow unattended-upgrades
 ```
 
+### Oneliner with automatic restarts of services and hourly unattended upgrades
+```bash
+sudo DEBIAN_FRONTEND=noninteractive apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y unattended-upgrades needrestart apt-listchanges && sudo bash -c 'printf "APT::Periodic::Update-Package-Lists \"1\";\nAPT::Periodic::Unattended-Upgrade \"1\";\n" > /etc/apt/apt.conf.d/20auto-upgrades && mkdir -p /etc/needrestart/conf.d && printf "$nrconf{restart} = '\''a'\'';\n" > /etc/needrestart/conf.d/99-auto-restart.conf && mkdir -p /etc/systemd/system/apt-daily.timer.d /etc/systemd/system/apt-daily-upgrade.timer.d && printf "[Timer]\nOnCalendar=\nOnCalendar=hourly\nRandomizedDelaySec=30m\n" | tee /etc/systemd/system/apt-daily.timer.d/override.conf > /etc/systemd/system/apt-daily-upgrade.timer.d/override.conf && systemctl daemon-reload && systemctl restart apt-daily.timer apt-daily-upgrade.timer'
+```
+
 ## Setup firewall
 ```bash
 sudo ufw allow ssh
