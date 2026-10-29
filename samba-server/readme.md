@@ -51,6 +51,7 @@ directory mask = 0755
 
 ```bash
 # For the laser-jobs
+adduser laser
 sudo smbpasswd -a laser
 sudo chown -R laser:laser /data/samba_fs/laser-jobs 
 
