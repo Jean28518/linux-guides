@@ -56,6 +56,8 @@ sudo chown -R laser:laser /data/samba_fs/laser-jobs
 
 systemctl restart smbd.service samba*
 ufw allow 445
+ufw allow 139/tcp
+ufw allow 445/tcp
 ```
 
 ### Add user
